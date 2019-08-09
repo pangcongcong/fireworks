@@ -120,7 +120,7 @@ export default {
 			});
 			return {
 				title: '送你一朵'+this.shareSakuraName+'，快来和我平分100万现金！',
-				path: '/pages/fireworks/fireworks?sakura_key=' + this.shareSakuraKey +'&user_id=' + this.user_id + "&sakura_id=" + this.sakura_id,
+				path: '/pages/fireworks/main?sakura_key=' + this.shareSakuraKey +'&user_id=' + this.user_id + "&sakura_id=" + this.sakura_id,
 				imageUrl: this.shareImgBtn,
 				success: function (res) {
 					wx.showToast({
@@ -129,7 +129,7 @@ export default {
 						duration: 2000
 					});
 					wx.navigateTo({
-						url: '/pages/fireworks/fireworks?user_id=' + this.user_id
+						url: '/pages/fireworks/main?user_id=' + this.user_id
 					});
 				},
 				fail: function () {
@@ -144,7 +144,7 @@ export default {
 			let shareImg = this.shareImg;
 			return {
 				title: '100万现金等你来分！距离分钱仅剩'+this.restDay+'天！',
-				path: '/pages/fireworks/fireworks?user_id=' + this.user_id,
+				path: '/pages/fireworks/main?user_id=' + this.user_id,
 				imageUrl: shareImg,
 				success: function (res) {
 					wx.showToast({

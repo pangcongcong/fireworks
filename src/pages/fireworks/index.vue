@@ -146,10 +146,8 @@ import card from '@/components/card';
 			<div class="task-item" v-for="item in taskList" :key="item.task_id">
 				<div>{{item.name}}</div>
 				<div class="task-item-img">
-					<div v-if="item.task_id == 7">3</div>
-					<div v-else>1</div>
-					<!-- <img v-if="item.task_id == 7" src="https://s4.wandougongzhu.cn/s/03/2x_e99b42.png" alt="">
-					<img v-else src="https://s3.wandougongzhu.cn/s/bc/_157403.png" alt=""> -->
+					<div v-if="item.task_id == 7" class="num">3</div>
+					<div v-else class="num">1</div>
 				</div>
 				<form :report-submit="form_id" @submit="gather" >
 					<button v-if="item.status == '0'" form-type="submit" class="task-item-btn receive" @click="getTask(item.task_id)">
@@ -160,11 +158,11 @@ import card from '@/components/card';
 					
 				</div>
 				<form :report-submit="form_id" @submit="gather" >
-					<div v-if="item.status == '-1'" class="task-item-btn">
-						<button v-if="item.task_id == '2'" open-type="share" :data-type="1" @click="doTask2()">
+					<div v-if="item.status == '-1'">
+						<button v-if="item.task_id == '2'" class="task-item-btn" open-type="share" :data-type="1" @click="doTask2()">
 							去分享
 						</button>
-						<button v-if="item.task_id != '2'" form-type="submit" @click="toFinishTask(item.task_id,item.page_id)">
+						<button v-if="item.task_id != '2'"  class="task-item-btn" form-type="submit" @click="toFinishTask(item.task_id,item.page_id)">
 							去完成
 						</button>
 					</div>
@@ -633,7 +631,7 @@ export default {
 				console.log('data-sakuraid='+ res.target.dataset.sakuraid);
 				return {
 					title: '送你一朵'+res.target.dataset.sakuraname + this.cloundShareSakuraInfo.title,
-					path: '/pages/fireworks/fireworks?sakura_key=' + res.target.dataset.sakurakey +'&user_id=' + this.user_id +"&sakura_id=" + res.target.dataset.sakuraid + '&ch=sakura_mp_2019',
+					path: '/pages/fireworks/main?sakura_key=' + res.target.dataset.sakurakey +'&user_id=' + this.user_id +"&sakura_id=" + res.target.dataset.sakuraid + '&ch=sakura_mp_2019',
 					imageUrl: this.shareImgBtn[res.target.dataset.sakurakey],
 					success: function () {
 						self.shareActivity();
@@ -653,10 +651,10 @@ export default {
 				},'sakura');
 				return {
 					title: '送你一朵'+this.sakuraDetailName + this.cloundShareSakuraInfo.title,
-					path: '/pages/fireworks/fireworks?sakura_key=' + this.sakuraDetailKey +'&user_id=' + this.user_id +"&sakura_id=" + this.sakura_id + '&ch=sakura_mp_2019',
+					path: '/pages/fireworks/main?sakura_key=' + this.sakuraDetailKey +'&user_id=' + this.user_id +"&sakura_id=" + this.sakura_id + '&ch=sakura_mp_2019',
 					imageUrl: this.shareImgBtn[this.sakuraDetailKey],
 					success: function () {
-						
+
 						self.shareActivity();
 					},
 					fail: function () {
@@ -675,7 +673,7 @@ export default {
 			if (res.from == 'menu') {
 				return {
 					title: this.cloundShareActInfo.title + this.act_text + '!',
-					path: '/pages/fireworks/fireworks?user_id=' + this.user_id + '&ch=sakura_mp_2019',
+					path: '/pages/fireworks/main?user_id=' + this.user_id + '&ch=sakura_mp_2019',
 					imageUrl: shareImg,
 					success: function (res) {
 						Net.tick({
@@ -700,7 +698,7 @@ export default {
 					},'sakura');
 					return {
 						title: this.cloundShareActInfo.title + this.act_text + '!',
-						path: '/pages/fireworks/fireworks?user_id=' + this.user_id + '&ch=sakura_mp_2019',
+						path: '/pages/fireworks/main?user_id=' + this.user_id + '&ch=sakura_mp_2019',
 						imageUrl: shareImg,
 						success: function (res) {
 						
@@ -722,7 +720,7 @@ export default {
 					},'sakura');
 					return {
 						title: this.cloundShareActInfo.title + this.act_text + '!',
-						path: '/pages/fireworks/fireworks?user_id=' + this.user_id + '&ch=sakura_mp_2019',
+						path: '/pages/fireworks/main?user_id=' + this.user_id + '&ch=sakura_mp_2019',
 						imageUrl: shareImg,
 						success: function (res) {
 							self.shareActivity();
@@ -756,7 +754,7 @@ export default {
 		goCash() {
 			WMP.checkAuthPromise(this.$root.$mp.page).then(() => {
 				wx.navigateTo({ 
-					url: '/pages/tocash/tocash' 
+					url: '/pages/tocash/main' 
 				});
 			})
 		},
@@ -1339,7 +1337,7 @@ export default {
 						});
 					} else {
 						wx.navigateTo({
-							url: '/pages/togift/togift',
+							url: '/pages/togift/main',
 						});
 					}
 				} else{
@@ -1367,6 +1365,7 @@ button::after{ border: none; }
 	border-radius: 50%;
 	right: 30px;
 	bottom: 50px;
+	z-index: 4;
 }
 .ad-img-fixed img {
 	width: 100%;
@@ -2159,6 +2158,8 @@ button::after{ border: none; }
 	line-height: 60px;
 	color: #191919;
 	margin: 10px auto;
+	padding-left: 10px;
+	box-sizing: border-box;
 	display: flex;
 	background: url('https://s5.wandougongzhu.cn/s/22/1_2ddd54.png') no-repeat;
 	background-size: 100% 100%;
@@ -2173,10 +2174,6 @@ button::after{ border: none; }
 	background-size: cover;
 	text-align: center;
 	color: #fff;
-}
-.task-item-y {
-	background: url('https://s.wandougongzhu.cn/s/00/932x_9e4c97.png') no-repeat;
-	background-size: cover;
 }
 .task-item-suc {
   color: #ff8a00;
@@ -2235,8 +2232,12 @@ button::after{ border: none; }
 .task-item-btn button {
 	display: block;
 	font-size: 14px;
+	width: 62px;
+	height: 24px;
+	line-height: 24px;
 	padding: 0;
 	border: none;
+	background: none;
 }
 #mask,.compose-box {
 	text-align: center;
