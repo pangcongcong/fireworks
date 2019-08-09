@@ -1,11 +1,10 @@
+import card from '@/components/card';
 <template>
 	<div class="container">
 		<div class="rule-box" @click="goRule()"></div>
 		<div class="theme-bg" id="bg">
 			<div class="fire-box">
 				<div class="fire-item item1">
-					<!-- <div class="shink1"></div>
-					<div class="shink2"></div> -->
 				</div>
 				<div class="fire-item item2"></div>
 				<div class="fire-item item3"></div>
@@ -35,52 +34,85 @@
 			<div class="flower-box">
 				<div class="right">
 					<form :report-submit="form_id" @submit="gather" >
-						<div class="flower-item flower-item-dyh" :class="{'gray': sakura_C_num == '0'}">
-							<div class="tag" :class="{'gray': sakura_C_num == '0'}" style="left:50%;top: 80%">洞爷湖花火大会</div>
-							<button v-if="sakura_C_num > 0" class="click-box" form-type="submit" @click="showSakuraDetail('sakura_c','大岛樱','梦中繁花犹再现，樱瓣飘飘然。')">
-								<div class="num-box">{{sakura_C_num}}</div>
-							</button>
-						</div>
+						<button class="flower-item flower-item-dyh" :class="{'gray': sakura_C_num == '0'}" @click="showSakuraDetail('sakura_c','洞爷湖花火大会','全国花火競技大会「洞爷湖の花火」')">
+							<div class="tag" :class="{'gray': sakura_C_num == '0'}" style="left:50%;top: 80%">
+								洞爷湖花火大会
+								<div v-if="sakura_C_num > 0" class="num-box">{{sakura_C_num}}</div>
+							</div>
+							<div class="fire-ani-box" v-if="sakura_C_num != '0'">
+								<div class="firecracker" style="left:55%;top: 40%">
+									<div class="ani"></div>
+									<div class="boom"></div>
+								</div>
+							</div>
+						</button>
 					</form>
 				</div>
 				<div class="center">
-					<form :report-submit="form_id" @submit="gather" >
-						<div class="flower-item flower-item-dq" :class="{'gray': sakura_D_num == '0'}">
-							<div class="tag" :class="{'gray': sakura_D_num == '0'}" style="left:80%;top: 50%">大曲花火大会</div>
-							<button  v-if="sakura_D_num > 0" class="click-box" form-typt="submit" @click="showSakuraDetail('sakura_d','淡墨樱','樱花开处处，想似当年故乡路。')">
-								<div class="num-box">{{sakura_D_num}}</div>
-							</button>
-						</div>
+					<form :report-submit="form_id" @submit="gather" @click="showSakuraDetail('sakura_d','大曲花火大会','全国花火競技大会「大曲の花火」')">
+						<button class="flower-item flower-item-dq" :class="{'gray': sakura_D_num == '0'}">
+							<div class="tag" :class="{'gray': sakura_D_num == '0'}" style="left:80%;top: 50%">
+								大曲花火大会
+								<div v-if="sakura_D_num > 0" class="num-box">{{sakura_D_num}}</div>
+							</div>
+							<div class="fire-ani-box" v-if="sakura_D_num != '0'">
+								<div class="firecracker" style="left:55%;top: 40%">
+									<div class="ani"></div>
+									<div class="boom"></div>
+								</div>
+							</div>
+						</button>
 					</form>
 					<form :report-submit="form_id" @submit="gather" >
-						<div class="flower-item flower-item-db" :class="{'gray': sakura_E_num == '0'}">
-							<div class="tag" :class="{'gray': sakura_E_num == '0'}" style="left:60%;top: -100%">大阪天神祭</div>
-							<button  v-if="sakura_E_num > 0" class="click-box" form-type="submit" @click="showSakuraDetail('sakura_e','寒绯樱','不见方三日，世上滿櫻花。')">
-								<div class="num-box">{{sakura_E_num}}</div>
-							</button>
-						</div>
+						<button class="flower-item flower-item-db" :class="{'gray': sakura_E_num == '0'}" @click="showSakuraDetail('sakura_e','大阪天神祭','全国花火競技大会「大阪の花火」')">
+							<div class="tag" :class="{'gray': sakura_E_num == '0'}" style="left:60%;top: -100%">
+								大阪天神祭
+								<div v-if="sakura_E_num > 0" class="num-box">{{sakura_E_num}}</div>
+							</div>
+							<div class="fire-ani-box" v-if="sakura_E_num != '0'">
+								<div class="firecracker" style="left:70%;top: 20%">
+									<div class="ani"></div>
+									<div class="boom"></div>
+								</div>
+							</div>
+						</button>
 					</form>
 					<form :report-submit="form_id" @submit="gather" >
-						<div class="flower-item flower-item-tf" :class="{'gray': sakura_B_num == '0'}">
-							<div class="tag" :class="{'gray': sakura_B_num == '0'}" style="left:30%;top: 80%">土浦花火大会</div>
-							<button  v-if="sakura_B_num > 0" class="click-box" form-type="submit" @click="showSakuraDetail('sakura_b','吉野樱','今日花如雪，山樱如美人。')">
-								<div class="num-box">{{sakura_B_num}}</div>
-							</button>
-						</div>
+						<button class="flower-item flower-item-tf" :class="{'gray': sakura_B_num == '0'}" @click="showSakuraDetail('sakura_b','土浦花火大会','全国花火競技大会「土浦の花火」')">
+							<div class="tag" :class="{'gray': sakura_B_num == '0'}" style="left:30%;top: 80%">
+								土浦花火大会
+								<div v-if="sakura_B_num > 0" class="num-box">{{sakura_B_num}}</div>
+							</div>
+							<div class="fire-ani-box" v-if="sakura_B_num != '0'">
+								<div class="firecracker" style="left:25%;top: 40%">
+									<div class="ani"></div>
+									<div class="boom"></div>
+								</div>
+							</div>
+						</button>
 					</form>
 				</div>
 				<div class="left">
 					<form :report-submit="form_id" @submit="gather" >
-						<div class="flower-item flower-item-zhc" :class="{'gray': sakura_A_num == '0'}">
-							<div class="tag" :class="{'gray': sakura_A_num == '0'}" style="left:20%;top: 50%">筑后川花火大会</div>
-							<button v-if="sakura_A_num > 0" class="click-box" form-type="submit"  @click="showSakuraDetail('sakura_a','八重樱','花开时来，花落时也要来。')">
-								<div class="num-box">{{sakura_A_num}}</div>
-							</button>
-						</div>
+						<button class="flower-item flower-item-zhc" :class="{'gray': sakura_A_num == '0'}" @click="showSakuraDetail('sakura_a','筑后川花火大会','全国花火競技大会「筑后川の花火」')">
+							<div class="tag" :class="{'gray': sakura_A_num == '0'}" style="left:10%;top: 80%">
+								筑后川花火大会
+								<div v-if="sakura_A_num > 0" class="num-box">{{sakura_A_num}}</div>
+							</div>
+							<div class="fire-ani-box" v-if="sakura_A_num != '0'">
+								<div class="firecracker" style="left:15%;top: 20%">
+									<div class="ani"></div>
+									<div class="boom"></div>
+								</div>
+							</div>
+						</button>
 					</form>
 				</div>
 				<form :report-submit="form_id" @submit="gather" >
-					<button class="mix-btn" form-type="submit" :class="{'new-mix-btn': is_compose}" @click="showComposeAni()">点亮花火</button>
+					<button class="mix-btn" form-type="submit" :class="{'new-mix-btn': is_compose}" @click="showComposeAni()">
+						<div class="wave"></div>
+						<div class="mix-btn-text">点亮花火</div>
+					</button>
 				</form>
 			</div>
 			<div class="rest-count">
@@ -194,21 +226,18 @@
 		<div class="ad-img-fixed" @click="toFixedCard()">
 			<img :src="buoy_ad_info.ad_img" alt="">
 		</div>
-		 <!-- -->
 		<div id="mask" v-if="maskShow">
-			<!-- v-if="showAlert == 'compose'" -->
-			<div class="compose-box" >
-				<div class="compose-tips">
-					恭喜获得一朵樱花
-				</div>
+			<div class="compose-box" v-if="showAlert == 'compose'">
+				<div class="compose-ani-before"></div>
 				<div class="compose-ani"></div>
+				<div class="compose-ani2-before"></div>
 				<div class="compose-ani-2"></div>
+				<div class="compose-ani3-before"></div>
 				<div class="compose-ani-3"></div>
-				<div class="shink"></div>
-				<div class="shink2"></div>
-				<form :report-submit="form_id" @submit="gather" >
-					<button class="compose-btn" form-type="submit" @click="closeAlert()">确定</button>
-				</form>
+				<div class="compose-ani4-before"></div>
+				<div class="compose-ani-4"></div>
+				<div class="compose-ani5-before"></div>
+				<div class="compose-ani-5"></div>
 			</div>
 			<!-- 点击**樱花瓣弹框 -->
 			<div class="to-alert-box" v-if="showAlert == 'sakuraDetail'">
@@ -223,8 +252,8 @@
 				<img v-if="sakuraDetailKey == 'sakura_d'" class="mysakura" src="https://s3.wandougongzhu.cn/s/72/dq_196ee4.jpg">
 				<img v-if="sakuraDetailKey == 'sakura_e'" class="mysakura" src="https://s3.wandougongzhu.cn/s/b9/db_d1cdb7.jpg">
 				<div class="mysakura-tips">
-					<p>每天首次赠送可获得一次抽樱花瓣的机会</p>
-					<p>取消分享也会扣除樱花瓣，一定完成分享哦~</p>
+					<p>每天首次赠送可获得一次抽花火的机会</p>
+					<p>取消分享也会扣除花火，一定完成分享哦~</p>
 				</div>
 				<form :report-submit="form_id" @submit="gather" >
 					<button class="mysakura-btn" form-type="submit" @click="sendToFriendShow()">
@@ -287,8 +316,8 @@
 			<div class="get-alert-box" v-if="showAlert == 'inviteSakuraAll'">
 				<div class="colse" @click="closeAlert()"></div>
 				<div class="invite-text">
-					<div class="invite-title">邀请好友注册得万能樱</div>
-					<div>万能樱可兑换任意一朵花瓣</div>
+					<div class="invite-title">邀请好友注册得万能花火</div>
+					<div>万能花火可兑换任意地区花火</div>
 				</div>
 				<img class="getsakura invite-sakura" src="https://s2.wandougongzhu.cn/s/9f/wan_ebbf7a.png">
 				<form :report-submit="form_id" @submit="gather" >
@@ -296,7 +325,7 @@
 						去邀请
 					</button>
 				</form>
-				<div class="universal-tips">花瓣在好友验证手机号后发放</div>
+				<div class="universal-tips">花火在好友验证手机号后发放</div>
 			</div>
 			<!-- 万能樱兑换 -->
 			<!-- sakuraAllChange -->
@@ -463,28 +492,27 @@ export default {
 			flowerStatus: '0',
 			status: '-1',
 			text: '',
-			sakura_A_num: 0, //八重樱
-			sakura_B_num: 0, //吉野樱
-			sakura_C_num: 0, //大岛樱 
-			sakura_D_num: 0, //淡墨樱
-			sakura_E_num: 0, //寒绯樱
-			sakura_W_num: 0, //万能樱数量
-			sakura_G_num: 0, //赠送花瓣数量
-			sakura_H_num: 0, //合成樱花数量
-			is_compose: false, //是否可以合成樱花
+			sakura_A_num: 0, //筑后川花火大会
+			sakura_B_num: 0, //土浦花火大会
+			sakura_C_num: 0, //洞爷湖花火大会 
+			sakura_D_num: 0, //大曲花火大会
+			sakura_E_num: 0, //大阪天神祭
+			sakura_W_num: 0, //万能花火数量
+			sakura_G_num: 0, //赠送花火数量
+			sakura_H_num: 0, //合成花火数量
+			is_compose: false, //是否可以合成庆生花火
 			rest_count: 0, //剩余抽奖次数
 			total_count: 9, //今日可抽总次数
-			lottery_res: {}, //抽取樱花瓣结果
+			lottery_res: {}, //抽取花火结果
 			maskShow: false, //蒙层
 			taskList: [],
 			totalSakuraNum: 0,
 			lastSakuraNum: 500000,
-			progressSakura: 0, //集樱花进度0-5代表0w-50w
+			progressSakura: 0, //集花火进度0-5代表0w-50w
 			restDay: 10,
 			restText: '',
 			lock: false,
 			sakuraDetailKey: 'sakura_a',
-			sakuraDetailRotate: 0, //旋转角度
 			sakuraDetailName: '筑后川花火大会',
 			sakuraDetailPoetry: '築後川花火大會',
 			shareImg: 'https://s.wandougongzhu.cn/s/54/-02_a336b2.jpg', //分享图
@@ -494,16 +522,16 @@ export default {
 				'sakura_c': 'https://s5.wandougongzhu.cn/s/58/__3_b21b66.jpg',
 				'sakura_d': 'https://s.wandougongzhu.cn/s/10/__4_6eaacb.jpg',
 				'sakura_e': 'https://s5.wandougongzhu.cn/s/41/__5_4165fc.jpg'
-			},//分享花瓣给好友图了list
+			},//分享花火给好友图了list
 			shareSakura: 'sakura_a',
-			sakura_All_num: 0, //万能花瓣数量
+			sakura_All_num: 0, //万能花火数量
 			sakura_whitch_choosed: '',
-			exchange_sakura_key: '', //要兑换的花瓣
+			exchange_sakura_key: '', //要兑换的花火
 			inviteCount: 0, //邀请好友数量
 			ruleShowMore: false,
 			ruleShowText: '展开更多',
 			giftRecList: [], //赠领记录
-			invite_sakura: '', //通过邀请来领取的花瓣key
+			invite_sakura: '', //通过邀请来领取的花火key
 			invite_user_id: '', //邀请人id
 			option: '',
 			inviteUser: '', //好友昵称
@@ -519,7 +547,7 @@ export default {
 			index_ad_info: '', //首页广告
 			buoy_ad_info: '', //悬浮广告or底部广告
 			cloundShareActInfo: {}, //云控分享页面
-			cloundShareSakuraInfo: {}, //云控分享花瓣
+			cloundShareSakuraInfo: {}, //云控分享花火
 			topRankList: [], //排行榜数据
 			userRankList: {}, //当前用户的排行数据
 			showFaceTime: '0', //是否显示山下久智FaceTime
@@ -566,7 +594,7 @@ export default {
 			if (this.option.user_id == WMP.globalData.userInfo.user_id) {
 				if (this.option.sakura_id) {
 					wx.showToast({
-						title: '不能领取自己分享的花瓣～',
+						title: '不能领取自己分享的花火～',
 						icon: 'none',
 						duration: 2000
 					});
@@ -879,7 +907,7 @@ export default {
 							is_succ : 0  // fail
 						},'sakura');
 						wx.showToast({
-							title: '不能领取自己分享的花瓣～',
+							title: '不能领取自己分享的花火～',
 							icon: 'none',
 							duration: 2000
 						});
@@ -1066,53 +1094,53 @@ export default {
 				this.sakuraDetailKey = key;
 				this.sakuraDetailName = name;
 				this.sakuraDetailPoetry = poetry;
-				if(this.sakuraDetailKey == 'sakura_a') {
-					this.sakuraDetailRotate = 0;
-				} else if (this.sakuraDetailKey == 'sakura_b') {
-					this.sakuraDetailRotate = 72;
-				} else if (this.sakuraDetailKey == 'sakura_c') {
-					this.sakuraDetailRotate = 144;
-				} else if (this.sakuraDetailKey == 'sakura_d') {
-					this.sakuraDetailRotate = -144;
-				} else if (this.sakuraDetailKey == 'sakura_e') {
-					this.sakuraDetailRotate = -72;
-				}
+				
 				this.maskShow = true;
 				this.showAlert = 'sakuraDetail';
 			} else {
 				wx.showToast({
-					title: '抽樱花已结束',
+					title: '抽花火已结束',
 					icon: 'error',
 					duration: 2000
 				});
 			}
-			
 		},
 		showComposeAni() {
-			if (this.is_compose) {
-				Net.get('Sakura.userComposeSakura', {
-					data: {
-						user_id: this.user_id
-					}
-				}).then(res=>{
-					if(res.errno=='0') {
-						this.maskShow = true;
-						this.showAlert = 'compose';
-					} else {
-						wx.showToast({
-							title: res.errmsg,
-							icon: 'none',
-							duration: 2000
-						});
-					}
-				}) 
-			} else {
-				wx.showToast({
-					title: '樱花数量不足～',
-					icon: 'none',
-					duration: 2000
-				});
-			}
+			this.maskShow = true;
+			this.showAlert = 'compose';
+			setTimeout(()=>{
+				this.showAlert = '';
+				this.maskShow = false;
+			},3500);
+
+			// if (this.is_compose) {
+			// 	Net.get('Sakura.userComposeSakura', {
+			// 		data: {
+			// 			user_id: this.user_id
+			// 		}
+			// 	}).then(res=>{
+			// 		if(res.errno=='0') {
+			// 			this.maskShow = true;
+			// 			this.showAlert = 'compose';
+			// 			setTimeout(()=>{
+					// 	this.showAlert = '';
+					// 	this.maskShow = false;
+					// },3500);
+			// 		} else {
+			// 			wx.showToast({
+			// 				title: res.errmsg,
+			// 				icon: 'none',
+			// 				duration: 2000
+			// 			});
+			// 		}
+			// 	}) 
+			// } else {
+			// 	wx.showToast({
+			// 		title: '花火数量不足～',
+			// 		icon: 'none',
+			// 		duration: 2000
+			// 	});
+			// }
 		},
 		//万能瓣兑换弹框
 		showSakuraW() {
@@ -1262,14 +1290,14 @@ export default {
 					});
 				} else {
 					wx.showToast({
-						title: '万能樱不足～',
+						title: '万能花火不足～',
 						icon: 'error',
 						duration: 1500,
 					})
 				}
 			} else {
 				wx.showToast({
-					title: '请选择一个花瓣',
+					title: '请选择一个花火',
 					icon: 'error',
 					duration: 1500,
 				});
@@ -1312,7 +1340,7 @@ export default {
 				if (task_id == 3) {
 					if (this.sakura_A_num == '0' && this.sakura_B_num == '0' && this.sakura_C_num == '0' && this.sakura_D_num == '0' && this.sakura_E_num == '0') {
 						wx.showToast({
-							title: '当前没有花瓣～',
+							title: '当前没有花火～',
 							icon: 'none',
 							duration: 1500,
 						});
@@ -1455,7 +1483,7 @@ button::after{ border: none; }
 	position:absolute;
 	right:0;
 }
-.to-alert-box,.get-alert-box,.compose-box {
+.to-alert-box,.get-alert-box {
 	position: absolute;
 	left: 50%;
 	top: 50%;
@@ -1477,38 +1505,6 @@ button::after{ border: none; }
 .suc-alert-box  .mysakura-text .name {
 	font-size: 12px;
 	margin-top: 20px;
-}
-.compose-box {
-	position: absolute;
-	width: 375px;
-	height: 400px;
-	background: none;
-}
-
-.compose-tips {
-	font-size: 28px;
-	color: #fff;
-	margin: 0 auto;
-	top: 0;
-	-webkit-animation: showtext 5s ease-in-out;
-	animation: showtext 5s ease-in-out;
-}
-.compose-btn {
-	z-index: 10;
-	position: absolute;
-	left: 50%;
-	bottom: 0;
-	transform: translate(-50%, 0);
-	width: 115px;
-	height: 38px;
-	line-height: 38px;
-	font-size: 14px;
-	color: #fff;
-	margin: 0 auto;
-	background: url('https://s2.wandougongzhu.cn/s/68/toyou_3d05c2.png') no-repeat;
-	background-size: cover;
-	-webkit-animation: showtext 5s ease-in-out;
-	animation: showtext 5s ease-in-out;
 }
 .universal-compose {
 	font-size: 20px;
@@ -1702,12 +1698,12 @@ button::after{ border: none; }
 	background: url('https://s4.wandougongzhu.cn/s/5e/_9d0db2.png') no-repeat;
 	background-size: contain;
 	color: #FFFFFF;
-	z-index: 999;
+	z-index: 1;
 }
 .rec-btn {
 	position: absolute;
 	left: 28px;
-	bottom: 30px;
+	bottom: 20px;
 	display: inline;
 	font-size: 14px;
 	text-decoration: underline;
@@ -1818,6 +1814,7 @@ button::after{ border: none; }
 }
 .reel-box .flower-box .flower-item {
 	position: absolute;
+	overflow: visible;
 }
 .flower-item .tag{
 	position: relative;
@@ -1825,7 +1822,7 @@ button::after{ border: none; }
 	padding: 10px 2px;
 	font-size: 10px;
 	font-weight: bold;
-	line-height: 12px;
+	line-height: 11px;
 	color: #000;
 	box-sizing: border-box;
 	background: url(https://s1.wandougongzhu.cn/s/ec/2x_9bfe98.png) no-repeat;
@@ -1837,12 +1834,58 @@ button::after{ border: none; }
 	background: url(https://s4.wandougongzhu.cn/s/20/_gray_cd255c.png) no-repeat;
 	background-size: 100% 100%;
 }
+.flower-item .num-box {
+	position: absolute;
+	right: -8px;
+	bottom: -6px;
+}
+.flower-item .fire-ani-box {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.fire-ani-box .firecracker {
+	width: 16px;
+	height: 33px;
+	position: absolute;
+	background: url(https://s5.wandougongzhu.cn/s/bd/_d9b697.png) no-repeat;
+	background-size: 100% 100%;
+	z-index: 1;
+}
+.firecracker .ani {
+	left: 6px;
+	bottom: 30px;
+	position: absolute;
+	width: 2px;
+	height: 6px;
+	border-radius: 70%;
+	background-image: linear-gradient(to bottom, rgb(213, 34, 35),rgba(255,255,255,0.5));
+	background-size: cover;
+	/* forwards */
+	animation: fire_rise 2s forwards cubic-bezier(.08,.47,.38,.87);
+}
+.firecracker .boom {
+	position: absolute;
+	bottom: 70px;
+	left: -26px;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	transform: scale(0.5);
+	opacity: 0;
+	background: url(https://s.wandougongzhu.cn/s/49/42x_154024.png) no-repeat;
+	background-size: cover;
+	animation: fire_boom_s 2s forwards ease-in-out;
+	animation-delay: 2.5s;
+}
 .flower-item-dyh {
 	left: 246px;
 	top: 59px;
 	width: 105px;
 	height: 90px;
-	background: url(https://s3.wandougongzhu.cn/s/f3/_a02127.png) no-repeat;
+	background: url(https://s1.wandougongzhu.cn/s/1b/dyh_map_328482.png) no-repeat;
 	background-size: cover;
 	background-position: center;
 }
@@ -1856,26 +1899,26 @@ button::after{ border: none; }
 	top: 145px;
 	width: 101px;
 	height: 92px;
-	background: url(https://s5.wandougongzhu.cn/s/57/_5fb20d.png) no-repeat;
+	background: url(https://s5.wandougongzhu.cn/s/63/dq_map_440614.png) no-repeat;
 	background-size: cover;
 	background-position: center;
 }
 .flower-item-dq.gray {
-	background: url(https://s5.wandougongzhu.cn/s/e3/_gray_4e0244.png) no-repeat;
+	background: url(https://s4.wandougongzhu.cn/s/9d/dq_map_g_5b5429.png) no-repeat;
 	background-size: cover;
 	background-position: center;
 }
 .flower-item-tf {
-	left: 148px;
+	left: 147px;
 	top: 187px;
 	width: 90px;
 	height: 90px;
-	background: url(https://s2.wandougongzhu.cn/s/21/_433abc.png) no-repeat;
+	background: url(https://s5.wandougongzhu.cn/s/8d/tf_map_489ec1.png) no-repeat;
 	background-size: cover;
 	background-position: center;
 }
 .flower-item-tf.gray {
-	background: url(https://s4.wandougongzhu.cn/s/57/_gray_54f170.png) no-repeat;
+	background: url(https://s5.wandougongzhu.cn/s/53/tf_map_g_81d879.png) no-repeat;
 	background-size: cover;
 	background-position: center;
 }
@@ -1884,12 +1927,12 @@ button::after{ border: none; }
 	top: 227px;
 	width: 104px;
 	height: 60.5px;
-	background: url(https://s5.wandougongzhu.cn/s/21/_65cc39.png) no-repeat;
+	background: url(https://s.wandougongzhu.cn/s/e3/db_map_065caa.png) no-repeat;
 	background-size: cover;
 	background-position: center;
 }
 .flower-item-db.gray {
-	background: url(https://s5.wandougongzhu.cn/s/f8/_gray_aedb7e.png) no-repeat;
+	background: url(https://s4.wandougongzhu.cn/s/00/db_map_g_262ac2.png) no-repeat;
 	background-size: cover;
 	background-position: center;
 }
@@ -1898,12 +1941,12 @@ button::after{ border: none; }
 	top: 246px;
 	width: 100.5px;
 	height: 61px;
-	background: url(https://s2.wandougongzhu.cn/s/50/_cef6e7.png) no-repeat;
+	background: url(https://s4.wandougongzhu.cn/s/d0/zhc_map_128e65.png) no-repeat;
 	background-size: cover;
 	background-position: center;
 }
 .flower-item-zhc.gray {
-	background: url(https://s4.wandougongzhu.cn/s/a6/_gray_d23ebb.png) no-repeat;
+	background: url(https://s4.wandougongzhu.cn/s/2b/zhc_map_g_f9ac74.png) no-repeat;
 	background-size: cover;
 	background-position: center;
 }
@@ -1960,7 +2003,7 @@ button::after{ border: none; }
 	height: 74px;
 }
 .universal-flower .flower-item-tf {
-	left: 114px;
+	left: 113px;
 	top: 178px;
 	width: 70px;
 	height: 73px;
@@ -1991,63 +2034,6 @@ button::after{ border: none; }
 .universal-flower .flower-item span.have-flower-num {
 	color: rgba(255, 255, 255, 1);
 }
-
- @keyframes twinkling{  
-	0%{  
-			opacity: 0;  
-	}
-	20% {
-		opacity: 0.4;
-	}
-	50% {
-		opacity: 1;
-	}
-	80% {
-		opacity: 0.4;
-	}
-	100%{  
-			opacity: 0;  
-	}  
-} 
- @-webkit-keyframes twinkling{  
-	0%{  
-			opacity: 0;  
-	}
-	20% {
-		opacity: 0.4;
-	}
-	50% {
-		opacity: 1;
-	}
-	80% {
-		opacity: 0.4;
-	}
-	100%{  
-			opacity: 0;  
-	}  
-}
-@keyframes breath {
-  from {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  to {
-    transform: scale(1);
-  }
-}
-
-@keyframes firing {
-	0%{ padding: 80px; transform: scale(0.5) translateY(0); opacity:1;}
-	75% { padding:0; transform: scale(1) translateY(0);}
-	100%{ opacity:0; transform:scale(1) translateY(100px);}
-}
-@-webkit-keyframes firing {
-	0%{ padding: 80px; -webkit-transform: scale(0.5) translateY(0); opacity:1;}
-	75%{ padding:0;-webkit-transform: scale(1) translateY(0);}
-	100%{ opacity:0;-webkit-transform:scale(1) translateY(100px);}
-}
 .mix-btn {
 	position: absolute;
 	right: 22px;
@@ -2055,18 +2041,66 @@ button::after{ border: none; }
 	display: block;
 	width: 75px;
 	height: 75px;
-	padding: 15px 10px;
+	padding: 0;
 	color: rgba(255, 255, 255, 0.302);
 	font-size: 20px;
 	line-height: 22px;
-	background: url('https://s5.wandougongzhu.cn/s/41/02x_12405d.png') no-repeat;
-	background-size: cover;
-	
+	background: none;
+	/* background: url('https://s5.wandougongzhu.cn/s/41/02x_12405d.png') no-repeat;
+	background-size: cover; */
 }
 .new-mix-btn {
 	color: rgba(255,255,255,1);
 	background: url('https://s2.wandougongzhu.cn/s/4c/-2x_81cff2.png') no-repeat;
 	background-size: cover;
+}
+.wave {  
+	position: absolute;
+	top: 0;
+	width: 75px;  
+	height: 75px;  
+	color: #fff;
+	background: url('https://s2.wandougongzhu.cn/s/4c/-2x_81cff2.png') no-repeat;
+	background-size: cover; 
+	border-radius: 50%; 
+	overflow: hidden; 
+}  
+.wave:before,  
+.wave:after {  
+	content: "";  
+	position: absolute;  
+	width: 100px;  
+	height: 100px;  
+	top: 0;  
+	left: 50%;  
+	background-color: rgba(0, 0, 0, .2);  
+	border-radius: 34%;  
+	transform: translate(-50%, -70%) rotate(0);  
+	animation: rotate 7s linear infinite;  
+	z-index: 1;  
+}  
+.wave:after {  
+	content: "";
+	border-radius: 67%;  
+	background-color: rgba(0, 0, 0, .5);  
+	transform: translate(-50%, -70%) rotate(0);  
+	animation: rotate 11s linear -5s infinite;
+}  
+@keyframes rotate {  
+	50% {  
+		transform: translate(-50%, -73%) rotate(180deg);  
+	} 100% {  
+		transform: translate(-50%, -70%) rotate(360deg);  
+	}  
+} 
+.mix-btn-text {
+	position: absolute;
+	width: 75px;
+	height: 75px;
+	padding: 15px;
+	box-sizing: border-box;
+	color: #fff;
+	z-index: 2;
 }
 .flower-box .bottom {
 	display: flex;
@@ -2211,205 +2245,205 @@ button::after{ border: none; }
 	padding: 0;
 	border: none;
 }
-#mask {
+#mask,.compose-box {
 	text-align: center;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	z-index: 2;
 }
-.compose-ani, .compose-ani-2, .compose-ani-3,.shink,.shink2 {
-	opacity: 0;
+.compose-ani {
+	opacity: 0;  
 	position: absolute;
-	width: 300px;
-	height: 300px;
-	margin: 10px 37px;
-	background: url('https://s3.wandougongzhu.cn/s/ac/3_d1bd5d.png') no-repeat;
+	width: 220px;
+	height: 220px;
+	left: 10px;
+	bottom: 250px;
+	z-index: 1;
+	background: url('https://s4.wandougongzhu.cn/s/34/1_ae06eb.png') no-repeat;
 	background-size: cover;
-	-webkit-animation: compose 3s ease-in-out;
-	animation: compose 3s ease-in-out;
+	-webkit-animation: fire_boom 2.5s forwards cubic-bezier(.01,.43,.34,.91);
+	animation: fire_boom 2.5s forwards cubic-bezier(.01,.43,.34,.91);
+	animation-delay: 1s;
+}
+.compose-ani-before {
+	opacity: 0;  
+	position: absolute;
+	left: 100px;
+	width: 28px;
+	height: 100px;
+	background: url('https://s.wandougongzhu.cn/s/fb/4_b2c3de.png') no-repeat;
+	background-size: cover;
+	background-position: center;
+	bottom: 265px;
+	animation: fire_boom_up 1s forwards cubic-bezier(.07,.72,.56,1);
 }
 .compose-ani-2 {
-	opacity: 0;
+	opacity: 0;  
+	position: absolute;
+	width: 190px;
+	height: 190px;
+	left: 190px;
+	bottom: 190px;
 	z-index: 2;
-	background: url('https://s2.wandougongzhu.cn/s/c8/cool6_6d080f.png') no-repeat;
+	background: url('https://s5.wandougongzhu.cn/s/a5/2_8ef911.png') no-repeat;
 	background-size: cover;
-	-webkit-animation: compose-2 4s;
-	animation: compose-2 4s;
-	transform: scale(2);
-	/* animation-delay: 2s; */
+	-webkit-animation: fire_boom 2.5s forwards cubic-bezier(.01,.43,.34,.91);
+	animation: fire_boom 2.5s forwards cubic-bezier(.01,.43,.34,.91);
+	animation-delay: 1s;
+}
+.compose-ani2-before {
+	opacity: 0;  
+	position: absolute;
+	left: 270px;
+	width: 28px;
+	height: 100px;
+	background: url('https://s1.wandougongzhu.cn/s/be/1_236cef.png') no-repeat;
+	background-size: cover;
+	background-position: center;
+	bottom: 210px;
+	animation: fire_boom_up 1s forwards cubic-bezier(.07,.72,.56,1);
 }
 .compose-ani-3 {
-	opacity: 1;
-	z-index: 3;
-	background: url('https://s1.wandougongzhu.cn/s/73/hua_11b087.png') no-repeat;
+	opacity: 0;  
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	left: 288px;
+	bottom: 405px;
+	z-index: 1;
+	background: url('https://s2.wandougongzhu.cn/s/64/3_fe2423.png') no-repeat;
 	background-size: cover;
-	-webkit-animation: compose-3 4s;
-	animation: compose-3 4s;
-	/* animation-delay: 3s; */
+	-webkit-animation: fire_boom 2.3s forwards cubic-bezier(.01,.43,.34,.91);
+	animation: fire_boom 2.3s forwards cubic-bezier(.01,.43,.34,.91);
+	animation-delay: 1.2s;
 }
-.shink {
+.compose-ani3-before {
+	opacity: 0; 
+	position: absolute;
+	left: 85px;
+	width: 22px;
+	height: 75px;
+	background: url('https://s.wandougongzhu.cn/s/bf/3_7bb5d1.png') no-repeat;
+	background-size: cover;
+	background-position: center;
+	bottom: 433px;
+	animation: fire_boom_up 1s forwards cubic-bezier(.07,.72,.56,1);
+}
+.compose-ani-4 {
+	opacity: 0; 
+	position: absolute;
+	width: 170px;
+	height: 170px;
+	left: 10px;
+	bottom: 405px;
+	z-index: 1;
+	background: url('https://s2.wandougongzhu.cn/s/02/4_9f75e9.png') no-repeat;
+	background-size: cover;
+	-webkit-animation: fire_boom 2.5s forwards cubic-bezier(.01,.43,.34,.91);
+	animation: fire_boom 2.5s forwards cubic-bezier(.01,.43,.34,.91);
+	animation-delay: 1s;
+}
+.compose-ani4-before {
+	opacity: 0; 
+	position: absolute;
+	left: 328px;
+	width: 28px;
+	height: 100px;
+	background: url('https://s.wandougongzhu.cn/s/fb/4_b2c3de.png') no-repeat;
+	background-size: cover;
+	background-position: center;
+	bottom: 380px;
+	animation: fire_boom_up 1s forwards cubic-bezier(.07,.72,.56,1);
+	animation-delay: .2s;
+}
+.compose-ani-5 {
+	opacity: 0; 
+	position: absolute;
+	width: 290px;
+	height: 290px;
+	left: 70px;
+	bottom: 310px;
 	z-index: 2;
-	position: relative;
-	width: 100%;
-	height: 100%;
-	background: url('https://s4.wandougongzhu.cn/s/a5/yanhua1_a58499.png') no-repeat;
+	background: url('https://s3.wandougongzhu.cn/s/10/5_66436a.png') no-repeat;
 	background-size: cover;
-	/* transform: scale(2); */
-	-webkit-animation: shink 0.5s infinite ease-in-out;
-	animation: shink 0.5s infinite ease-in-out;
-	/* animation-delay: 4s; */
+	-webkit-animation: fire_boom 2s forwards cubic-bezier(.01,.43,.34,.91);
+	animation: fire_boom 2s forwards cubic-bezier(.01,.43,.34,.91);
+	animation-delay: 1.5s;
 }
-.shink2 {
-	z-index: 2;
-	position: relative;
-	width: 100%;
-	height: 100%;
-	background: url('https://s5.wandougongzhu.cn/s/58/yanhua2_b6cdf2.png') no-repeat;
+.compose-ani5-before {
+	opacity: 0; 
+	position: absolute;
+	left: 208px;
+	width: 28px;
+	height: 100px;
+	background: url('https://s.wandougongzhu.cn/s/32/2_6dc082.png') no-repeat;
 	background-size: cover;
-	/* transform: scale(2); */
-	-webkit-animation: shink2 0.5s infinite ease-in-out;
-	animation: shink2 0.5s infinite ease-in-out;
-	/* animation-delay: 4s; */
+	background-position: center;
+	bottom: 360px;
+	animation: fire_boom_up 1s forwards cubic-bezier(.07,.72,.56,1);
+	animation-delay: 0.5s;
 }
-@keyframes shink{
-    0%{  
-        opacity: 1;
-    }
-    100%{  
-        opacity: 0;
-    }  
-} 
-@-webkit-keyframes shink{
-    0%{  
-        opacity: 1;
-    }
-    100%{  
-        opacity: 0;
-    }  
-} 
-@keyframes showtext {
-	0%{  
-        opacity: 0;
+@keyframes breath {
+  from {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@-webkit-keyframes breath {
+  from {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes flutter
+{
+	0% {
+		transform: rotate(2deg);
+		-webkit-transform: rotate(2deg);
+		transform-origin: 50% 0;
+		-webkit-transform-origin: 50% 0;
+	}
+	20% {
+		transform: rotate(10deg);
+		-webkit-transform: rotate(10deg);
+		transform-origin: 50% 0;
+		-webkit-transform-origin: 50% 0;
+	}
+	40% {
+		transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+		transform-origin: 50% 0;
+		-webkit-transform-origin: 50% 0;
+	}
+	60% {
+		transform: rotate(-2deg);
+		-webkit-transform: rotate(-2deg);
+		transform-origin: 50% 0;
+		-webkit-transform-origin: 50% 0;
 	}
 	80% {
-		opacity: 0;
+		transform: rotate(-10deg);
+		-webkit-transform: rotate(-10deg);
+		transform-origin: 50% 0;
+		-webkit-transform-origin: 50% 0;
 	}
-    100%{  
-        opacity: 1;
-    } 
-}
-@-webkit-keyframes showtext{
-    0%{  
-        opacity: 0;
+	100% {
+		transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+		transform-origin: 50% 0;
+		-webkit-transform-origin: 50% 0;
 	}
-	80% {
-		opacity: 0;
-	}
-    100%{  
-        opacity: 1;
-    }  
-} 
-
-@keyframes shink2{
-    0%{  
-        opacity: 0;
-    }
-    100%{  
-        opacity: 1;
-    }  
-} 
-@-webkit-keyframes shink2{
-    0%{  
-        opacity: 0;
-    }
-    100%{  
-        opacity: 1;
-    }  
-} 
-@keyframes compose{
-    0%{  
-        opacity: 1;
-		transform: scale(1) rotate(0);
-    }
-	/* 66.6% {
-		opacity: 1;
-		transform: scale(1) rotate(720deg);
-	} */
-    100%{  
-        opacity: 0;  
-		transform: scale(0.2) rotate(1080deg);
-    }  
-} 
- @-webkit-keyframes compose{  
-    0%{  
-        opacity: 1;
-		transform: scale(0.2) rotate(0);
-    }
-	/* 66.6% {
-		opacity: 1;
-		transform: scale(1) rotate(720deg);
-	} */
-    100%{  
-        opacity: 0.2;  
-		transform: scale(0.2) rotate(720deg);
-    }  
-} 
-@keyframes compose-2{
-    0%{  
-        opacity: 0;
-		transform: scale(0.4) rotate(0);
-    }
-	50%{
-		opacity: 0.2;
-		transform: scale(0.4) rotate(720deg);
-	}
-    100%{  
-        opacity: 1;  
-		transform: scale(2) rotate(1440deg);
-    }  
-}
-@-webkit-keyframes compose-2{
-    0%{  
-        opacity: 0;
-		transform: scale(0.4) rotate(0);
-    }
-	50%{
-		opacity: 0.2;
-		transform: scale(0.4) rotate(720deg);
-	}
-    100%{  
-        opacity: 1;  
-		transform: scale(2) rotate(1440deg);
-    } 
-}
-@keyframes compose-3{
-    0%{  
-        opacity: 0;
-		transform: scale(0.2);
-    }
-	75%{
-		opacity: 0;
-		transform: scale(0.2);
-	}
-    100%{  
-        opacity: 1;  
-		transform: scale(1);
-    }  
-}
-@-webkit-keyframes compose-3{
-   	0%{  
-        opacity: 0;
-		transform: scale(0.2);
-    }
-	75%{
-		opacity: 0;
-		transform: scale(0.2);
-	}
-    100%{  
-        opacity: 1;  
-		transform: scale(1);
-    } 
 }
 @-webkit-keyframes flutter
 {
@@ -2450,44 +2484,108 @@ button::after{ border: none; }
         -webkit-transform-origin: 50% 0;
     }
 }
-@keyframes flutter
-{
-    0% {
-        transform: rotate(2deg);
-        -webkit-transform: rotate(2deg);
-        transform-origin: 50% 0;
-        -webkit-transform-origin: 50% 0;
-    }
-    20% {
-        transform: rotate(10deg);
-        -webkit-transform: rotate(10deg);
-        transform-origin: 50% 0;
-        -webkit-transform-origin: 50% 0;
-    }
-    40% {
-        transform: rotate(0deg);
-        -webkit-transform: rotate(0deg);
-        transform-origin: 50% 0;
-        -webkit-transform-origin: 50% 0;
-    }
-    60% {
-        transform: rotate(-2deg);
-        -webkit-transform: rotate(-2deg);
-        transform-origin: 50% 0;
-        -webkit-transform-origin: 50% 0;
-    }
-    80% {
-        transform: rotate(-10deg);
-        -webkit-transform: rotate(-10deg);
-        transform-origin: 50% 0;
-        -webkit-transform-origin: 50% 0;
-    }
-    100% {
-        transform: rotate(0deg);
-        -webkit-transform: rotate(0deg);
-        transform-origin: 50% 0;
-        -webkit-transform-origin: 50% 0;
-    }
+@keyframes fire_rise{
+	0%{  
+		bottom: 25px;
+	}
+	90% {
+		opacity: 1;
+		bottom: 80px;
+	}
+	100%{
+		bottom: 80px;
+		opacity: 0;
+	}  
+} 
+@-webkit-keyframes fire_rise{
+	0%{  
+		bottom: 25px;
+	}
+	90% {
+		opacity: 1;
+		bottom: 80px;
+	}
+	100%{
+		bottom: 80px;
+		opacity: 0;
+	}  
+}
+
+@keyframes fire_boom_s {
+	0%{
+		transform: scale(0.5); 
+		opacity:1;
+	}
+	80%{ 
+		opacity: 0.2;
+		transform: scale(1);
+	}
+	100%{ 
+		opacity: 0; 
+		transform:scale(1);
+	}
+}
+@-webkit-keyframes fire_boom_s {
+	0%{
+		transform: scale(0.5); 
+		opacity:1;
+	}
+	80%{ 
+		opacity: 0.2;
+		transform: scale(1);
+	}
+	100%{ 
+		opacity: 0; 
+		transform:scale(1);
+	}
+}
+@keyframes fire_boom {
+	0%{
+		transform: scale(0.03) translateY(400px); 
+		opacity: 1;
+	}
+	10% {
+		transform: scale(0.03) translateY(20px); 
+		opacity: 1;
+	}
+	90%{ 
+		opacity: 1;
+		transform:scale(1) translateY(0);
+	}
+	100%{ 
+		opacity: 0;
+		transform:scale(1) translateY(0);
+	}
+}
+@-webkit-keyframes fire_boom {
+	0%{
+		transform: scale(0.03) translateY(400px); 
+		opacity: 1;
+	}
+	10% {
+		transform: scale(0.03) translateY(20px); 
+		opacity: 1;
+	}
+	90%{ 
+		opacity: 1;
+		transform:scale(1) translateY(0);
+	}
+	100%{ 
+		opacity: 0;
+		transform:scale(1) translateY(0);
+	}
+}
+@keyframes fire_boom_up {
+	0% {
+		opacity: 1;
+		bottom: 0;
+	}
+	90% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
 }
 .brand-box {
 	display: flex;
