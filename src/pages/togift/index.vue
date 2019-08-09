@@ -1,19 +1,22 @@
 <template>
 	<div class="container">
-		<div class="title">请选择要赠送的花瓣</div>
+		<div class="title">请选择要赠送的花火</div>
 		<swiper class="swiper-box" next-margin="35px" previous-margin="35px" @change="swiperChange">
 			<swiper-item v-for="item in sakuraList" :key="item.index">
-				<div class="to-alert-box" >
+				<div class="get-alert-box" >
 					<div class="sakura-text">
 						<div class="name">{{item.sakura_name}}</div>
-						<div class="poetry">{{item.poetry}}</div>
+						<div class="ihave-sakura">拥有<span>{{item.sakura_num}}</span>瓣</div>
 					</div>
-					<img class="mysakura" src="https://s5.wandougongzhu.cn/s/e0/myflower1_485615.png" v-bind:class="{'rotate1': item.sakura_key == 'sakura_b','rotate2': item.sakura_key == 'sakura_c','rotate3': item.sakura_key == 'sakura_d','rotate4': item.sakura_key == 'sakura_e'}">
+					<img v-if="item.sakura_key == 'sakura_a'" class="mysakura" src="https://s4.wandougongzhu.cn/s/3a/zhc_8eeb51.jpg">
+					<img v-if="item.sakura_key == 'sakura_b'" class="mysakura" src="https://s1.wandougongzhu.cn/s/92/tf_61b463.jpg">
+					<img v-if="item.sakura_key == 'sakura_c'" class="mysakura" src="https://s3.wandougongzhu.cn/s/9f/dyh_984083.jpg">
+					<img v-if="item.sakura_key == 'sakura_d'" class="mysakura" src="https://s3.wandougongzhu.cn/s/72/dq_196ee4.jpg">
+					<img v-if="item.sakura_key == 'sakura_e'" class="mysakura" src="https://s3.wandougongzhu.cn/s/b9/db_d1cdb7.jpg">
 					<div class="mysakura-tips">
 						<p>多余的樱花瓣可以赠送给好友哦</p>
 						<p>每天首次赠送可获得1次抽樱花瓣的机会</p>
 					</div>
-					<div class="ihave-sakura">拥有<span>{{item.sakura_num}}</span>瓣</div>
 				</div>
 			</swiper-item>
 		</swiper>
@@ -46,7 +49,34 @@ export default {
 			form_id:true,
 			user_id: '',
 			userInfo: {},
-			sakuraList: [], //已有樱花数量
+			sakuraList: [
+				{
+					'sakura_num': 1,
+					'sakura_name': '筑后川花火大会',
+					'sakura_key': 'sakura_a',
+					'share_img': 'https://s4.wandougongzhu.cn/s/3a/zhc_8eeb51.jpg'
+				},{
+					'sakura_num': 2,
+					'sakura_name': '土浦花火大会',
+					'sakura_key': 'sakura_b',
+					'share_img': 'https://s1.wandougongzhu.cn/s/92/tf_61b463.jpg'
+				},{
+					'sakura_num': 3,
+					'sakura_name': '洞爷湖花火大会',
+					'sakura_key': 'sakura_c',
+					'share_img': 'https://s3.wandougongzhu.cn/s/9f/dyh_984083.jpg'
+				},{
+					'sakura_num': 4,
+					'sakura_name': '大曲花火大会',
+					'sakura_key': 'sakura_d',
+					'share_img': 'https://s3.wandougongzhu.cn/s/72/dq_196ee4.jpg'
+				},{
+					'sakura_num': 5,
+					'sakura_name': '大阪天神祭',
+					'sakura_key': 'sakura_e',
+					'share_img': 'https://s3.wandougongzhu.cn/s/b9/db_d1cdb7.jpg'
+				},
+			], //已有樱花数量
 			shareImgBtn: '', //分享花瓣给好友图 sakura_a
 			shareImg: 'https://s4.wandougongzhu.cn/s/e4/__1_17ae88.jpg', //分享图
 			sakuraDetailRotate: 0, //旋转角度
@@ -178,46 +208,41 @@ export default {
 				if (sakuraitem.sakura_a > 0) {
 					list.push({
 						'sakura_num': sakuraitem.sakura_a,
-						'sakura_name': '八重樱',
-						'poetry': '花开时来，花落时也要来。',
+						'sakura_name': '筑后川花火大会',
 						'sakura_key': 'sakura_a',
-						'share_img': 'https://s2.wandougongzhu.cn/s/7d/__1_de53f5.jpg'
+						'share_img': 'https://s4.wandougongzhu.cn/s/3a/zhc_8eeb51.jpg'
 					});
 				}
 				if (sakuraitem.sakura_b > 0) {
 					list.push({
 						'sakura_num': sakuraitem.sakura_b,
-						'sakura_name': '吉野樱',
-						'poetry': '今日花如雪，山樱如美人。',
+						'sakura_name': '土浦花火大会',
 						'sakura_key': 'sakura_b',
-						'share_img': 'https://s.wandougongzhu.cn/s/c8/__2_209e10.jpg'
+						'share_img': 'https://s1.wandougongzhu.cn/s/92/tf_61b463.jpg'
 					});
 				}
 				if (sakuraitem.sakura_c > 0) {
 					list.push({
 						'sakura_num': sakuraitem.sakura_c,
-						'sakura_name': '大岛樱',
-						'poetry': '梦中繁花犹再现，樱瓣飘飘然。',
+						'sakura_name': '洞爷湖花火大会',
 						'sakura_key': 'sakura_c',
-						'share_img': 'https://s5.wandougongzhu.cn/s/58/__3_b21b66.jpg'
+						'share_img': 'https://s3.wandougongzhu.cn/s/9f/dyh_984083.jpg'
 					});
 				}
 				if (sakuraitem.sakura_d > 0) {
 					list.push({
 						'sakura_num': sakuraitem.sakura_d,
-						'sakura_name': '淡墨樱',
-						'poetry': '樱花开处处，想似当年故乡路。',
+						'sakura_name': '大曲花火大会',
 						'sakura_key': 'sakura_d',
-						'share_img': 'https://s.wandougongzhu.cn/s/10/__4_6eaacb.jpg'
+						'share_img': 'https://s3.wandougongzhu.cn/s/72/dq_196ee4.jpg'
 					});
 				}
 				if (sakuraitem.sakura_e > 0) {
 					list.push({
 						'sakura_num': sakuraitem.sakura_e,
-						'sakura_name': '寒绯樱',
-						'poetry': '不见方三日，世上滿櫻花。',
+						'sakura_name': '大阪天神祭',
 						'sakura_key': 'sakura_e',
-						'share_img': 'https://s5.wandougongzhu.cn/s/41/__5_4165fc.jpg'
+						'share_img': 'https://s3.wandougongzhu.cn/s/b9/db_d1cdb7.jpg'
 					});
 				}
 				this.sakuraList = list;
@@ -239,27 +264,6 @@ export default {
 button::after{
 	display: none;
 }
-@font-face {
-    font-family: "SakuraFont";
-    src: url("https://s5.wandougongzhu.cn/s/72/fonts_80bdfb.eot"); /* IE9 */
-    src: url("https://s5.wandougongzhu.cn/s/72/fonts_80bdfb.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-	url("https://s5.wandougongzhu.cn/s/2e/fonts_ec2f0d.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
-    url("https://s5.wandougongzhu.cn/s/34/fonts_953a8a.woff") format("woff"); /* chrome, firefox */
-    font-style: normal;
-    font-weight: normal;
-}
-@font-face {
-    font-family: "SakuraKai";
-    src: url("https://s3.wandougongzhu.cn/s/b4/kai_e8c1a4.eot"); /* IE9 */
-    src: url("https://s3.wandougongzhu.cn/s/b4/kai_e8c1a4.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-	url("https://s.wandougongzhu.cn/s/8e/kai_4b2023.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
-    url("https://s2.wandougongzhu.cn/s/6f/kai_4cfb89.woff") format("woff"); /* chrome, firefox */
-    font-style: normal;
-    font-weight: normal;
-}
-body {
-	font-family: "SakuraKai";
-}
 #mask {
 	position: fixed;
 	top: 0;
@@ -272,21 +276,17 @@ body {
 	justify-content: center;
 	align-items: center;
 }
-.to-alert-box,.get-alert-box,.compose-box {
+.get-alert-box,.compose-box {
 	position: absolute;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%,-50%);
-	width: 280px;
+	width: 300px;
 	height: 345px;
 	font-size: 14px;
 	text-align: center;
-	background: url('https://s3.wandougongzhu.cn/s/65/alertbg_701e5c.png') no-repeat;
-	background-size: cover;
-}
-.get-alert-box {
-	background: url('https://s2.wandougongzhu.cn/s/f9/alertbg2_587294.png') no-repeat;
-	background-size: cover;
+	background: url('https://s3.wandougongzhu.cn/s/cc/alert_7c4ab3.png') no-repeat;
+	background-size: 100% 100%;
 }
 .suc-alert-box {
 	height: 190px;
@@ -308,52 +308,25 @@ body {
 	background-size: contain;
 	cursor: pointer;
 }
-.rotate1 {
-	transform: rotate(72deg);
-}
-.rotate2 {
-	transform: rotate(144deg);
-}
-.rotate3 {
-	transform: rotate(-144deg);
-}
-.rotate4 {
-	transform: rotate(-72deg);
-}
 .container {
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	font-family: "SakuraKai";
 	text-align: center;
-	background: url('https://s5.wandougongzhu.cn/s/99/cover17_7cbf7e.jpg') no-repeat;
+	background: url('https://s1.wandougongzhu.cn/s/5c/_a225a7.jpg') no-repeat;
 	background-size: 100% 100%;
 	background-color: #f3f2f1;
 	padding: 0;
 	margin: 0;
 }
 .title {
-	font-size: 28px;
-	font-family: "sakuraKai";
-	color: rgb(237, 61, 98);
-	-webkit-text-stroke: 1rpx #ffffff;
+	font-size: 22px;
+  color: #fff;
 	text-align: center;
 	font-weight: bold;
-	margin-top: 50px;
-}
-.to-alert-box{
-	position: absolute;
-	left: 50%;
-	top: 0;
-	transform: translate(-50%,0);
-	width: 280px;
-	height: 345px;
-	font-size: 14px;
-	text-align: center;
-	background: url('https://s3.wandougongzhu.cn/s/65/alertbg_701e5c.png') no-repeat;
-	background-size: cover;
+	margin-top: 80px;
 }
 .swiper-box {
 	position: absolute;
@@ -364,55 +337,33 @@ body {
 	/* padding: 0 95px; */
 	overflow: hidden;
 }
-.sakura-text {
-	display: flex;
-}
 .mysakura-text {
 	margin-top: 28px;
 }
-.sakura-text .poetry {
-	position: absolute;
-	left: 21px;
-	top: 15px;
-	width: 14px;
-	font-family: "SakuraKai";
-	font-size: 14px;
-	line-height: 16px;
-	writing-mode: vertical-lr;
-}
 .sakura-text .name {
-	position: absolute;
-	left: 41px;
-	top: 15px;
-	width: 25px;
-	height: 75px;
-	font-family: "SakuraFont";
-	font-size: 25px;
-	line-height: 25px;
+	margin-top: 20px;
+	font-size: 20px;
+	line-height: 22px;
+	font-weight: bold;
+  color: rgb(213, 34, 35);
 }
 .mysakura{
-	width: 130px;
-	height: 165px;
+	width: 260px;
+	height: 177px;
 	position: relative;
-	margin: 55px auto;
+	margin: 15px auto;
 }
 .mysakura-tips {
-	width: 100%;
-	position: absolute;
 	color: rgb(67, 67, 67);
 	bottom: 60px;
 	font-size: 12px;
-	font-family: "SakuraKai";
+	line-height: 20px;
 	text-align: center;
 }
-
 .ihave-sakura {
-	position: absolute;
-	left: 50%;
-	transform: translate(-50%, 0);
-	bottom: 25px;
 	color: #191919;
 	font-size: 14px;
+	margin-top: 5px;
 	font-weight: bold;
 }
 .ihave-sakura span {
@@ -430,7 +381,7 @@ body {
 	font-size: 14px;
 	color: #fff;
 	border: none;
-	background: url('https://s2.wandougongzhu.cn/s/68/toyou_3d05c2.png') no-repeat;
+	background: url('https://s5.wandougongzhu.cn/s/09/_ad9e3d.png') no-repeat;
 	background-size: 100% 100%;
 	margin: 0 auto;
 }
@@ -439,8 +390,6 @@ body {
 	font-size: 16px;
 	color: rgb(87, 94, 137);
 	display: flex;
-	/* -webkit-text-stroke: 1rpx #ffffff; */
 	text-align: center;
-	/* font-weight: bold; */
 }
 </style>

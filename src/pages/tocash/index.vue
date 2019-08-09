@@ -1,11 +1,11 @@
 <template>
 	<div class="container">
 		<div class="tips">
-			<div>我的樱花</div>
-			<div class="my-sakura-box" v-if="sakura_H_num > 0">
+			<div>我合成的花火</div>
+			<div class="my-sakura-box" v-if="sakura_H_num > 0 || true">
 				<div class="my-sakura">X{{sakura_H_num || 0}}</div>
 			</div>
-			<div class="none-tips" v-if="sakura_H_num == '0'">无可兑换的樱花</div>
+			<div class="none-tips" v-if="sakura_H_num == '0' && false">无可兑换的花火</div>
 		</div>
 		<div class="min-tips" v-if="user_price == '0' && toCashNum < min_exchange_price">微信限制提现金额不得小于0.3元，建议兑换豌豆积分</div>
 		<div class="cash-box">
@@ -67,7 +67,8 @@
 				</div>
 			</div>
 		</div>
-		<div id="suc" v-if="sucResShow">
+		 <!-- v-if="sucResShow" -->
+		<div id="suc">
 			<div class="suc-title">恭喜您，<span v-if="type == '0'">积分</span> <span v-if="type == '1'">现金</span>兑换成功！</div>
 			<div class="suc-tips" v-if="type == '0'">积分已经放入豌豆公主账号<span>{{phone}}</span></div>
 			<div class="suc-tips" v-if="type == '1'">现金24小时内会存入您的微信钱包</div>
@@ -287,12 +288,11 @@ body {
 }
 .my-sakura {
 	width: auto;
-	height: 15px;
-	line-height: 15px;
+	height: 25px;
 	margin: 3px;
-	padding-left: 18px;
-	background: url('https://s3.wandougongzhu.cn/s/7e/4_88421d.png') no-repeat;
-	background-size: 15px;
+	padding-left: 30px;
+	background: url('https://s4.wandougongzhu.cn/s/e9/fire_461ac3.png') no-repeat;
+	background-size: 25px;
 	background-position: left center;
 }
 .btn-box {
@@ -303,14 +303,13 @@ body {
 }
 .colse {
 	position: absolute;
-	top: -45px;
-	right: 0px;
-	width: 30px;
-	height: 50px;
-	background: url('https://s2.wandougongzhu.cn/s/5f/_977ab3.png') no-repeat;
+	top: 15px;
+	right: 15px;
+	width: 20px;
+	height: 20px;
+	background: url('https://s.wandougongzhu.cn/s/eb/close_a4ff2d.png') no-repeat;
 	z-index: 2;
 	background-size: contain;
-	cursor: pointer;
 }
 .mysakura-btn,.suc-btn {
 	bottom: 10px;
@@ -319,12 +318,12 @@ body {
 	line-height: 38px;
 	font-size: 14px;
 	color: #fff;
-	background: url('https://s2.wandougongzhu.cn/s/68/toyou_3d05c2.png') no-repeat;
+	background: url('https://s5.wandougongzhu.cn/s/2a/btn_e2760e.jpg') no-repeat;
 	background-size: 100% 100%;
 	margin: 0 auto;
 }
 .dis-btn {
-	background: url('https://s3.wandougongzhu.cn/s/01/_2fd8c9.png') no-repeat;
+	background: url('https://s3.wandougongzhu.cn/s/28/_67a6fa.png') no-repeat;
 	background-size: 100% 100%;
 }
 .to-alert-box {
@@ -336,7 +335,7 @@ body {
 	height: 172px;
 	font-size: 14px;
 	text-align: center;
-	background: url('https://s3.wandougongzhu.cn/s/3d/alertmin_05569c.png') no-repeat;
+	background: url('https://s4.wandougongzhu.cn/s/a2/alert_s_f4973c.png') no-repeat;
 	background-size: 100% 100%;
 }
 .to-cash-tip {
@@ -354,35 +353,34 @@ body {
 }
 #suc {
 	text-align: center;
-	background: url('https://s3.wandougongzhu.cn/s/1f/sucbg_ee24f9.jpg') no-repeat;
-	background-size: cover;
+	background: url('https://s4.wandougongzhu.cn/s/6b/duihuan_d99279.jpg') no-repeat;
+	background-size: 100% 100%;
 }
-
 #suc .suc-title {
 	font-size: 22px;
 	margin-top: 80px;
-	color:rgb(237, 61, 98);
-	-webkit-text-stroke:1rpx #ffffff;
+  color: rgb(216, 35, 35);
+	/* -webkit-text-stroke:1rpx #ffffff; */
 	text-align:center;
 	font-weight:bold;
-	/* font-family: "sakuraKai"; */
 }
 #suc .suc-tips {
 	font-size: 14px;
 	color: #191919;
+  color: rgb(22, 40, 84);
 }
 
 #suc .suc-res {
 	font-size: 32px;
-	color: rgb(234, 60, 98);
+  color: rgb(216, 35, 35);
 	font-weight: bold;
 	margin: 20px auto 5px auto;
 }
 .suc-banner {
-	width: 345px;
+	width: 315px;
 	height: 200px;
 	background: url('https://s5.wandougongzhu.cn/s/98/banner_c52dba.jpg') no-repeat;
-	background-size: 100% 100%;
+	background-size: contain;
 	margin: 10px auto;
 }
 .suc-res span {
@@ -390,7 +388,6 @@ body {
 }
 .suc-btn {
 	display: block;
-	margin-top: 30px;
 }
 .container {
 	font-weight: bold;
@@ -399,9 +396,8 @@ body {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	/* font-family: "SakuraKai"; */
 	text-align: center;
-	background: url('https://s1.wandougongzhu.cn/s/b8/bg2_df61bf.jpg') no-repeat;
+	background: url('https://s1.wandougongzhu.cn/s/19/_5f3df6.jpg') no-repeat;
 	background-size: 100% 100%;
 	background-color: #f3f2f1;
 }
@@ -424,7 +420,6 @@ body {
 .min-tips {
 	font-size: 12px;
 	color: rgb(111,111,111);
-	/* position: absolute; */
 	margin-top: 10px;
 }
 .cash-box,.score-box {
@@ -432,26 +427,30 @@ body {
 	top: 180px;
 	width: 275px;
 	height: 80px;
+	overflow: hidden;
 	background: url('https://s5.wandougongzhu.cn/s/52/xianjinbtn_254e29.png') no-repeat;
 	background-size: 100% 100%;
-	margin: 10px 50px;
 	color: #ffffff;
-	/* font-family: "sakuraKai"; */
 }
 .cash-box .icon ,.score-box .icon{
 	width: 35px;
 	height: 20px;
 	position: absolute;
 	left: -5px;
+	top: -2px;
 }
 .cash-rate {
-	position:absolute;
+	width: 60px;
+	height: 25px;
+	position: absolute;
 	left: 140px;
 	font-size: 14px;
-	color:rgb(243, 81, 109);
-	-webkit-transform:rotate(20deg);
-	transform:rotate(20deg);
-	line-height:36px;
+  color: rgb(216, 40, 40);
+	-webkit-transform: rotate(20deg);
+	transform: rotate(20deg);
+	line-height: 25px;
+	background: url(https://s2.wandougongzhu.cn/s/cb/_0182ea.png) no-repeat;
+	background-size: 100%;
 }
 .cash-content,.score-content {
 	display: flex;
@@ -460,8 +459,8 @@ body {
 }
 .score-box {
 	top: 300px;
-	background: url('https://s3.wandougongzhu.cn/s/76/2_c34842.png') no-repeat;
-	background-size: cover;
+	background: url('https://s4.wandougongzhu.cn/s/a4/_39ec92.png') no-repeat;
+	background-size: 100% 100%;
 }
 .tips2 {
 	font-size: 12px;
@@ -478,9 +477,9 @@ body {
 }
 .tips {
 	position: relative;
-	margin-top: 90px;
-	font-size: 16px;
-	color: rgb(87, 94, 137);
+	font-size: 20px;
+	font-weight: bold;
+  color: rgb(22, 40, 84);
 	text-align: center;
 }
 .to-cash-btn,.to-score-btn,.to-cash-btn-disable {
