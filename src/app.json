@@ -2,9 +2,7 @@
   "pages": [
 		"pages/fireworks/main",
 		"pages/tocash/main",
-		"pages/togift/main",
-    "pages/index/main",
-		"pages/logs/main"
+		"pages/togift/main"
 	],
   "window": {
     "backgroundTextStyle": "light",

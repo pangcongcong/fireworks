@@ -1106,41 +1106,34 @@ export default {
 			}
 		},
 		showComposeAni() {
-			this.maskShow = true;
-			this.showAlert = 'compose';
-			setTimeout(()=>{
-				this.showAlert = '';
-				this.maskShow = false;
-			},3500);
-
-			// if (this.is_compose) {
-			// 	Net.get('Sakura.userComposeSakura', {
-			// 		data: {
-			// 			user_id: this.user_id
-			// 		}
-			// 	}).then(res=>{
-			// 		if(res.errno=='0') {
-			// 			this.maskShow = true;
-			// 			this.showAlert = 'compose';
-			// 			setTimeout(()=>{
-					// 	this.showAlert = '';
-					// 	this.maskShow = false;
-					// },3500);
-			// 		} else {
-			// 			wx.showToast({
-			// 				title: res.errmsg,
-			// 				icon: 'none',
-			// 				duration: 2000
-			// 			});
-			// 		}
-			// 	}) 
-			// } else {
-			// 	wx.showToast({
-			// 		title: '花火数量不足～',
-			// 		icon: 'none',
-			// 		duration: 2000
-			// 	});
-			// }
+			if (this.is_compose) {
+				Net.get('Sakura.userComposeSakura', {
+					data: {
+						user_id: this.user_id
+					}
+				}).then(res=>{
+					if(res.errno=='0') {
+						this.maskShow = true;
+						this.showAlert = 'compose';
+						setTimeout(()=>{
+						this.showAlert = '';
+						this.maskShow = false;
+					},3500);
+					} else {
+						wx.showToast({
+							title: res.errmsg,
+							icon: 'none',
+							duration: 2000
+						});
+					}
+				}) 
+			} else {
+				wx.showToast({
+					title: '花火数量不足～',
+					icon: 'none',
+					duration: 2000
+				});
+			}
 		},
 		//万能瓣兑换弹框
 		showSakuraW() {
