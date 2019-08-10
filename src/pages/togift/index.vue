@@ -6,7 +6,7 @@
 				<div class="get-alert-box" >
 					<div class="sakura-text">
 						<div class="name">{{item.sakura_name}}</div>
-						<div class="ihave-sakura">拥有<span>{{item.sakura_num}}</span>瓣</div>
+						<div class="ihave-sakura">拥有<span>{{item.sakura_num}}</span>个</div>
 					</div>
 					<img v-if="item.sakura_key == 'sakura_a'" class="mysakura" src="https://s4.wandougongzhu.cn/s/3a/zhc_8eeb51.jpg">
 					<img v-if="item.sakura_key == 'sakura_b'" class="mysakura" src="https://s1.wandougongzhu.cn/s/92/tf_61b463.jpg">
@@ -14,8 +14,8 @@
 					<img v-if="item.sakura_key == 'sakura_d'" class="mysakura" src="https://s3.wandougongzhu.cn/s/72/dq_196ee4.jpg">
 					<img v-if="item.sakura_key == 'sakura_e'" class="mysakura" src="https://s3.wandougongzhu.cn/s/b9/db_d1cdb7.jpg">
 					<div class="mysakura-tips">
-						<p>多余的樱花瓣可以赠送给好友哦</p>
-						<p>每天首次赠送可获得1次抽樱花瓣的机会</p>
+						<p>多余的花火可以赠送给好友哦</p>
+						<p>每天首次赠送可获得1次抽花火的机会</p>
 					</div>
 				</div>
 			</swiper-item>
@@ -30,7 +30,7 @@
 			<div class="get-alert-box suc-alert-box" v-if="showAlert == 'sendToFriend'">
 				<div class="colse" @click="closeAlert()"></div>
 				<div class="mysakura-text">
-					<div class="name">樱花瓣已扣除，快去分享给好友吧！</div>
+					<div class="name">花火已扣除，快去分享给好友吧！</div>
 				</div>
 				<form :report-submit="form_id" @submit="gather" >
 					<button open-type="share" class="mysakura-btn">
@@ -43,6 +43,7 @@
 </template>
 
 <script>
+let ch = 'sakura_mp_2019';
 export default {
 	data() {
 		return {
@@ -76,12 +77,12 @@ export default {
 					'sakura_key': 'sakura_e',
 					'share_img': 'https://s3.wandougongzhu.cn/s/b9/db_d1cdb7.jpg'
 				},
-			], //已有樱花数量
-			shareImgBtn: '', //分享花瓣给好友图 sakura_a
+			], //已有花火数量
+			shareImgBtn: '', //分享花火给好友图 sakura_a
 			shareImg: 'https://s4.wandougongzhu.cn/s/e4/__1_17ae88.jpg', //分享图
 			sakuraDetailRotate: 0, //旋转角度
-			shareSakuraKey: '', //分享的樱花key
-			shareSakuraName: '', //分享的樱花name
+			shareSakuraKey: '', //分享的花火key
+			shareSakuraName: '', //分享的花火name
 			sakura_id: '',
 			maskShow: false,
 			showAlert: '',
@@ -89,7 +90,6 @@ export default {
 	},
 	onLoad(option) {
 		console.log(option);
-		let ch = 'sakura_mp_2019';
 		wx.hideShareMenu();
 		wx.setStorage({ key: 'ch', data: ch });
 		WMP.globalData.ch = ch;
@@ -111,7 +111,7 @@ export default {
 		if (res.from == 'button') {
 			wx.nextTick(function () {
 				Net.tick({
-					type: 'sakura_share_flower'
+					type: 'huahuodahui_share_flower'
 				});
 				self.closeAlert();
 				self.showAlert = '';
@@ -119,7 +119,7 @@ export default {
 				self.getUserActInfo();
 			});
 			return {
-				title: '送你一朵'+this.shareSakuraName+'，快来和我平分100万现金！',
+				title: '送你一朵'+this.shareSakuraName+'，快来和我平分500万现金！',
 				path: '/pages/fireworks/main?sakura_key=' + this.shareSakuraKey +'&user_id=' + this.user_id + "&sakura_id=" + this.sakura_id,
 				imageUrl: this.shareImgBtn,
 				success: function (res) {
@@ -143,7 +143,7 @@ export default {
 		} else {
 			let shareImg = this.shareImg;
 			return {
-				title: '100万现金等你来分！距离分钱仅剩'+this.restDay+'天！',
+				title: '500万现金等你来分！距离分钱仅剩'+this.restDay+'天！',
 				path: '/pages/fireworks/main?user_id=' + this.user_id,
 				imageUrl: shareImg,
 				success: function (res) {

@@ -260,26 +260,7 @@ export default {
 button::after{
 	display: none;
 }
-@font-face {
-    font-family: "SakuraFont";
-    src: url("https://s5.wandougongzhu.cn/s/72/fonts_80bdfb.eot"); /* IE9 */
-    src: url("https://s5.wandougongzhu.cn/s/72/fonts_80bdfb.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-	url("https://s5.wandougongzhu.cn/s/2e/fonts_ec2f0d.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
-    url("https://s5.wandougongzhu.cn/s/34/fonts_953a8a.woff") format("woff"); /* chrome, firefox */
-    font-style: normal;
-    font-weight: normal;
-}
-@font-face {
-    font-family: "SakuraKai";
-    src: url("https://s3.wandougongzhu.cn/s/b4/kai_e8c1a4.eot"); /* IE9 */
-    src: url("https://s3.wandougongzhu.cn/s/b4/kai_e8c1a4.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-	url("https://s.wandougongzhu.cn/s/8e/kai_4b2023.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
-    url("https://s2.wandougongzhu.cn/s/6f/kai_4cfb89.woff") format("woff"); /* chrome, firefox */
-    font-style: normal;
-    font-weight: normal;
-}
 body {
-	/* font-family: "SakuraKai"; */
 	color: #191919;
 }
 .my-sakura-box {

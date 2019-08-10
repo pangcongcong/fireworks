@@ -149,8 +149,7 @@ import card from '@/components/card';
 			<div class="task-item" v-for="item in taskList" :key="item.task_id">
 				<div>{{item.name}}</div>
 				<div class="task-item-img">
-					<div v-if="item.task_id == 7" class="num">3</div>
-					<div v-else class="num">1</div>
+					<div class="num">{{item.count}}</div>
 				</div>
 				<form :report-submit="form_id" @submit="gather" >
 					<button v-if="item.status == '0'" form-type="submit" class="task-item-btn receive" @click="getTask(item.task_id)">
@@ -158,7 +157,7 @@ import card from '@/components/card';
 					</button>
 				</form>
 				<div v-if="item.status == '1'" class="task-item-btn done">
-					
+					完成
 				</div>
 				<form :report-submit="form_id" @submit="gather" >
 					<div v-if="item.status == '-1'">
@@ -174,7 +173,7 @@ import card from '@/components/card';
 			<div class="task-item">
 				<div class="suc-box">
 					<div class="suc-box-right">
-						邀请新朋友加入豌豆得万能花火
+						邀请新朋友加入豌豆得<span>万能花火</span>
 					</div>
 				</div>
 				<div class="task-item-img" @click="showSakuraW()">
@@ -483,6 +482,7 @@ import card from '@/components/card';
 </template>
 
 <script>
+let ch = '828_huahuodahui_mp';
 
 export default {
 	data() {
@@ -561,15 +561,14 @@ export default {
 		};
 	},
 	onLoad() {
-		let ch = 'sakura_mp_2019';
 		wx.hideShareMenu();
 		wx.setStorage({ key: 'ch', data: ch });
 		WMP.globalData.ch = ch;
 		//浏览打点
 		Net.tick({
-			type: 'sakura_uv',
+			type: 'huahuodahui_uv',
 			page_name: 'sy',
-		},'sakura');
+		},'huahuodahui');
 		// this.getRestDay();
 		this.option = this.$root.$mp.query;
 		console.log(this.$root.$mp);
@@ -579,8 +578,8 @@ export default {
 				console.log(is_first);
 			}else{
 				Net.tick({
-					type:'sakura_access'
-				},'sakura');
+					type:'huahuodahui_access'
+				},'sahuahuodahuikura');
 				wx.setStorage({
 					key:"is_first_access",
 					data:"0"
@@ -629,12 +628,12 @@ export default {
 		if (res.from == 'button' && res.target.dataset.type == '0') {
 			if (res.target.dataset.sakuraid) {
 				Net.tick({
-					type:'sakura_share_flower',
-				},'sakura');
+					type:'huahuodahui_share_flower',
+				},'huahuodahui');
 				console.log('data-sakuraid='+ res.target.dataset.sakuraid);
 				return {
 					title: '送你一朵'+res.target.dataset.sakuraname + this.cloundShareSakuraInfo.title,
-					path: '/pages/fireworks/main?sakura_key=' + res.target.dataset.sakurakey +'&user_id=' + this.user_id +"&sakura_id=" + res.target.dataset.sakuraid + '&ch=sakura_mp_2019',
+					path: '/pages/fireworks/main?sakura_key=' + res.target.dataset.sakurakey +'&user_id=' + this.user_id +"&sakura_id=" + res.target.dataset.sakuraid + '&ch=' + ch,
 					imageUrl: this.shareImgBtn[res.target.dataset.sakurakey],
 					success: function () {
 						self.shareActivity();
@@ -650,11 +649,11 @@ export default {
 			} else {
 				console.log('this-sakura_id='+this.sakura_id);
 				Net.tick({
-					type:'sakura_share_flower',
-				},'sakura');
+					type:'huahuodahui_share_flower',
+				},'huahuodahui');
 				return {
 					title: '送你一朵'+this.sakuraDetailName + this.cloundShareSakuraInfo.title,
-					path: '/pages/fireworks/main?sakura_key=' + this.sakuraDetailKey +'&user_id=' + this.user_id +"&sakura_id=" + this.sakura_id + '&ch=sakura_mp_2019',
+					path: '/pages/fireworks/main?sakura_key=' + this.sakuraDetailKey +'&user_id=' + this.user_id +"&sakura_id=" + this.sakura_id + '&ch=' + ch,
 					imageUrl: this.shareImgBtn[this.sakuraDetailKey],
 					success: function () {
 
@@ -676,12 +675,12 @@ export default {
 			if (res.from == 'menu') {
 				return {
 					title: this.cloundShareActInfo.title + this.act_text + '!',
-					path: '/pages/fireworks/main?user_id=' + this.user_id + '&ch=sakura_mp_2019',
+					path: '/pages/fireworks/main?user_id=' + this.user_id + '&ch=' + ch,
 					imageUrl: shareImg,
 					success: function (res) {
 						Net.tick({
-							type:'sakura_share_act',
-						},'sakura');
+							type:'huahuodahui_share_act',
+						},'huahuodahui');
 						self.shareActivity();
 						self.getUserActInfo();
 					},
@@ -696,12 +695,12 @@ export default {
 			} else {
 				if (res.target.dataset.type && res.target.dataset.type == '1') {
 					Net.tick({
-						type:'sakura_task',
-						sakura_task_id: 2
-					},'sakura');
+						type:'huahuodahui_task',
+						huahuodahui_task_id: 2
+					},'huahuodahui');
 					return {
 						title: this.cloundShareActInfo.title + this.act_text + '!',
-						path: '/pages/fireworks/main?user_id=' + this.user_id + '&ch=sakura_mp_2019',
+						path: '/pages/fireworks/main?user_id=' + this.user_id + '&ch=' + ch,
 						imageUrl: shareImg,
 						success: function (res) {
 						
@@ -719,11 +718,11 @@ export default {
 					};
 				} else if (res.target.dataset.type && res.target.dataset.type == '2') {
 					Net.tick({
-						type: 'sakura_share_act',
-					},'sakura');
+						type: 'huahuodahui_share_act',
+					},'huahuodahui');
 					return {
 						title: this.cloundShareActInfo.title + this.act_text + '!',
-						path: '/pages/fireworks/main?user_id=' + this.user_id + '&ch=sakura_mp_2019',
+						path: '/pages/fireworks/main?user_id=' + this.user_id + '&ch=' + ch,
 						imageUrl: shareImg,
 						success: function (res) {
 							self.shareActivity();
@@ -763,22 +762,11 @@ export default {
 		},
 		doTask2() {
 			Net.tick({
-				type:'sakura_task',
-				sakura_task_id: 2
-			},'sakura');
+				type:'huahuodahui_task',
+				huahuodahui_task_id: 2
+			},'huahuodahui');
 			this.shareActivity();
 			this.getUserActInfo();
-		},
-		goFaceTime() {
-			console.log('facetime 666')
-			WMP.checkAuthPromise(this.$root.$mp.page).then(()=>{
-				let url = `https://m.wandougongzhu.cn/activity/sweets?from_act=sakura`
-				let real_url = `/page/webview/index?url=${encodeURIComponent(url)}`;
-				Net.tick({
-					type:'sakura_go_facetime',
-				},'sakura');
-				wx.navigateTo({ url: real_url });
-			})
 		},
 		goRule(){
 			wx.navigateTo({ url: `/page/page/index?page_id=${this.pageId}` });
@@ -807,8 +795,8 @@ export default {
 		},
 		toFixedCard() {
 			Net.tick({
-				type:'sakura_go_ad',
-			},'sakura');
+				type:'huahuodahui_go_ad',
+			},'huahuodahui');
 			if (this.buoy_ad_info.page_id && this.buoy_ad_info.page_id != '0') {
 				wx.navigateTo({ url: `/page/page/index?page_id=${this.buoy_ad_info.page_id}` });
 			} else {
@@ -819,15 +807,11 @@ export default {
 			console.log(e.mp.detail.formId);
 			Net.gatherMsgId({
 				scene_id: 7,
-				scene_val: 'sakura',
+				scene_val: 'huahuodahui',
 				form_id: e.mp.detail.formId,
 			});
 		},
 		sendToFriendShow() {
-			this.showAlert = 'sendToFriend';
-			this.getShareSakuraId();
-		},
-		getShareSakuraId() {
 			Net.get('Sakura.userGiftSakura', {
 				data: {
 					user_id: this.user_id,
@@ -836,6 +820,7 @@ export default {
 			}).then(res=>{
 				if(res.errno=='0') {
 					this.sakura_id = res.data.sakura_id;
+					this.showAlert = 'sendToFriend';
 				} else {
 					wx.showToast({
 						title: res.errmsg,
@@ -902,9 +887,9 @@ export default {
 				if (this.option.user_id == this.user_id ) {
 					if (this.option.sakura_id) {
 						Net.tick({
-							type:'sakura_get_flower',
+							type:'huahuodahui_get_flower',
 							is_succ : 0  // fail
-						},'sakura');
+						},'huahuodahui');
 						wx.showToast({
 							title: '不能领取自己分享的花火～',
 							icon: 'none',
@@ -925,9 +910,9 @@ export default {
 						}).then(res=>{
 							if(res.errno=='0') {
 								Net.tick({
-									type:'sakura_get_flower',
+									type:'huahuodahui_get_flower',
 									is_succ : 0  // suc
-								},'sakura');
+								},'huahuodahui');
 								wx.showToast({
 									title: '领取成功',
 									icon: 'success',
@@ -947,9 +932,9 @@ export default {
 						this.showAlert = 'showHaveDone';
 						this.maskShow = true;
 						Net.tick({
-							type:'sakura_get_flower',
+							type:'huahuodahui_get_flower',
 							is_succ : 1  // fail
-						},'sakura');
+						},'huahuodahui');
 					}
 				}
 			} else {
@@ -974,8 +959,8 @@ export default {
 
 			// WMP.checkAuthPromise(this.$root.$mp.page).then((res)=> {
 				Net.tick({
-					type:'sakura_access1'
-				},'sakura');
+					type:'huahuodahui_access1'
+				},'huahuodahui');
 				if (WMP.globalData.userInfo && WMP.globalData.userInfo.user_id) {
 					this._getUserActInfo();
 				} else {
@@ -1081,9 +1066,9 @@ export default {
 			this.maskShow = true;
 			this.showAlert = 'showHaveDone';
 			Net.tick({
-				type:'sakura_get_flower',
+				type:'huahuodahui_get_flower',
 				is_succ : 1  // fail
-			},'sakura');
+			},'huahuodahui');
 		},
 		showSakuraDetail(key, name, poetry) {
 			if (this.act_status == '1') {
@@ -1302,9 +1287,9 @@ export default {
 			}).then(res=>{
 				if(res.errno=='0') {
 					Net.tick({
-						type:'sakura_task',
-						sakura_task_id: parseInt(paramTask)
-					},'sakura');
+						type:'huahuodahui_task',
+						huahuodahui_task_id: parseInt(paramTask)
+					},'huahuodahui');
 					wx.showToast({
 						title: '领取成功',
 						icon: 'success',
@@ -1323,9 +1308,9 @@ export default {
 		toFinishTask(task_id,page_id) {
 			WMP.checkAuthPromise(this.$root.$mp.page).then(()=>{
 				Net.tick({
-					type:'sakura_task',
-					sakura_task_id: parseInt(task_id)
-				},'sakura');
+					type:'huahuodahui_task',
+					huahuodahui_task_id: parseInt(task_id)
+				},'huahuodahui');
 				if (task_id == 3) {
 					if (this.sakura_A_num == '0' && this.sakura_B_num == '0' && this.sakura_C_num == '0' && this.sakura_D_num == '0' && this.sakura_E_num == '0') {
 						wx.showToast({
@@ -2191,6 +2176,9 @@ button::after{ border: none; }
 	text-align: left;
 	margin-left: 10px;
 }
+.suc-box-right span {
+	color: rgb(73, 15, 0);
+}
 .task-item-img {
 	position: absolute;
 	right: 110px;
@@ -2203,7 +2191,7 @@ button::after{ border: none; }
 .task-item-btn {
 	position: absolute;
 	right: 10px;
-	margin: 15px;
+	margin: 20px;
 	font-size: 14px;
 	line-height: 24px;
 	text-align: center;
