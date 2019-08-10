@@ -20,7 +20,8 @@ import card from '@/components/card';
 			<div class="my-sakura-box" >
 				<div>点亮的花火</div>
 				<div class="my-sakura">
-					<div class="my-sakura-new">X{{sakura_H_num || 0}}</div>
+					<div class="my-sakura-new"></div>
+					<div>X{{sakura_H_num || 0}}</div>
 				</div>
 			</div>
 			<form :report-submit="form_id" @submit="gather" >
@@ -1384,6 +1385,7 @@ button::after{ border: none; }
 	width: 130px;
 	overflow: hidden;
 	font-size: 14px;
+	line-height: 20px;
 	color: rgb(27, 32, 62);
 	font-weight: bold;
 	text-align: left;
