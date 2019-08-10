@@ -110,8 +110,10 @@ import card from '@/components/card';
 					</form>
 				</div>
 				<form :report-submit="form_id" @submit="gather" >
-					<button class="mix-btn" form-type="submit" :class="{'new-mix-btn': is_compose}" @click="showComposeAni()">
-						<div class="wave"></div>
+					<button class="mix-btn" form-type="submit" @click="showComposeAni()">
+						<div class="wave">
+							<div class="wave-pos" :style="{'transform': 'translateY(' + (15*(-is_compose)) + 'px)'}"></div>
+						</div>
 						<div class="mix-btn-text">点亮花火</div>
 					</button>
 				</form>
@@ -499,7 +501,7 @@ export default {
 			sakura_W_num: 0, //万能花火数量
 			sakura_G_num: 0, //赠送花火数量
 			sakura_H_num: 0, //合成花火数量
-			is_compose: false, //是否可以合成庆生花火
+			is_compose: 0, //有几种类型花火 决定是否可以合成
 			rest_count: 0, //剩余抽奖次数
 			total_count: 9, //今日可抽总次数
 			lottery_res: {}, //抽取花火结果
@@ -865,11 +867,9 @@ export default {
 					this.sakura_W_num = infoList.sakura_w;
 					this.sakura_H_num = parseInt(infoList.sakura_h);
 					this.sakura_G_num = infoList.sakura_g;
-					if (infoList.sakura_a > 0 && infoList.sakura_b > 0 && infoList.sakura_c > 0 && infoList.sakura_d > 0 && infoList.sakura_e >0 ) {
-						this.is_compose = true;
-					} else {
-						this.is_compose = false;
-					}				
+					this.is_compose = 0;
+					this.is_compose = infoList.sakura_a > 0 + infoList.sakura_b > 0 + infoList.sakura_c > 0 + infoList.sakura_d > 0+ infoList.sakura_e > 0;
+					console.log(this.is_compose);	
 					this.rest_count = infoList.residue_lottery_count;
 					this.total_count = infoList.day_total;
 					// this.user_id = infoList.user_id;
@@ -1012,11 +1012,8 @@ export default {
 						this.sakura_W_num = infoList.sakura_w;
 						this.sakura_H_num = parseInt(infoList.sakura_h);
 						this.sakura_G_num = infoList.sakura_g;
-						if (infoList.sakura_a > 0 && infoList.sakura_b > 0 && infoList.sakura_c > 0 && infoList.sakura_d > 0 && infoList.sakura_e >0 ) {
-							this.is_compose = true;
-						} else {
-							this.is_compose = false;
-						}				
+						this.is_compose = 0;
+						this.is_compose = infoList.sakura_a > 0 + infoList.sakura_b > 0 + infoList.sakura_c > 0 + infoList.sakura_d > 0+ infoList.sakura_e > 0;			
 						this.rest_count = infoList.residue_lottery_count;
 						this.total_count = infoList.day_total;
 						// this.user_id = infoList.user_id;
@@ -1105,7 +1102,7 @@ export default {
 			}
 		},
 		showComposeAni() {
-			if (this.is_compose) {
+			if (this.is_compose == '5') {
 				Net.get('Sakura.userComposeSakura', {
 					data: {
 						user_id: this.user_id
@@ -2033,17 +2030,13 @@ button::after{ border: none; }
 	right: 22px;
 	bottom: 36px;
 	display: block;
-	width: 75px;
-	height: 75px;
+	width: 60px;
+	height: 60px;
 	padding: 0;
 	color: rgba(255, 255, 255, 0.302);
-	font-size: 20px;
-	line-height: 22px;
+	font-size: 16px;
+	line-height: 18px;
 	background: none;
-	/* background: url('https://s5.wandougongzhu.cn/s/41/02x_12405d.png') no-repeat;
-	background-size: cover; */
-}
-.new-mix-btn {
 	color: rgba(255,255,255,1);
 	background: url('https://s2.wandougongzhu.cn/s/4c/-2x_81cff2.png') no-repeat;
 	background-size: cover;
@@ -2051,47 +2044,51 @@ button::after{ border: none; }
 .wave {  
 	position: absolute;
 	top: 0;
-	width: 75px;  
-	height: 75px;  
-	color: #fff;
+	width: 60px;  
+	height: 60px;  
 	background: url('https://s2.wandougongzhu.cn/s/4c/-2x_81cff2.png') no-repeat;
 	background-size: cover; 
 	border-radius: 50%; 
 	overflow: hidden; 
-}  
-.wave:before,  
-.wave:after {  
+}
+.wave-pos {
+	width: 100%;
+	height: 100%;
+	background: transparent;
+}
+.wave-pos:before,  
+.wave-pos:after {  
 	content: "";  
 	position: absolute;  
-	width: 100px;  
-	height: 100px;  
+	width: 80px;  
+	height: 80px;  
 	top: 0;  
 	left: 50%;  
 	background-color: rgba(0, 0, 0, .2);  
 	border-radius: 34%;  
-	transform: translate(-50%, -70%) rotate(0);  
+	transform: translate(-50%, -18px) rotate(0);  
 	animation: rotate 7s linear infinite;  
 	z-index: 1;  
 }  
-.wave:after {  
+.wave-pos:after {  
 	content: "";
 	border-radius: 67%;  
 	background-color: rgba(0, 0, 0, .5);  
-	transform: translate(-50%, -70%) rotate(0);  
+	transform: translate(-50%, -18px) rotate(0);  
 	animation: rotate 11s linear -5s infinite;
-}  
+}
 @keyframes rotate {  
 	50% {  
-		transform: translate(-50%, -73%) rotate(180deg);  
+		transform: translate(-50%, -18px) rotate(180deg);  
 	} 100% {  
-		transform: translate(-50%, -70%) rotate(360deg);  
+		transform: translate(-50%, -18px) rotate(360deg);  
 	}  
 } 
 .mix-btn-text {
 	position: absolute;
-	width: 75px;
-	height: 75px;
-	padding: 15px;
+	width: 60px;
+	height: 60px;
+	padding: 12px 10px;
 	box-sizing: border-box;
 	color: #fff;
 	z-index: 2;
