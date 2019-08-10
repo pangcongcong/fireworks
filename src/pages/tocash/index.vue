@@ -2,10 +2,10 @@
 	<div class="container">
 		<div class="tips">
 			<div>我合成的花火</div>
-			<div class="my-sakura-box" v-if="sakura_H_num > 0 || true">
+			<div class="my-sakura-box" v-if="sakura_H_num > 0">
 				<div class="my-sakura">X{{sakura_H_num || 0}}</div>
 			</div>
-			<div class="none-tips" v-if="sakura_H_num == '0' && false">无可兑换的花火</div>
+			<div class="none-tips" v-if="sakura_H_num == '0'">无可兑换的花火</div>
 		</div>
 		<div class="min-tips" v-if="user_price == '0' && toCashNum < min_exchange_price">微信限制提现金额不得小于0.3元，建议兑换豌豆积分</div>
 		<div class="cash-box">
@@ -47,36 +47,43 @@
 			</div>
 		</div>
 		<div id="mask" v-if="maskShow">
-			<div class="to-alert-box">
+			<div class="to-alert-box" v-if="showAlert == 'changescore'">
 				<div class="colse" @click="closeAlert()"></div>
 				<div class="mysakura-tips">
 					<p>即将为您兑换豌豆公主<span>{{toScoreNum}}</span>积分，</p>
 					<p>可抵现<span>{{scoreToCash}}</span>元，下单时可抵现。</p>
 				</div>
 				<div class="btn-box">
-					<form :report-submit="form_id" @submit="gather" >
-						<button class="mysakura-btn dis-btn" @click="closeAlert()">
-							取消
-						</button>
-					</form>
-					<form :report-submit="form_id" @submit="gather" >
-						<button class="mysakura-btn" form-type="submit" @click="showChangeScore()">
-							去兑换
-						</button>
-					</form>
+					<div class="mysakura-btn dis-btn" @click="closeAlert()">
+						取消
+					</div>
+					<div class="mysakura-btn" @click="showChangeScore()">
+						去兑换
+					</div>
+				</div>
+			</div>
+			<div class="to-alert-box alert-new-box changecash"  v-if="showAlert == 'changescash'">
+				<div class="colse" @click="closeAlert()"></div>
+				<div class="changecash-title">兑换现金提醒</div>
+				<div class="mysakura-tips">
+					<p>受微信规则限制，兑换的现金需通过公众号发到您的手中。请在微信搜索公众号「豌豆公主服务号」并关注，再点击按钮兑换现金。</p>
+				</div>
+				<div class="btn-box">
+					<div class="mysakura-btn" @click="showChangeCash()">
+						我知道了
+					</div>
 				</div>
 			</div>
 		</div>
-		 <!-- v-if="sucResShow" -->
-		<div id="suc">
+		<div id="suc" v-if="sucResShow">
 			<div class="suc-title">恭喜您，<span v-if="type == '0'">积分</span> <span v-if="type == '1'">现金</span>兑换成功！</div>
 			<div class="suc-tips" v-if="type == '0'">积分已经放入豌豆公主账号<span>{{phone}}</span></div>
 			<div class="suc-tips" v-if="type == '1'">现金24小时内会存入您的微信钱包</div>
 			<div class="suc-res" v-if="type == '0'">{{toScoreNum}}<span>积分</span></div>
 			<div class="suc-res" v-if="type == '1'">{{toCashNum}}<span>现金</span></div>
-			<div v-if="type == '1'">
+			<div v-if="type == '1' && toCashNum < 1">
 				<div class="suc-tips">{{toCashTip}}</div>
-				<img class="to-cash-tip" src="https://s4.wandougongzhu.cn/s/f3/613_360bb0.png" alt="">
+				<!-- <img class="to-cash-tip" src="https://s4.wandougongzhu.cn/s/f3/613_360bb0.png" alt=""> -->
 			</div>
 			<div @click="toAd(ad_info.page_id)" >
 				<img v-bind:src="ad_info.ad_img" alt="" class="suc-banner">

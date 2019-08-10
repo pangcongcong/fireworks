@@ -12,7 +12,7 @@ import card from '@/components/card';
 				<div class="fire-item item5"></div>
 			</div>
 			<div class="text-box"></div>
-			<div v-if="act_status == '1' || true" class="timer-count">已点亮<span class="num">{{totalSakuraNum}}</span>场花火，距分钱还剩<span class="num">{{act_remain_day}}</span>天</div>
+			<div v-if="act_status == '1'" class="timer-count">已点亮<span class="num">{{totalSakuraNum}}</span>场花火，距分钱还剩<span class="num">{{act_remain_day}}</span>天</div>
 			<div v-else class="timer-count">{{act_text}}</div>
 		</div>
 		
@@ -112,7 +112,7 @@ import card from '@/components/card';
 				<form :report-submit="form_id" @submit="gather" >
 					<button class="mix-btn" form-type="submit" @click="showComposeAni()">
 						<div class="wave">
-							<div class="wave-pos" :style="{'transform': 'translateY(' + (15*(-Number(is_compose))) + 'px)'}"></div>
+							<div class="wave-pos" :style="{'transform': 'translateY(' + (15*(-is_compose)) + 'px)'}"></div>
 						</div>
 						<div class="mix-btn-text">点亮花火</div>
 					</button>
@@ -137,7 +137,9 @@ import card from '@/components/card';
 			<div class="lottery-btn" v-if="act_status == '3'">
 				活动已结束
 			</div>
-			<div class="lottery-btn wait-res" v-if="act_status == '4'"></div>
+			<div class="lottery-btn wait-res" v-if="act_status == '4'">
+				待开奖
+			</div>
 			<div class="rec-btn" @click="showGiftRec()">
 				赠领记录
 			</div>
@@ -185,7 +187,7 @@ import card from '@/components/card';
 				</form>
 			</div>
 		</div>
-		<div class="brand-box" v-if="topRankList && topRankList.length > 0 || true">
+		<div class="brand-box" v-if="topRankList && topRankList.length > 0">
 			<div class="task-title">
 				点亮成就榜
 			</div>
@@ -223,7 +225,7 @@ import card from '@/components/card';
 				</div>
 			</div>
 		</div>
-		<div class="ad-img-fixed" @click="toFixedCard()">
+		<div v-if="buoy_ad_info.ad_img != ''"  class="ad-img-fixed" @click="toFixedCard()">
 			<img :src="buoy_ad_info.ad_img" alt="">
 		</div>
 		<div id="mask" v-if="maskShow">
@@ -319,7 +321,7 @@ import card from '@/components/card';
 					<div class="invite-title">邀请好友注册得万能花火</div>
 					<div>万能花火可兑换任意地区花火</div>
 				</div>
-				<img class="getsakura invite-sakura" src="https://s2.wandougongzhu.cn/s/9f/wan_ebbf7a.png">
+				<img class="getsakura invite-sakura" src="https://s3.wandougongzhu.cn/s/8b/_830d8b.jpg">
 				<form :report-submit="form_id" @submit="gather" >
 					<button class="invite-btn" form-type="submit" open-type="share" :data-type="2">
 						去邀请
@@ -338,48 +340,48 @@ import card from '@/components/card';
 				<div class="flower-box universal-flower">
 					<div class="right">
 						<form :report-submit="form_id" @submit="gather" >
-							<div class="flower-item flower-item-dyh" :class="{'gray': sakura_whitch_choosed != 'sakura_c'}" @click="chooseChangeSakura('sakura_c')">
-								<div class="tag" :class="{'gray': sakura_whitch_choosed != 'sakura_c'}" style="left:50%;top: 80%">洞爷湖花火大会</div>
-								<button v-if="sakura_C_num > 0" class="click-box" form-type="submit">
-									<div class="num-box">{{sakura_C_num}}</div>
-								</button>
-							</div>
+							<button class="flower-item flower-item-dyh" :class="{'gray': sakura_whitch_choosed != 'sakura_c'}" @click="chooseChangeSakura('sakura_c')">
+								<div class="tag" :class="{'gray': sakura_whitch_choosed != 'sakura_c'}" style="left:50%;top: 80%">
+									洞爷湖花火大会
+									<div v-if="sakura_C_num > 0" class="num-box">{{sakura_C_num}}</div>
+								</div>
+							</button>
 						</form>
 					</div>
 					<div class="center">
 						<form :report-submit="form_id" @submit="gather" >
-							<div class="flower-item flower-item-dq" :class="{'gray': sakura_whitch_choosed != 'sakura_d'}" @click="chooseChangeSakura('sakura_d')">
-								<div class="tag" :class="{'gray': sakura_whitch_choosed != 'sakura_d'}" style="left:80%;top: 50%">大曲花火大会</div>
-								<button  v-if="sakura_D_num > 0" class="click-box" form-typt="submit">
-									<div class="num-box">{{sakura_D_num}}</div>
-								</button>
-							</div>
+							<button class="flower-item flower-item-dq" :class="{'gray': sakura_whitch_choosed != 'sakura_d'}" @click="chooseChangeSakura('sakura_d')">
+									<div class="tag" :class="{'gray': sakura_whitch_choosed != 'sakura_d'}" style="left:80%;top: 50%">
+									大曲花火大会
+									<div v-if="sakura_D_num > 0" class="num-box">{{sakura_D_num}}</div>
+								</div>
+							</button>
 						</form>
 						<form :report-submit="form_id" @submit="gather" >
-							<div class="flower-item flower-item-db" :class="{'gray': sakura_whitch_choosed != 'sakura_e'}" @click="chooseChangeSakura('sakura_e')">
-								<div class="tag" :class="{'gray': sakura_whitch_choosed != 'sakura_e'}" style="left:60%;top: -100%">大阪天神祭</div>
-								<button  v-if="sakura_E_num > 0" class="click-box" form-type="submit">
-									<div class="num-box">{{sakura_E_num}}</div>
-								</button>
-							</div>
+							<button class="flower-item flower-item-db" :class="{'gray': sakura_whitch_choosed != 'sakura_e'}" @click="chooseChangeSakura('sakura_e')">
+								<div class="tag" :class="{'gray': sakura_whitch_choosed != 'sakura_e'}" style="left:60%;top: -100%">
+									大阪天神祭
+									<div v-if="sakura_E_num > 0" class="num-box">{{sakura_E_num}}</div>
+								</div>
+							</button>
 						</form>
 						<form :report-submit="form_id" @submit="gather" >
-							<div class="flower-item flower-item-tf" :class="{'gray': sakura_whitch_choosed != 'sakura_b'}" @click="chooseChangeSakura('sakura_b')">
-								<div class="tag" :class="{'gray': sakura_whitch_choosed != 'sakura_b'}" style="left:30%;top: 80%">土浦花火大会</div>
-								<button  v-if="sakura_B_num > 0" class="click-box" form-type="submit">
-									<div class="num-box">{{sakura_B_num}}</div>
-								</button>
-							</div>
+							<button class="flower-item flower-item-tf" :class="{'gray': sakura_whitch_choosed != 'sakura_b'}" @click="chooseChangeSakura('sakura_b')">
+								<div class="tag" :class="{'gray': sakura_whitch_choosed != 'sakura_b'}" style="left:30%;top: 80%">
+									土浦花火大会
+									<div v-if="sakura_B_num > 0" class="num-box">{{sakura_B_num}}</div>
+								</div>
+							</button>
 						</form>
 					</div>
 					<div class="left">
 						<form :report-submit="form_id" @submit="gather" >
-							<div class="flower-item flower-item-zhc" :class="{'gray': sakura_whitch_choosed != 'sakura_a'}" @click="chooseChangeSakura('sakura_a')">
-								<div class="tag" :class="{'gray': sakura_whitch_choosed != 'sakura_a'}" style="left:20%;top: 50%">筑后川花火大会</div>
-								<button v-if="sakura_A_num > 0" class="click-box" form-type="submit">
-									<div class="num-box">{{sakura_A_num}}</div>
-								</button>
-							</div>
+							<button class="flower-item flower-item-zhc" :class="{'gray': sakura_whitch_choosed != 'sakura_a'}" @click="chooseChangeSakura('sakura_a')">
+								<div class="tag" :class="{'gray': sakura_whitch_choosed != 'sakura_a'}" style="left:20%;top: 50%">
+									筑后川花火大会
+									<div v-if="sakura_A_num > 0" class="num-box">{{sakura_A_num}}</div>
+								</div>
+							</button>
 						</form>
 					</div>
 				</div>
@@ -425,25 +427,25 @@ import card from '@/components/card';
 			<div class="get-alert-box" v-if="showAlert == 'inviteShareSakura'">
 				<div class="colse" @click="closeAlert()"></div>
 				<div class="mysakura-text">
-					<div class="congratulation">好友<span>{{inviteUser}}</span>送你一朵</div>
+					<div class="congratulation">好友<span>{{inviteUser}}</span>送你一个</div>
 					<div class="name">{{inviteShareSakuraName}}</div>
 				</div>
 				<div class="getsakura" 
-					:class="{'zhc':inviteShareSakuraName == 'sakura_a','tf':inviteShareSakuraName == 'sakura_b','dyh':inviteShareSakuraName == 'sakura_c','dq':inviteShareSakuraName == 'sakura_d','db':inviteShareSakuraName == 'sakura_e',}">
+					:class="{'zhc':inviteShareSakuraKey == 'sakura_a','tf':inviteShareSakuraKey == 'sakura_b','dyh':inviteShareSakuraKey == 'sakura_c','dq':inviteShareSakuraKey == 'sakura_d','db':inviteShareSakuraKey == 'sakura_e'}">
 				</div>
-				<div class="getsakura-text" v-if="inviteShareSakuraName == 'sakura_a'">
+				<div class="getsakura-text" v-if="inviteShareSakuraKey == 'sakura_a'">
 					即将迎接第360年历史了，始终是九州人气花火期待度排名第一的筑后川花火大会，起源来自水天宫的奉纳祭祀，是一场结合平安祈福的烟火节庆。
 				</div>
-				<div class="getsakura-text" v-if="lottery_res.sakura_name == 'sakura_b'">
+				<div class="getsakura-text" v-if="inviteShareSakuraKey == 'sakura_b'">
 					土浦全国烟火大会是可自由入场的竞赛大会，是日本三大烟花大会之一，也是日本全国人气数一数二的烟花比赛。
 				</div>
-				<div class="getsakura-text" v-if="lottery_res.sakura_name == 'sakura_c'">
+				<div class="getsakura-text" v-if="inviteShareSakuraKey == 'sakura_c'">
 					洞爷湖花火大会是日本举办期间最长的烟花大会，烟火是在行驶在湖面的船隻上释放的，是夏天来北海道不可或缺的活动。
 				</div>
-				<div class="getsakura-text" v-if="lottery_res.sakura_name == 'sakura_d'">
+				<div class="getsakura-text" v-if="inviteShareSakuraKey == 'sakura_d'">
 					秋田县大仙市举办的大曲烟火大会，是从日本全国各地选拔出来的烟火师亲手施放高空烟火的烟火竞赛大会，是全日本最具有代表性的花火大会之一。
 				</div>
-				<div class="getsakura-text" v-if="lottery_res.sakura_name == 'sakura_e'">
+				<div class="getsakura-text" v-if="inviteShareSakuraKey == 'sakura_e'">
 					具有1000多年历史的大坂天神祭是日本三大祭典之一，祭奉日本的「学问和艺术之神」棺原道真。
 				</div>
 				<form :report-submit="form_id" @submit="gather" >
@@ -537,6 +539,7 @@ export default {
 			option: '',
 			inviteUser: '', //好友昵称
 			inviteShareSakuraName: '', //好友送的**盈
+			inviteShareSakuraKey: '', //好友送的**盈
 			sakura_id: '',
 			checkInfo: '',
 			haveDone: false,
@@ -553,11 +556,6 @@ export default {
 			userRankList: {}, //当前用户的排行数据
 			showFaceTime: '0', //是否显示山下久智FaceTime
 			pageId: 19767, //活动规则卡片页id
-			interval:'',
-			fireList:[], //烟花列表
-			fireMin: 1,//每屏最少烟花数
-			fireMax: 3,//每屏最多烟花数
-			fireTime: 1500,
 		};
 	},
 	onLoad() {
@@ -808,6 +806,10 @@ export default {
 			});
 		},
 		sendToFriendShow() {
+			this.showAlert = 'sendToFriend';
+			this.getShareSakuraId();
+		},
+		getShareSakuraId() {
 			Net.get('Sakura.userGiftSakura', {
 				data: {
 					user_id: this.user_id,
@@ -816,7 +818,6 @@ export default {
 			}).then(res=>{
 				if(res.errno=='0') {
 					this.sakura_id = res.data.sakura_id;
-					this.showAlert = 'sendToFriend';
 				} else {
 					wx.showToast({
 						title: res.errmsg,
@@ -827,7 +828,6 @@ export default {
 			});
 		},
 		showGetSakuraAlert() {
-			console.log('sakura act info')
 			Net.get('Sakura.getUserActivityInfoByUserId', {
 				data: {
 					user_id: '0',
@@ -848,8 +848,7 @@ export default {
 					this.sakura_W_num = infoList.sakura_w;
 					this.sakura_H_num = parseInt(infoList.sakura_h);
 					this.sakura_G_num = infoList.sakura_g;
-					this.is_compose = Number(infoList.sakura_a > 0 + infoList.sakura_b > 0 + infoList.sakura_c > 0 + infoList.sakura_d > 0+ infoList.sakura_e > 0);
-					console.log('is_compose=' + this.is_compose);	
+					this.is_compose = Number(infoList.sakura_a > 0) + Number(infoList.sakura_b > 0) + Number(infoList.sakura_c > 0) + Number(infoList.sakura_d > 0)+ Number(infoList.sakura_e > 0);
 					this.rest_count = infoList.residue_lottery_count;
 					this.total_count = infoList.day_total;
 					// this.user_id = infoList.user_id;
@@ -857,6 +856,7 @@ export default {
 					this.inviteCount = res.data.info.invite_count;
 					this.inviteUser = res.data.gift_sakura.gift_user_name;
 					this.inviteShareSakuraName = res.data.gift_sakura.sakura_name;
+					this.inviteShareSakuraKey = res.data.gift_sakura.sakura_key;
 					this.recv_id = res.data.gift_sakura.recv_user_id;
 					this.act_status = res.data.activity_status;
 					this.act_text = res.data.activity_status_text;
@@ -992,7 +992,7 @@ export default {
 						this.sakura_W_num = infoList.sakura_w;
 						this.sakura_H_num = parseInt(infoList.sakura_h);
 						this.sakura_G_num = infoList.sakura_g;
-						this.is_compose = Number(infoList.sakura_a > 0 + infoList.sakura_b > 0 + infoList.sakura_c > 0 + infoList.sakura_d > 0+ infoList.sakura_e > 0);		
+						this.is_compose = Number(infoList.sakura_a > 0) + Number(infoList.sakura_b > 0) + Number(infoList.sakura_c > 0) + Number(infoList.sakura_d > 0)+ Number(infoList.sakura_e > 0);
 						this.rest_count = infoList.residue_lottery_count;
 						this.total_count = infoList.day_total;
 						// this.user_id = infoList.user_id;
@@ -1000,6 +1000,7 @@ export default {
 						this.inviteCount = res.data.info.invite_count;
 						this.inviteUser = res.data.gift_sakura.gift_user_name;
 						this.inviteShareSakuraName = res.data.gift_sakura.sakura_name;
+						this.inviteShareSakuraKey = res.data.gift_sakura.sakura_key;
 						this.recv_id = res.data.gift_sakura.recv_user_id;
 						this.act_status = res.data.activity_status;
 						this.act_text = res.data.activity_status_text;
@@ -1091,9 +1092,9 @@ export default {
 						this.maskShow = true;
 						this.showAlert = 'compose';
 						setTimeout(()=>{
-						this.showAlert = '';
-						this.maskShow = false;
-					},3500);
+							this.showAlert = '';
+							this.maskShow = false;
+						},3500);
 					} else {
 						wx.showToast({
 							title: res.errmsg,
@@ -1342,7 +1343,7 @@ button::after{ border: none; }
 	border-radius: 50%;
 	right: 30px;
 	bottom: 50px;
-	z-index: 4;
+	z-index: 2;
 }
 .ad-img-fixed img {
 	width: 100%;
@@ -1920,12 +1921,6 @@ button::after{ border: none; }
 	background-size: cover;
 	background-position: center;
 }
-.flower-item .click-box{
-	display: block;
-	width:inherit;
-	height:inherit;
-	background: none;
-}
 .flower-item span {
 	font-size: 14px;
 	color: #fff;
@@ -1959,6 +1954,7 @@ button::after{ border: none; }
 }
 .universal-flower .flower-item {
 	position: absolute;
+	overflow: visible;
 }
 .universal-flower .flower-item-dyh {
 	left: 195px;
