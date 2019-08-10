@@ -43,43 +43,16 @@
 </template>
 
 <script>
-let ch = 'sakura_mp_2019';
+let ch = '828_huahuodahui_mp';
 export default {
 	data() {
 		return {
 			form_id:true,
 			user_id: '',
 			userInfo: {},
-			sakuraList: [
-				{
-					'sakura_num': 1,
-					'sakura_name': '筑后川花火大会',
-					'sakura_key': 'sakura_a',
-					'share_img': 'https://s4.wandougongzhu.cn/s/3a/zhc_8eeb51.jpg'
-				},{
-					'sakura_num': 2,
-					'sakura_name': '土浦花火大会',
-					'sakura_key': 'sakura_b',
-					'share_img': 'https://s1.wandougongzhu.cn/s/92/tf_61b463.jpg'
-				},{
-					'sakura_num': 3,
-					'sakura_name': '洞爷湖花火大会',
-					'sakura_key': 'sakura_c',
-					'share_img': 'https://s3.wandougongzhu.cn/s/9f/dyh_984083.jpg'
-				},{
-					'sakura_num': 4,
-					'sakura_name': '大曲花火大会',
-					'sakura_key': 'sakura_d',
-					'share_img': 'https://s3.wandougongzhu.cn/s/72/dq_196ee4.jpg'
-				},{
-					'sakura_num': 5,
-					'sakura_name': '大阪天神祭',
-					'sakura_key': 'sakura_e',
-					'share_img': 'https://s3.wandougongzhu.cn/s/b9/db_d1cdb7.jpg'
-				},
-			], //已有花火数量
+			sakuraList: [], //已有花火数量
 			shareImgBtn: '', //分享花火给好友图 sakura_a
-			shareImg: 'https://s4.wandougongzhu.cn/s/e4/__1_17ae88.jpg', //分享图
+			shareImg: 'https://s1.wandougongzhu.cn/s/81/_9163d6.jpg', //分享图
 			sakuraDetailRotate: 0, //旋转角度
 			shareSakuraKey: '', //分享的花火key
 			shareSakuraName: '', //分享的花火name
@@ -119,7 +92,7 @@ export default {
 				self.getUserActInfo();
 			});
 			return {
-				title: '送你一朵'+this.shareSakuraName+'，快来和我平分500万现金！',
+				title: '送你一个'+this.shareSakuraName+'，快来和我平分500万现金！',
 				path: '/pages/fireworks/main?sakura_key=' + this.shareSakuraKey +'&user_id=' + this.user_id + "&sakura_id=" + this.sakura_id,
 				imageUrl: this.shareImgBtn,
 				success: function (res) {
@@ -210,7 +183,7 @@ export default {
 						'sakura_num': sakuraitem.sakura_a,
 						'sakura_name': '筑后川花火大会',
 						'sakura_key': 'sakura_a',
-						'share_img': 'https://s4.wandougongzhu.cn/s/3a/zhc_8eeb51.jpg'
+						'share_img': 'https://s.wandougongzhu.cn/s/16/-_b46163.jpg'
 					});
 				}
 				if (sakuraitem.sakura_b > 0) {
@@ -218,7 +191,7 @@ export default {
 						'sakura_num': sakuraitem.sakura_b,
 						'sakura_name': '土浦花火大会',
 						'sakura_key': 'sakura_b',
-						'share_img': 'https://s1.wandougongzhu.cn/s/92/tf_61b463.jpg'
+						'share_img': 'https://s3.wandougongzhu.cn/s/58/-_452eb2.jpg'
 					});
 				}
 				if (sakuraitem.sakura_c > 0) {
@@ -226,7 +199,7 @@ export default {
 						'sakura_num': sakuraitem.sakura_c,
 						'sakura_name': '洞爷湖花火大会',
 						'sakura_key': 'sakura_c',
-						'share_img': 'https://s3.wandougongzhu.cn/s/9f/dyh_984083.jpg'
+						'share_img': 'https://s1.wandougongzhu.cn/s/c4/-_2b2c54.jpg'
 					});
 				}
 				if (sakuraitem.sakura_d > 0) {
@@ -234,7 +207,7 @@ export default {
 						'sakura_num': sakuraitem.sakura_d,
 						'sakura_name': '大曲花火大会',
 						'sakura_key': 'sakura_d',
-						'share_img': 'https://s3.wandougongzhu.cn/s/72/dq_196ee4.jpg'
+						'share_img': 'https://s5.wandougongzhu.cn/s/e6/-_405b31.jpg'
 					});
 				}
 				if (sakuraitem.sakura_e > 0) {
@@ -242,7 +215,7 @@ export default {
 						'sakura_num': sakuraitem.sakura_e,
 						'sakura_name': '大阪天神祭',
 						'sakura_key': 'sakura_e',
-						'share_img': 'https://s3.wandougongzhu.cn/s/b9/db_d1cdb7.jpg'
+						'share_img': 'https://s4.wandougongzhu.cn/s/a5/-_0732fe.jpg'
 					});
 				}
 				this.sakuraList = list;

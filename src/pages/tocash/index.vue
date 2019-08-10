@@ -91,6 +91,7 @@
 </template>
 
 <script>
+let ch = '828_huahuodahui_mp';
 export default {
 	data() {
 		return {
@@ -116,7 +117,6 @@ export default {
 	},
 	onLoad(option) {
 		console.log(option);
-		let ch = 'sakura_mp_2019';
 		wx.hideShareMenu();
 		wx.setStorage({ key: 'ch', data: ch });
 		WMP.globalData.ch = ch;
@@ -140,7 +140,7 @@ export default {
 			console.log(e);
 			Net.gatherMsgId({
 				scene_id: 7,
-				scene_val: 'sakura',
+				scene_val: 'huahuodahui',
 				form_id: e.mp.detail.formId,
 			});
 		},

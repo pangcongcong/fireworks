@@ -112,7 +112,7 @@ import card from '@/components/card';
 				<form :report-submit="form_id" @submit="gather" >
 					<button class="mix-btn" form-type="submit" @click="showComposeAni()">
 						<div class="wave">
-							<div class="wave-pos" :style="{'transform': 'translateY(' + (15*(-is_compose)) + 'px)'}"></div>
+							<div class="wave-pos" :style="{'transform': 'translateY(' + (15*(-Number(is_compose))) + 'px)'}"></div>
 						</div>
 						<div class="mix-btn-text">点亮花火</div>
 					</button>
@@ -516,13 +516,13 @@ export default {
 			sakuraDetailKey: 'sakura_a',
 			sakuraDetailName: '筑后川花火大会',
 			sakuraDetailPoetry: '築後川花火大會',
-			shareImg: 'https://s.wandougongzhu.cn/s/54/-02_a336b2.jpg', //分享图
+			shareImg: 'https://s1.wandougongzhu.cn/s/81/_9163d6.jpg', //分享图
 			shareImgBtn: {
-				'sakura_a': 'https://s2.wandougongzhu.cn/s/7d/__1_de53f5.jpg',
-				'sakura_b': 'https://s.wandougongzhu.cn/s/c8/__2_209e10.jpg',
-				'sakura_c': 'https://s5.wandougongzhu.cn/s/58/__3_b21b66.jpg',
-				'sakura_d': 'https://s.wandougongzhu.cn/s/10/__4_6eaacb.jpg',
-				'sakura_e': 'https://s5.wandougongzhu.cn/s/41/__5_4165fc.jpg'
+				'sakura_a': 'https://s.wandougongzhu.cn/s/16/-_b46163.jpg',
+				'sakura_b': 'https://s3.wandougongzhu.cn/s/58/-_452eb2.jpg',
+				'sakura_c': 'https://s1.wandougongzhu.cn/s/c4/-_2b2c54.jpg',
+				'sakura_d': 'https://s5.wandougongzhu.cn/s/e6/-_405b31.jpg',
+				'sakura_e': 'https://s4.wandougongzhu.cn/s/a5/-_0732fe.jpg'
 			},//分享花火给好友图了list
 			shareSakura: 'sakura_a',
 			sakura_All_num: 0, //万能花火数量
@@ -612,12 +612,8 @@ export default {
 		}
 	},
 	onUnload() {
-		// clearInterval(this.interval);
 	},
 	onReady() {
-		// this.canvasFire()
-		// this.fireWorks();
-    // this.interval = setInterval(this.fireWorks, this.fireTime);
 	},
 	onShow() {
 		this._getUserActInfo();
@@ -852,9 +848,8 @@ export default {
 					this.sakura_W_num = infoList.sakura_w;
 					this.sakura_H_num = parseInt(infoList.sakura_h);
 					this.sakura_G_num = infoList.sakura_g;
-					this.is_compose = 0;
-					this.is_compose = infoList.sakura_a > 0 + infoList.sakura_b > 0 + infoList.sakura_c > 0 + infoList.sakura_d > 0+ infoList.sakura_e > 0;
-					console.log(this.is_compose);	
+					this.is_compose = Number(infoList.sakura_a > 0 + infoList.sakura_b > 0 + infoList.sakura_c > 0 + infoList.sakura_d > 0+ infoList.sakura_e > 0);
+					console.log('is_compose=' + this.is_compose);	
 					this.rest_count = infoList.residue_lottery_count;
 					this.total_count = infoList.day_total;
 					// this.user_id = infoList.user_id;
@@ -997,8 +992,7 @@ export default {
 						this.sakura_W_num = infoList.sakura_w;
 						this.sakura_H_num = parseInt(infoList.sakura_h);
 						this.sakura_G_num = infoList.sakura_g;
-						this.is_compose = 0;
-						this.is_compose = infoList.sakura_a > 0 + infoList.sakura_b > 0 + infoList.sakura_c > 0 + infoList.sakura_d > 0+ infoList.sakura_e > 0;			
+						this.is_compose = Number(infoList.sakura_a > 0 + infoList.sakura_b > 0 + infoList.sakura_c > 0 + infoList.sakura_d > 0+ infoList.sakura_e > 0);		
 						this.rest_count = infoList.residue_lottery_count;
 						this.total_count = infoList.day_total;
 						// this.user_id = infoList.user_id;
