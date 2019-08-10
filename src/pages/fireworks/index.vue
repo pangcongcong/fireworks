@@ -20,7 +20,7 @@ import card from '@/components/card';
 			<div class="my-sakura-box" >
 				<div>点亮的花火</div>
 				<div class="my-sakura">
-					<div v-for="(item,index) in sakura_H_num" :key="index" class="my-sakura-new"></div>
+					<div class="my-sakura-new">X{{sakura_H_num || 0}}</div>
 				</div>
 			</div>
 			<form :report-submit="form_id" @submit="gather" >
