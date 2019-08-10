@@ -270,22 +270,22 @@ import card from '@/components/card';
 					<div class="name">{{lottery_res.sakura_name}}</div>
 				</div>
 				<div class="getsakura" 
-					:class="{'zhc':lottery_res.sakura_name == 'sakura_a','tf':lottery_res.sakura_name == 'sakura_b','dyh':lottery_res.sakura_name == 'sakura_c','dq':lottery_res.sakura_name == 'sakura_d','db':lottery_res.sakura_name == 'sakura_e',}">
+					:class="{'zhc':lottery_res.sakura_key == 'sakura_a','tf':lottery_res.sakura_key == 'sakura_b','dyh':lottery_res.sakura_key == 'sakura_c','dq':lottery_res.sakura_key == 'sakura_d','db':lottery_res.sakura_key == 'sakura_e',}">
 
 				</div>
-				<div class="getsakura-text" v-if="lottery_res.sakura_name == 'sakura_a'">
+				<div class="getsakura-text" v-if="lottery_res.sakura_key == 'sakura_a'">
 					即将迎接第360年历史了，始终是九州人气花火期待度排名第一的筑后川花火大会，起源来自水天宫的奉纳祭祀，是一场结合平安祈福的烟火节庆。
 				</div>
-				<div class="getsakura-text" v-if="lottery_res.sakura_name == 'sakura_b'">
+				<div class="getsakura-text" v-if="lottery_res.sakura_key == 'sakura_b'">
 					土浦全国烟火大会是可自由入场的竞赛大会，是日本三大烟花大会之一，也是日本全国人气数一数二的烟花比赛。
 				</div>
-				<div class="getsakura-text" v-if="lottery_res.sakura_name == 'sakura_c'">
+				<div class="getsakura-text" v-if="lottery_res.sakura_key == 'sakura_c'">
 					洞爷湖花火大会是日本举办期间最长的烟花大会，烟火是在行驶在湖面的船隻上释放的，是夏天来北海道不可或缺的活动。
 				</div>
-				<div class="getsakura-text" v-if="lottery_res.sakura_name == 'sakura_d'">
+				<div class="getsakura-text" v-if="lottery_res.sakura_key == 'sakura_d'">
 					秋田县大仙市举办的大曲烟火大会，是从日本全国各地选拔出来的烟火师亲手施放高空烟火的烟火竞赛大会，是全日本最具有代表性的花火大会之一。
 				</div>
-				<div class="getsakura-text" v-if="lottery_res.sakura_name == 'sakura_e'">
+				<div class="getsakura-text" v-if="lottery_res.sakura_key == 'sakura_e'">
 					具有1000多年历史的大坂天神祭是日本三大祭典之一，祭奉日本的「学问和艺术之神」棺原道真。
 				</div>
 				<form :report-submit="form_id" @submit="gather" >
