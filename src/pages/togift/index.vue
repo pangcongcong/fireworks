@@ -59,6 +59,13 @@ export default {
 			sakura_id: '',
 			maskShow: false,
 			showAlert: '',
+			logCommonParam: {
+				ns: '828_huahuodahui_mp',
+				w: '',
+				open_id: '',
+				devtype: 'mp',
+				ch: ch,
+			},
 		};
 	},
 	onLoad(option) {
@@ -83,9 +90,12 @@ export default {
 
 		if (res.from == 'button') {
 			wx.nextTick(function () {
-				Net.tick({
-					type: 'huahuodahui_share_flower'
-				});
+				Net.newLog(
+					{
+						mt: 'huahuodahui_share_flower',
+					},
+					this.logCommonParam,
+				);
 				self.closeAlert();
 				self.showAlert = '';
 				self.maskShow = false;
@@ -143,7 +153,7 @@ export default {
 			console.log(e);
 			Net.gatherMsgId({
 				scene_id: 7,
-				scene_val: 'sakura',
+				scene_val: 'huahuodahui',
 				form_id: e.mp.detail.formId,
 			});
 		},

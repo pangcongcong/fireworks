@@ -120,6 +120,13 @@ export default {
 			user_price: '', //兑换过了
 			min_exchange_price: '', //最小金额
 			pay_status: '0',//
+			logCommonParam: {
+				ns: '828_huahuodahui_mp',
+				w: '',
+				open_id: '',
+				devtype: 'mp',
+				ch: ch,
+			},
 		};
 	},
 	onLoad(option) {
@@ -137,6 +144,12 @@ export default {
 	},
 	methods: {
 		toAd(page_id) {
+			Net.newLog(
+				{
+					mt: 'huahuodahui_gotoad',
+				},
+				this.logCommonParam,
+			);
 			if (page_id && page_id != '0') {
 				wx.navigateTo({ url:  `/page/page/index?page_id=${page_id}`});
 			} else {
@@ -235,9 +248,12 @@ export default {
 						this.type = '1';
 						this.maskShow = true;
 						this.sucResShow = true;
-						Net.tick({
-							type: 'exchange_money',
-						})
+						Net.newLog(
+							{
+								mt: 'exchange_money',
+							},
+							this.logCommonParam,
+						);
 					} else {
 						wx.showToast({
 							title: res.errmsg,
@@ -279,7 +295,7 @@ body {
 	height: 25px;
 	margin: 3px;
 	padding-left: 30px;
-	background: url('https://s4.wandougongzhu.cn/s/e9/fire_461ac3.png') no-repeat;
+	background: url('https://s.wandougongzhu.cn/s/7a/513_d24f95.png') no-repeat;
 	background-size: 25px;
 	background-position: left center;
 }

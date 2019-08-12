@@ -42,8 +42,8 @@ import card from '@/components/card';
 							</div>
 							<div class="fire-ani-box" v-if="sakura_C_num != '0'">
 								<div class="firecracker" style="left:55%;top: 40%">
-									<div class="ani"></div>
-									<div class="boom"></div>
+									<div class="ani" :class="{'ani-delay': sakura_C_num > 0 }"></div>
+									<div class="boom" :class="{'ani-delay': sakura_C_num > 0 }"></div>
 								</div>
 							</div>
 						</button>
@@ -68,7 +68,7 @@ import card from '@/components/card';
 						<button class="flower-item flower-item-db" :class="{'gray': sakura_E_num == '0'}" @click="showSakuraDetail('sakura_e','大阪天神祭','全国花火競技大会「大阪の花火」')">
 							<div class="tag" :class="{'gray': sakura_E_num == '0'}" style="left:60%;top: -100%">
 								大阪天神祭
-								<div v-if="sakura_E_num > 0" class="num-box">{{sakura_E_num}}</div>
+								<div v-if="sakura_E_num > 0" class="num-box" style="right: auto;left:0">{{sakura_E_num}}</div>
 							</div>
 							<div class="fire-ani-box" v-if="sakura_E_num != '0'">
 								<div class="firecracker" style="left:70%;top: 20%">
@@ -86,8 +86,8 @@ import card from '@/components/card';
 							</div>
 							<div class="fire-ani-box" v-if="sakura_B_num != '0'">
 								<div class="firecracker" style="left:25%;top: 40%">
-									<div class="ani"></div>
-									<div class="boom"></div>
+									<div class="ani" :class="{'ani-delay': sakura_B_num > 0 }"></div>
+									<div class="boom" :class="{'ani-delay': sakura_B_num > 0 }"></div>
 								</div>
 							</div>
 						</button>
@@ -102,8 +102,8 @@ import card from '@/components/card';
 							</div>
 							<div class="fire-ani-box" v-if="sakura_A_num != '0'">
 								<div class="firecracker" style="left:15%;top: 20%">
-									<div class="ani"></div>
-									<div class="boom"></div>
+									<div class="ani" :class="{'ani-delay': sakura_A_num > 0 }"></div>
+									<div class="boom" :class="{'ani-delay': sakura_A_num > 0 }"></div>
 								</div>
 							</div>
 						</button>
@@ -112,7 +112,10 @@ import card from '@/components/card';
 				<form :report-submit="form_id" @submit="gather" >
 					<button class="mix-btn" form-type="submit" @click="showComposeAni()">
 						<div class="wave">
-							<div class="wave-pos" :style="{'transform': 'translateY(' + (15*(-is_compose)) + 'px)'}"></div>
+							<div class="wave-pos" :style="{'transform': 'translateY(' + (15*(-is_compose)) + 'px)'}">
+								<div class="wave-pos-before"></div>
+								<div class="wave-pos-after"></div>
+							</div>
 						</div>
 						<div class="mix-btn-text">点亮花火</div>
 					</button>
@@ -151,7 +154,7 @@ import card from '@/components/card';
 			<div class="task-item" v-for="item in taskList" :key="item.task_id">
 				<div>{{item.name}}</div>
 				<div class="task-item-img">
-					<div class="num">{{item.count}}</div>
+					<div class="num">{{item.count}}次</div>
 				</div>
 				<form :report-submit="form_id" @submit="gather" >
 					<button v-if="item.status == '0'" form-type="submit" class="task-item-btn receive" @click="getTask(item.task_id)">
@@ -159,7 +162,7 @@ import card from '@/components/card';
 					</button>
 				</form>
 				<div v-if="item.status == '1'" class="task-item-btn done">
-					完成
+					已完成
 				</div>
 				<form :report-submit="form_id" @submit="gather" >
 					<div v-if="item.status == '-1'">
@@ -187,7 +190,7 @@ import card from '@/components/card';
 				</form>
 			</div>
 		</div>
-		<div class="brand-box" v-if="topRankList && topRankList.length > 0">
+		<div class="brand-box" v-if="topRankList && topRankList.length > 0 ">
 			<div class="task-title">
 				点亮成就榜
 			</div>
@@ -208,24 +211,26 @@ import card from '@/components/card';
 						</div>
 					</div>
 				</div>
-				<div class="brand-box-top">
-					<div v-for="(item, index) in topRankList" :key="index" class="brand-box-top-item">
-						<div class="rank">
-							<div class="last">{{index + 1}}</div>
+				<swiper class="brand-box-top" vertical autoplay circular>
+					<swiper-item style="height: 34px;" v-for="(swiperitem, swiperindex) in topRankList" :key="swiperindex">
+						<div class="brand-box-top-item" v-for="(item, index) in swiperitem" :key="index">
+							<div class="rank">
+								<div class="last">{{5*swiperindex + index+1}}</div>
+							</div>
+							<div class="img-box">
+								<img :src="item.imgurl" alt="">
+								<div class="name">{{item.nickname}}</div>
+							</div>
+							<div class="flower-box">
+								<div>已点亮庆生花火<span class="flower">{{item.total}}</span>次</div>
+								<div class="time">{{item.last_time}}</div>
+							</div>
 						</div>
-						<div class="img-box">
-							<img :src="item.imgurl" alt="">
-							<div class="name">{{item.nickname}}</div>
-						</div>
-						<div class="flower-box">
-							<div>已点亮庆生花火<span class="flower">{{item.total}}</span>次</div>
-							<div class="time">{{item.last_time}}</div>
-						</div>
-					</div>
-				</div>
+					</swiper-item>
+				</swiper>
 			</div>
 		</div>
-		<div v-if="buoy_ad_info.ad_img != ''"  class="ad-img-fixed" @click="toFixedCard()">
+		<div v-if="buoy_ad_info.ad_img != ''"  class="ad-img-fixed" :class="{'scrolling': isScrolling}" @click="toFixedCard()">
 			<img :src="buoy_ad_info.ad_img" alt="">
 		</div>
 		<div id="mask" v-if="maskShow">
@@ -556,6 +561,14 @@ export default {
 			userRankList: {}, //当前用户的排行数据
 			showFaceTime: '0', //是否显示山下久智FaceTime
 			pageId: 19767, //活动规则卡片页id
+			isScrolling: false,
+			logCommonParam: {
+				ns: '828_huahuodahui_mp',
+				w: '',
+				open_id: '',
+				devtype: 'mp',
+				ch: ch,
+			},
 		};
 	},
 	onLoad() {
@@ -563,10 +576,13 @@ export default {
 		wx.setStorage({ key: 'ch', data: ch });
 		WMP.globalData.ch = ch;
 		//浏览打点
-		Net.tick({
-			type: 'huahuodahui_uv',
-			page_name: 'sy',
-		},'huahuodahui');
+		Net.newLog(
+			{
+				mt: 'huahuodahui_uv',
+				ivt: this.option.user_id || '',
+			},
+			this.logCommonParam,
+		);
 		this.option = this.$root.$mp.query;
 		console.log(this.$root.$mp);
 		if (!WMP.globalData.userInfo || !WMP.globalData.userInfo.user_id) {
@@ -574,9 +590,12 @@ export default {
 			if(is_first == '0'){
 				console.log(is_first);
 			}else{
-				Net.tick({
-					type:'huahuodahui_access'
-				},'sahuahuodahuikura');
+				Net.newLog(
+					{
+						mt: 'huahuodahui_access',
+					},
+					this.logCommonParam,
+				);
 				wx.setStorage({
 					key:"is_first_access",
 					data:"0"
@@ -610,7 +629,16 @@ export default {
 	},
 	onUnload() {
 	},
-	onReady() {
+	onPageScroll(e) {
+		let scrollTopNow =  e.scrollTop;
+		this.isScrolling = true;
+		let timer = setTimeout(()=> {
+			if(scrollTopNow === e.scrollTop) {
+				this.isScrolling = false;
+				console.log('滚动结束');
+				clearTimeout(timer);
+			}
+		},300);
 	},
 	onShow() {
 		this._getUserActInfo();
@@ -620,9 +648,12 @@ export default {
 		this.closeAlert();
 		if (res.from == 'button' && res.target.dataset.type == '0') {
 			if (res.target.dataset.sakuraid) {
-				Net.tick({
-					type:'huahuodahui_share_flower',
-				},'huahuodahui');
+				Net.newLog(
+					{
+						mt: 'huahuodahui_share_flower',
+					},
+					this.logCommonParam,
+				);
 				console.log('data-sakuraid='+ res.target.dataset.sakuraid);
 				return {
 					title: '送你一朵'+res.target.dataset.sakuraname + this.cloundShareSakuraInfo.title,
@@ -641,9 +672,12 @@ export default {
 				};
 			} else {
 				console.log('this-sakura_id='+this.sakura_id);
-				Net.tick({
-					type:'huahuodahui_share_flower',
-				},'huahuodahui');
+				Net.newLog(
+					{
+						mt: 'huahuodahui_share_flower',
+					},
+					this.logCommonParam,
+				);
 				return {
 					title: '送你一朵'+this.sakuraDetailName + this.cloundShareSakuraInfo.title,
 					path: '/pages/fireworks/main?sakura_key=' + this.sakuraDetailKey +'&user_id=' + this.user_id +"&sakura_id=" + this.sakura_id + '&ch=' + ch,
@@ -671,9 +705,12 @@ export default {
 					path: '/pages/fireworks/main?user_id=' + this.user_id + '&ch=' + ch,
 					imageUrl: shareImg,
 					success: function (res) {
-						Net.tick({
-							type:'huahuodahui_share_act',
-						},'huahuodahui');
+						Net.newLog(
+							{
+								mt: 'huahuodahui_share_act',
+							},
+							self.logCommonParam,
+						);
 						self.shareActivity();
 						self.getUserActInfo();
 					},
@@ -687,10 +724,12 @@ export default {
 				}
 			} else {
 				if (res.target.dataset.type && res.target.dataset.type == '1') {
-					Net.tick({
-						type:'huahuodahui_task',
-						huahuodahui_task_id: 2
-					},'huahuodahui');
+					Net.newLog(
+						{
+							mt: 'huahuodahui_task_2',
+						},
+						self.logCommonParam,
+					);
 					return {
 						title: this.cloundShareActInfo.title + this.act_text + '!',
 						path: '/pages/fireworks/main?user_id=' + this.user_id + '&ch=' + ch,
@@ -710,9 +749,12 @@ export default {
 						}
 					};
 				} else if (res.target.dataset.type && res.target.dataset.type == '2') {
-					Net.tick({
-						type: 'huahuodahui_share_act',
-					},'huahuodahui');
+					Net.newLog(
+						{
+							mt: 'huahuodahui_share_act',
+						},
+						self.logCommonParam,
+					);
 					return {
 						title: this.cloundShareActInfo.title + this.act_text + '!',
 						path: '/pages/fireworks/main?user_id=' + this.user_id + '&ch=' + ch,
@@ -754,10 +796,12 @@ export default {
 			})
 		},
 		doTask2() {
-			Net.tick({
-				type:'huahuodahui_task',
-				huahuodahui_task_id: 2
-			},'huahuodahui');
+			Net.newLog(
+				{
+					mt: 'huahuodahui_task_2',
+				},
+				this.logCommonParam,
+			);
 			this.shareActivity();
 			this.getUserActInfo();
 		},
@@ -787,9 +831,12 @@ export default {
 			});
 		},
 		toFixedCard() {
-			Net.tick({
-				type:'huahuodahui_go_ad',
-			},'huahuodahui');
+			Net.newLog(
+				{
+					mt: 'huahuodahui_go_ad',
+				},
+				this.logCommonParam,
+			);
 			if (this.buoy_ad_info.page_id && this.buoy_ad_info.page_id != '0') {
 				wx.navigateTo({ url: `/page/page/index?page_id=${this.buoy_ad_info.page_id}` });
 			} else {
@@ -837,7 +884,11 @@ export default {
 				if(res.errno=='0') {
 					this.taskList = res.data.day_task;
 					let infoList = res.data.info;
-					this.topRankList = res.data.top_list;
+					let tmpResult = [];
+					for(let i=0,len=res.data.top_list.length;i<len;i+=5){
+						tmpResult.push(data.slice(i,i+5));
+					}
+					this.topRankList = tmpResult;
 					this.userRankList = res.data.user_seq || {};
 					this.sakura_A_num = infoList.sakura_a;
 					this.sakura_B_num = infoList.sakura_b;
@@ -880,10 +931,12 @@ export default {
 			if (WMP.globalData.userInfo && WMP.globalData.userInfo.user_id) {
 				if (this.option.user_id == this.user_id ) {
 					if (this.option.sakura_id) {
-						Net.tick({
-							type:'huahuodahui_get_flower',
-							is_succ : 0  // fail
-						},'huahuodahui');
+						Net.newLog(
+							{
+								mt: 'huahuodahui_get_flower_self',
+							},
+							this.logCommonParam,
+						);
 						wx.showToast({
 							title: '不能领取自己分享的花火～',
 							icon: 'none',
@@ -903,10 +956,12 @@ export default {
 							}
 						}).then(res=>{
 							if(res.errno=='0') {
-								Net.tick({
-									type:'huahuodahui_get_flower',
-									is_succ : 0  // suc
-								},'huahuodahui');
+								Net.newLog(
+									{
+										mt: 'huahuodahui_get_flower_success',
+									},
+									this.logCommonParam,
+								);
 								wx.showToast({
 									title: '领取成功',
 									icon: 'success',
@@ -925,10 +980,12 @@ export default {
 					} else {
 						this.showAlert = 'showHaveDone';
 						this.maskShow = true;
-						Net.tick({
-							type:'huahuodahui_get_flower',
-							is_succ : 1  // fail
-						},'huahuodahui');
+						Net.newLog(
+							{
+								mt: 'huahuodahui_get_flower_fail',
+							},
+							this.logCommonParam,
+						);
 					}
 				}
 			} else {
@@ -952,9 +1009,12 @@ export default {
 			this.maskShow = false;
 
 			// WMP.checkAuthPromise(this.$root.$mp.page).then((res)=> {
-				Net.tick({
-					type:'huahuodahui_access1'
-				},'huahuodahui');
+				Net.newLog(
+					{
+						mt: 'huahuodahui_access1',
+					},
+					this.logCommonParam,
+				);
 				if (WMP.globalData.userInfo && WMP.globalData.userInfo.user_id) {
 					this._getUserActInfo();
 				} else {
@@ -981,7 +1041,11 @@ export default {
 					if(res.errno=='0') {
 						this.taskList = res.data.day_task;
 						let infoList = res.data.info;
-						this.topRankList = res.data.top_list;
+						let tmpResult = [];
+						for(let i=0,len=res.data.top_list.length;i<len;i+=5){
+							tmpResult.push(data.slice(i,i+5));
+						}
+						this.topRankList = tmpResult;
 						this.userRankList = res.data.user_seq;
 						this.sakura_A_num = infoList.sakura_a;
 						this.sakura_B_num = infoList.sakura_b;
@@ -1044,10 +1108,12 @@ export default {
 		showHaveDone() {
 			this.maskShow = true;
 			this.showAlert = 'showHaveDone';
-			Net.tick({
-				type:'huahuodahui_get_flower',
-				is_succ : 1  // fail
-			},'huahuodahui');
+			Net.newLog(
+				{
+					mt: 'huahuodahui_get_flower_fail',
+				},
+				this.logCommonParam,
+			);
 		},
 		showSakuraDetail(key, name, poetry) {
 			if (this.act_status == '1') {
@@ -1265,10 +1331,12 @@ export default {
 				}
 			}).then(res=>{
 				if(res.errno=='0') {
-					Net.tick({
-						type:'huahuodahui_task',
-						huahuodahui_task_id: parseInt(paramTask)
-					},'huahuodahui');
+					Net.newLog(
+						{
+							mt: 'huahuodahui_task_' + parseInt(paramTask),
+						},
+						this.logCommonParam,
+					);
 					wx.showToast({
 						title: '领取成功',
 						icon: 'success',
@@ -1286,10 +1354,12 @@ export default {
 		},
 		toFinishTask(task_id,page_id) {
 			WMP.checkAuthPromise(this.$root.$mp.page).then(()=>{
-				Net.tick({
-					type:'huahuodahui_task',
-					huahuodahui_task_id: parseInt(task_id)
-				},'huahuodahui');
+				Net.newLog(
+					{
+						mt: 'huahuodahui_task_' + parseInt(paramTask),
+					},
+					this.logCommonParam,
+				);
 				if (task_id == 3) {
 					if (this.sakura_A_num == '0' && this.sakura_B_num == '0' && this.sakura_C_num == '0' && this.sakura_D_num == '0' && this.sakura_E_num == '0') {
 						wx.showToast({
@@ -1333,6 +1403,9 @@ button::after{ border: none; }
 	width: 100%;
 	height: 100%;
 }
+.ad-img-fixed.scrolling {
+	opacity: 0.5;
+}
 .invite-text {
 	font-size: 12px;
 	color: rgb(67, 67, 67);
@@ -1345,23 +1418,25 @@ button::after{ border: none; }
 	position: absolute;
 	width: 130px;
 	overflow: hidden;
-	font-size: 14px;
-	line-height: 20px;
-	color: rgb(27, 32, 62);
+	font-size: 16px;
+	line-height: 25px;
+	color: #000;
 	font-weight: bold;
 	text-align: left;
 	margin: 30px auto 0 15px;
 }
+
 .my-sakura {
 	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
+  color: rgb(214, 35, 35);
 }
 .my-sakura-new {
 	width: 20px;
 	height: 20px;
 	margin: 2px 3px 0 0;
-	background: url('https://s4.wandougongzhu.cn/s/e9/fire_461ac3.png') no-repeat;
+	background: url('https://s.wandougongzhu.cn/s/7a/513_d24f95.png') no-repeat;
 	background-size: cover;
 }
 .w-sakura {
@@ -1400,11 +1475,11 @@ button::after{ border: none; }
 	justify-content: center;
 }
 .timer-count {
-	width: 250px;
-	height: 30px;
-	line-height: 30px;
+	width: 270px;
+	height: 35px;
+	line-height: 35px;
 	margin: 5px auto 0 auto;
-	font-size: 12px;
+	font-size: 13px;
 	font-weight: bold;
 	color: #000;
 	text-align: center;
@@ -1432,11 +1507,17 @@ button::after{ border: none; }
 	text-align: center;
 	line-height: 20px;
 	color: #fff;
-	background: url('https://s4.wandougongzhu.cn/s/5f/2_5a2e1c.png') no-repeat;
-	background-size: cover;
 	font-size:14px;
 	position:absolute;
 	right:0;
+	background: url('https://s5.wandougongzhu.cn/s/5e/3_41b2d3.png') no-repeat;
+	background-size: cover;
+}
+.task-item-img .num {
+	width: 25px;
+	height: 25px;
+	background: url('https://s4.wandougongzhu.cn/s/5f/2_5a2e1c.png') no-repeat;
+	background-size: cover;
 }
 .to-alert-box,.get-alert-box {
 	position: absolute;
@@ -1657,7 +1738,7 @@ button::after{ border: none; }
 }
 .rec-btn {
 	position: absolute;
-	left: 28px;
+	left: 15px;
 	bottom: 20px;
 	display: inline;
 	font-size: 14px;
@@ -1707,21 +1788,21 @@ button::after{ border: none; }
 	top: -30px;
 	left: -30px;
 	opacity: 0.6;
-	animation: breath 1s ease infinte;
-	-webkit-animation: breath 1s ease infinite;
+	/* animation: breath 1s ease infinte;
+	-webkit-animation: breath 1s ease infinite; */
 }
 .fire-item.item2 {
 	top: -20px;
 	left: 70px;
 	opacity: 0.3;
-	animation: breath 2s ease infinte;
-	-webkit-animation: breath 2s ease infinite;
+	/* animation: fire_boom_s 2s ease infinte;
+	-webkit-animation: fire_boom_s 2s ease infinite; */
 }
 .fire-item.item3 {
 	top: -20px;
 	left: 200px;
-	animation: breath 1.5s ease infinte;
-	-webkit-animation: breath 1.5s ease infinite;
+	animation: fire_boom_s 1.5s ease infinte;
+	-webkit-animation: fire_boom_s 1.5s ease infinite;
 }
 .fire-item.item4 {
 	width: 40px;
@@ -1729,8 +1810,8 @@ button::after{ border: none; }
 	right: 30px;
 	top: 90px;
 	opacity: 0.5;
-	animation: breath 2.5s ease infinte;
-	-webkit-animation: breath 2.5s ease infinite;
+	animation: fire_boom_s 2.5s ease infinte;
+	-webkit-animation: fire_boom_s 2.5s ease infinite;
 }
 .fire-item.item5 {
 	width: 20px;
@@ -1738,14 +1819,14 @@ button::after{ border: none; }
 	left: 40px;
 	top: 100px;
 	opacity: 0.5;
-	animation: breath 3s ease infinte;
-	-webkit-animation: breath 3s ease infinite;
+	animation: fire_boom_s 3s ease infinte;
+	-webkit-animation: fire_boom_s 3s ease infinite;
 }
 .theme-bg .text-box {
 	width: 330px;
 	height: 80px;
 	margin: 30px auto 0 auto;
-	background: url(https://s2.wandougongzhu.cn/s/9a/_c3c672.png) no-repeat;
+	background: url(https://s1.wandougongzhu.cn/s/46/16_1d7c08.png) no-repeat;
 	background-size: 100% auto;
 } 
 .tips {
@@ -1784,6 +1865,9 @@ button::after{ border: none; }
 	background-size: 100% 100%;
 	background-position: center;
 	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-items: center;
 }
 .flower-item .tag.gray {
 	background: url(https://s4.wandougongzhu.cn/s/20/_gray_cd255c.png) no-repeat;
@@ -1999,6 +2083,8 @@ button::after{ border: none; }
 	color: rgba(255,255,255,1);
 	background: url('https://s2.wandougongzhu.cn/s/4c/-2x_81cff2.png') no-repeat;
 	background-size: cover;
+	overflow: hidden;
+	border-radius: 50%;
 }
 .wave {  
 	position: absolute;
@@ -2011,26 +2097,29 @@ button::after{ border: none; }
 	overflow: hidden; 
 }
 .wave-pos {
-	width: 100%;
-	height: 100%;
+	width: 60px;
+	height: 60px;
 	background: transparent;
+	position: relative;
+	z-index: 2;
+	overflow: hidden;
 }
-.wave-pos:before,  
-.wave-pos:after {  
-	content: "";  
-	position: absolute;  
+.wave-pos-before,  
+.wave-pos-after {
+	display: block; 
+	position: relative;
 	width: 80px;  
 	height: 80px;  
 	top: 0;  
 	left: 50%;  
-	background-color: rgba(0, 0, 0, .2);  
+	background-color: rgba(0, 0, 0, .2);
 	border-radius: 34%;  
 	transform: translate(-50%, -18px) rotate(0);  
 	animation: rotate 7s linear infinite;  
 	z-index: 1;  
 }  
-.wave-pos:after {  
-	content: "";
+.wave-pos-after {  
+	top: -80px;
 	border-radius: 67%;  
 	background-color: rgba(0, 0, 0, .5);  
 	transform: translate(-50%, -18px) rotate(0);  
@@ -2075,6 +2164,8 @@ button::after{ border: none; }
 	background: url('https://s2.wandougongzhu.cn/s/09/-_f9c638.png') no-repeat;
 	background-size: 100% 100%;
 	margin: 5px auto;
+	animation: breath 2s ease infinte;
+	-webkit-animation: breath 2s ease infinite;
 }
 .lottery-btn.wait-res {
 	background: url('https://s3.wandougongzhu.cn/s/3b/-_gray_673f6c.png') no-repeat;
@@ -2132,10 +2223,9 @@ button::after{ border: none; }
 	align-items: center;
 	font-size: 14px;
 	text-align: left;
-	margin-left: 10px;
 }
 .suc-box-right span {
-	color: rgb(73, 15, 0);
+	color: #d42223;
 }
 .task-item-img {
 	position: absolute;
@@ -2163,10 +2253,12 @@ button::after{ border: none; }
 }
 .task-item-btn.done {
   color: rgb(237, 218, 180);
-	border: 2px solid rgb(237, 218, 180);
+	border: 1.5px solid rgb(237, 218, 180);
 	transform: rotate(30deg);
 	background: transparent;
 	transform: rotate(-10deg);
+	margin: 18px 20px;
+	box-sizing: border-box;
 }
 .task-item-btn.receive {
 	color: rgb(73, 15, 0);
@@ -2515,7 +2607,7 @@ button::after{ border: none; }
 }
 @keyframes fire_boom_up {
 	0% {
-		opacity: 1;
+		opacity: 0.5;
 		bottom: 0;
 	}
 	90% {
@@ -2525,6 +2617,9 @@ button::after{ border: none; }
 		opacity: 0;
 	}
 }
+.ani-delay {
+	animation-delay: 0.5s;
+}
 .brand-box {
 	display: flex;
 	flex-direction: column;
@@ -2533,16 +2628,19 @@ button::after{ border: none; }
 }
 .brand-box-content {
 	width: 352px;
-	height: 382px;
+	height: 250px;
 	padding: 20px 0;
-	background: url(https://s.wandougongzhu.cn/s/c6/_c4efa1.png) no-repeat;
+	background: url(https://s4.wandougongzhu.cn/s/a2/alert_s_f4973c.png) no-repeat;
 	background-size: 100% 100%;
 	margin: 0 auto;
 	color: rgb(25, 25, 25);
   font-size: 16px;
 }
+/* https://s4.wandougongzhu.cn/s/a2/alert_s_f4973c.png */
 .brand-box-top{
 	width: 345px;
+	height: 220px;
+	overflow: hidden;
 	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
@@ -2552,16 +2650,16 @@ button::after{ border: none; }
 .brand-box-top-item,.brand-box-my{
 	position: relative;
 	width: 310px;
-	height: 34px;
+	height: 40px;
 	margin: 0 auto;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
 .brand-box-my {
-	width: 100%;
+	width: 310px;
 	margin: 0 auto;
-	height: 34px;
+	height: 40px;
 	border-bottom: 0.5px solid rgb(196, 163, 97);
 }
 .brand-box-top-item .img-box {
