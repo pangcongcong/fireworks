@@ -35,7 +35,7 @@ import card from '@/components/card';
 			<div class="flower-box">
 				<div class="right">
 					<form :report-submit="form_id" @submit="gather" >
-						<button class="flower-item flower-item-dyh" :class="{'gray': sakura_C_num == '0'}" @click="showSakuraDetail('sakura_c','洞爷湖花火大会','全国花火競技大会「洞爷湖の花火」')">
+						<button class="flower-item flower-item-dyh" :class="{'gray': sakura_C_num == '0'}" @click="showSakuraDetail('sakura_c','洞爷湖花火大会','全国花火競技大会「洞爷湖の花火」',sakura_C_num)">
 							<div class="tag" :class="{'gray': sakura_C_num == '0'}" style="left:50%;top: 80%">
 								洞爷湖花火大会
 								<div v-if="sakura_C_num > 0" class="num-box">{{sakura_C_num}}</div>
@@ -50,7 +50,7 @@ import card from '@/components/card';
 					</form>
 				</div>
 				<div class="center">
-					<form :report-submit="form_id" @submit="gather" @click="showSakuraDetail('sakura_d','大曲花火大会','全国花火競技大会「大曲の花火」')">
+					<form :report-submit="form_id" @submit="gather" @click="showSakuraDetail('sakura_d','大曲花火大会','全国花火競技大会「大曲の花火」',sakura_D_num)">
 						<button class="flower-item flower-item-dq" :class="{'gray': sakura_D_num == '0'}">
 							<div class="tag" :class="{'gray': sakura_D_num == '0'}" style="left:80%;top: 50%">
 								大曲花火大会
@@ -65,7 +65,7 @@ import card from '@/components/card';
 						</button>
 					</form>
 					<form :report-submit="form_id" @submit="gather" >
-						<button class="flower-item flower-item-db" :class="{'gray': sakura_E_num == '0'}" @click="showSakuraDetail('sakura_e','大阪天神祭','全国花火競技大会「大阪の花火」')">
+						<button class="flower-item flower-item-db" :class="{'gray': sakura_E_num == '0'}" @click="showSakuraDetail('sakura_e','大阪天神祭','全国花火競技大会「大阪の花火」',sakura_E_num)">
 							<div class="tag" :class="{'gray': sakura_E_num == '0'}" style="left:60%;top: -100%">
 								大阪天神祭
 								<div v-if="sakura_E_num > 0" class="num-box" style="right: auto;left:0">{{sakura_E_num}}</div>
@@ -79,7 +79,7 @@ import card from '@/components/card';
 						</button>
 					</form>
 					<form :report-submit="form_id" @submit="gather" >
-						<button class="flower-item flower-item-tf" :class="{'gray': sakura_B_num == '0'}" @click="showSakuraDetail('sakura_b','土浦花火大会','全国花火競技大会「土浦の花火」')">
+						<button class="flower-item flower-item-tf" :class="{'gray': sakura_B_num == '0'}" @click="showSakuraDetail('sakura_b','土浦花火大会','全国花火競技大会「土浦の花火」',sakura_B_num)">
 							<div class="tag" :class="{'gray': sakura_B_num == '0'}" style="left:30%;top: 80%">
 								土浦花火大会
 								<div v-if="sakura_B_num > 0" class="num-box">{{sakura_B_num}}</div>
@@ -95,7 +95,7 @@ import card from '@/components/card';
 				</div>
 				<div class="left">
 					<form :report-submit="form_id" @submit="gather" >
-						<button class="flower-item flower-item-zhc" :class="{'gray': sakura_A_num == '0'}" @click="showSakuraDetail('sakura_a','筑后川花火大会','全国花火競技大会「筑后川の花火」')">
+						<button class="flower-item flower-item-zhc" :class="{'gray': sakura_A_num == '0'}" @click="showSakuraDetail('sakura_a','筑后川花火大会','全国花火競技大会「筑后川の花火」',sakura_A_num)">
 							<div class="tag" :class="{'gray': sakura_A_num == '0'}" style="left:10%;top: 80%">
 								筑后川花火大会
 								<div v-if="sakura_A_num > 0" class="num-box">{{sakura_A_num}}</div>
@@ -258,15 +258,36 @@ import card from '@/components/card';
 				<img v-if="sakuraDetailKey == 'sakura_c'" class="mysakura" src="https://s3.wandougongzhu.cn/s/9f/dyh_984083.jpg">
 				<img v-if="sakuraDetailKey == 'sakura_d'" class="mysakura" src="https://s3.wandougongzhu.cn/s/72/dq_196ee4.jpg">
 				<img v-if="sakuraDetailKey == 'sakura_e'" class="mysakura" src="https://s3.wandougongzhu.cn/s/b9/db_d1cdb7.jpg">
-				<div class="mysakura-tips">
+				<div class="mysakura-tips" v-if="sakuraDetailNum == 0">
 					<p>每天首次赠送可获得一次抽花火的机会</p>
 					<p>取消分享也会扣除花火，一定完成分享哦~</p>
 				</div>
-				<form :report-submit="form_id" @submit="gather" >
+				<block v-else>
+					<div class="getsakura-text" v-if="sakuraDetailKey == 'sakura_a'">
+						即将迎接第360年历史了，始终是九州人气花火期待度排名第一的筑后川花火大会，起源来自水天宫的奉纳祭祀，是一场结合平安祈福的烟火节庆。
+					</div>
+					<div class="getsakura-text" v-if="lsakuraDetailKey == 'sakura_b'">
+						土浦全国烟火大会是可自由入场的竞赛大会，是日本三大烟花大会之一，也是日本全国人气数一数二的烟花比赛。
+					</div>
+					<div class="getsakura-text" v-if="sakuraDetailKey == 'sakura_c'">
+						洞爷湖花火大会是日本举办期间最长的烟花大会，烟火是在行驶在湖面的船隻上释放的，是夏天来北海道不可或缺的活动。
+					</div>
+					<div class="getsakura-text" v-if="sakuraDetailKey == 'sakura_d'">
+						秋田县大仙市举办的大曲烟火大会，是从日本全国各地选拔出来的烟火师亲手施放高空烟火的烟火竞赛大会，是全日本最具有代表性的花火大会之一。
+					</div>
+					<div class="getsakura-text" v-if="sakuraDetailKey == 'sakura_e'">
+						具有1000多年历史的大坂天神祭是日本三大祭典之一，祭奉日本的「学问和艺术之神」棺原道真。
+					</div>
+				</block>
+				
+				<form v-if="sakuraDetailNum != 0" :report-submit="form_id" @submit="gather" >
 					<button class="mysakura-btn" form-type="submit" @click="sendToFriendShow()">
 						送给好友
 					</button>
 				</form>
+				<div v-if="sakuraDetailNum == 0" class="mysakura-btn" @click="closeAlert()">
+					确定
+				</div>
 			</div>
 			<!-- 恭喜你获得了**樱 -->
 			<div class="get-alert-box" v-if="showAlert == 'lotteryRes'">
@@ -523,6 +544,7 @@ export default {
 			sakuraDetailKey: 'sakura_a',
 			sakuraDetailName: '筑后川花火大会',
 			sakuraDetailPoetry: '築後川花火大會',
+			sakuraDetailNum: 0,
 			shareImg: 'https://s1.wandougongzhu.cn/s/81/_9163d6.jpg', //分享图
 			shareImgBtn: {
 				'sakura_a': 'https://s.wandougongzhu.cn/s/16/-_b46163.jpg',
@@ -1115,11 +1137,12 @@ export default {
 				this.logCommonParam,
 			);
 		},
-		showSakuraDetail(key, name, poetry) {
+		showSakuraDetail(key, name, poetry,num) {
 			if (this.act_status == '1') {
 				this.sakuraDetailKey = key;
 				this.sakuraDetailName = name;
 				this.sakuraDetailPoetry = poetry;
+				this.sakuraDetailNum = num;
 				
 				this.maskShow = true;
 				this.showAlert = 'sakuraDetail';
@@ -1130,6 +1153,7 @@ export default {
 					duration: 2000
 				});
 			}
+			
 		},
 		showComposeAni() {
 			if (this.is_compose == '5') {
@@ -1144,6 +1168,7 @@ export default {
 						setTimeout(()=>{
 							this.showAlert = '';
 							this.maskShow = false;
+							this.getUserActInfo();
 						},3500);
 					} else {
 						wx.showToast({
@@ -1261,6 +1286,7 @@ export default {
 			}
 		},
 		lotterySakura() {
+			console.log(WMP.globalData);
 			var self = this;
 			if (WMP.globalData.userInfo && WMP.globalData.userInfo.user_id) {
 				self._lotterySakura();
@@ -1514,8 +1540,10 @@ button::after{ border: none; }
 	background-size: cover;
 }
 .task-item-img .num {
-	width: 25px;
-	height: 25px;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 12px;
 	background: url('https://s4.wandougongzhu.cn/s/5f/2_5a2e1c.png') no-repeat;
 	background-size: cover;
 }
@@ -1646,7 +1674,7 @@ button::after{ border: none; }
 	width: 260px;
 	height: 177px;
 	position: relative;
-	margin: 10px auto;
+	margin: 15px auto 10px auto;
 }
 .mysakura.tf,.getsakura.tf {
 	background: url('https://s1.wandougongzhu.cn/s/92/tf_61b463.jpg') no-repeat;
@@ -1739,7 +1767,7 @@ button::after{ border: none; }
 .rec-btn {
 	position: absolute;
 	left: 15px;
-	bottom: 20px;
+	bottom: 30px;
 	display: inline;
 	font-size: 14px;
 	text-decoration: underline;
@@ -1903,7 +1931,7 @@ button::after{ border: none; }
 	background-image: linear-gradient(to bottom, rgb(213, 34, 35),rgba(255,255,255,0.5));
 	background-size: cover;
 	/* forwards */
-	animation: fire_rise 2s forwards cubic-bezier(.08,.47,.38,.87);
+	animation: fire_rise 2s infinite cubic-bezier(.08,.47,.38,.87);
 }
 .firecracker .boom {
 	position: absolute;
@@ -1916,7 +1944,7 @@ button::after{ border: none; }
 	opacity: 0;
 	background: url(https://s.wandougongzhu.cn/s/49/42x_154024.png) no-repeat;
 	background-size: cover;
-	animation: fire_boom_s 2s forwards ease-in-out;
+	animation: fire_boom_s 2s infinite ease-in-out;
 	animation-delay: 2.5s;
 }
 .flower-item-dyh {
@@ -2101,8 +2129,6 @@ button::after{ border: none; }
 	height: 60px;
 	background: transparent;
 	position: relative;
-	z-index: 2;
-	overflow: hidden;
 }
 .wave-pos-before,  
 .wave-pos-after {
@@ -2230,7 +2256,7 @@ button::after{ border: none; }
 .task-item-img {
 	position: absolute;
 	right: 110px;
-	margin: 20px 0;
+	margin: 15px 0;
 }
 .task-item-img img {
 	width: 50px;
@@ -2518,8 +2544,11 @@ button::after{ border: none; }
 	0%{  
 		bottom: 25px;
 	}
-	90% {
+	50%{
 		opacity: 1;
+	}
+	90% {
+		opacity: 0;
 		bottom: 80px;
 	}
 	100%{
@@ -2531,8 +2560,11 @@ button::after{ border: none; }
 	0%{  
 		bottom: 25px;
 	}
-	90% {
+	50%{
 		opacity: 1;
+	}
+	90% {
+		opacity: 0;
 		bottom: 80px;
 	}
 	100%{

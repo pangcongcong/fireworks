@@ -33,7 +33,7 @@
 					<div class="name">花火已扣除，快去分享给好友吧！</div>
 				</div>
 				<form :report-submit="form_id" @submit="gather" >
-					<button open-type="share" class="mysakura-btn">
+					<button open-type="share" class="mysakura-btn" @click="backToIndex()">
 						确定
 					</button>
 				</form>
@@ -66,6 +66,7 @@ export default {
 				devtype: 'mp',
 				ch: ch,
 			},
+			sakuraNum:0,
 		};
 	},
 	onLoad(option) {
@@ -186,6 +187,7 @@ export default {
 				user_id: this.user_id
 			}).then(res=>{
 				let sakuraitem = res.data.info;
+				this.sakuraNum = sakuraitem;
 				console.log(`sakuraitem=` + sakuraitem)
 				let list = [];
 				if (sakuraitem.sakura_a > 0) {
@@ -237,6 +239,15 @@ export default {
 		closeAlert (param) {
 			param = false;
 			this.maskShow = false;
+		},
+		backToIndex() {
+			if (this.sakuraNum.sakura_a != '0' || this.sakuraNum.sakura_b != '0' || this.sakuraNum.sakura_c != '0' || this.sakuraNum.sakura_d != '0' || this.sakuraNum.sakura_e == '0') {
+				return false;
+			} else {
+				wx.navigateBack({
+					delta: 1
+				});
+			}
 		}
 	},
 
