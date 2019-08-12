@@ -178,10 +178,10 @@ import card from '@/components/card';
 						邀请新朋友加入豌豆得<span>万能花火</span>
 					</div>
 				</div>
-				<div class="task-item-img" @click="showSakuraW()">
+				<!-- <div class="task-item-img" @click="showSakuraW()">
 					<div v-if="sakura_W_num > 0" class="num">{{sakura_W_num}}</div>
 					<div v-else class="num">3</div>
-				</div>
+				</div> -->
 				<form :report-submit="form_id" @submit="gather" >
 					<button class="task-item-btn" form-type="submit" @click="showinviteSakuraAll()">去邀请</button>
 				</form>
@@ -567,7 +567,6 @@ export default {
 			type: 'huahuodahui_uv',
 			page_name: 'sy',
 		},'huahuodahui');
-		// this.getRestDay();
 		this.option = this.$root.$mp.query;
 		console.log(this.$root.$mp);
 		if (!WMP.globalData.userInfo || !WMP.globalData.userInfo.user_id) {
@@ -1040,21 +1039,6 @@ export default {
 						console.log('bind success');
 					}
 				});
-			}
-		},
-		getRestDay() {
-			let myDate = new Date();
-			let m = myDate.getMonth();
-			let d = myDate.getDate();
-			if (d < 11) {
-				this.restDay = 11 - d;
-				this.restText = '距离分钱还剩'+this.restDay+'天';
-			} else if (d > 10 && d < 14) {
-				this.restDay = 0;
-				this.restText = '正在撒钱中';
-			} else {
-				this.restDay = -1;
-				this.restText = '活动已结束';
 			}
 		},
 		showHaveDone() {
@@ -2129,6 +2113,7 @@ button::after{ border: none; }
 	width: 345px;
 	height: 60px;
 	font-size: 15px;
+	font-weight: bold;
 	line-height: 60px;
 	color: #191919;
 	margin: 10px auto;
@@ -2137,23 +2122,6 @@ button::after{ border: none; }
 	display: flex;
 	background: url('https://s5.wandougongzhu.cn/s/22/1_2ddd54.png') no-repeat;
 	background-size: 100% 100%;
-}
-.task-item-evd,.task-item-suc {
-	width: 37px;
-	height: 20px;
-	font-size: 12px;
-	line-height: 20px;
-	margin: 20px 10px;
-	background: url('https://s.wandougongzhu.cn/s/82/evd_641d28.png') no-repeat;
-	background-size: cover;
-	text-align: center;
-	color: #fff;
-}
-.task-item-suc {
-  color: #ff8a00;
-	margin:  0px 10px;
-	background: url('https://s4.wandougongzhu.cn/s/ed/942x_91051c.png') no-repeat;
-	background-size: cover;
 }
 .suc-box {
 	line-height: 30px;
@@ -2192,7 +2160,6 @@ button::after{ border: none; }
 	background: rgb(248, 233, 209);
 	color: rgb(73, 15, 0);
 	border-radius: 0;
-	font-weight: bold;
 }
 .task-item-btn.done {
   color: rgb(237, 218, 180);
