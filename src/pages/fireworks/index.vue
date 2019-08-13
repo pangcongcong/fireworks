@@ -887,7 +887,7 @@ export default {
 					let infoList = res.data.info;
 					let tmpResult = [];
 					for(let i=0,len=res.data.top_list.length;i<len;i+=5){
-						tmpResult.push(data.slice(i,i+5));
+						tmpResult.push(res.data.top_list.slice(i,i+5));
 					}
 					this.topRankList = tmpResult;
 					this.userRankList = res.data.user_seq || {};
@@ -1051,7 +1051,7 @@ export default {
 						let infoList = res.data.info;
 						let tmpResult = [];
 						for(let i=0,len=res.data.top_list.length;i<len;i+=5){
-							tmpResult.push(data.slice(i,i+5));
+							tmpResult.push(res.data.top_list.slice(i,i+5));
 						}
 						this.topRankList = tmpResult;
 						this.userRankList = res.data.user_seq;
