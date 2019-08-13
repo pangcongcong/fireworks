@@ -258,7 +258,7 @@ import card from '@/components/card';
 				<img v-if="sakuraDetailKey == 'sakura_c'" class="mysakura" src="https://s3.wandougongzhu.cn/s/9f/dyh_984083.jpg">
 				<img v-if="sakuraDetailKey == 'sakura_d'" class="mysakura" src="https://s3.wandougongzhu.cn/s/72/dq_196ee4.jpg">
 				<img v-if="sakuraDetailKey == 'sakura_e'" class="mysakura" src="https://s3.wandougongzhu.cn/s/b9/db_d1cdb7.jpg">
-				<div class="mysakura-tips" v-if="sakuraDetailNum == 0">
+				<div class="mysakura-tips" v-if="sakuraDetailNum != 0">
 					<p>每天首次赠送可获得一次抽花火的机会</p>
 					<p>取消分享也会扣除花火，一定完成分享哦~</p>
 				</div>
@@ -266,7 +266,7 @@ import card from '@/components/card';
 					<div class="getsakura-text" v-if="sakuraDetailKey == 'sakura_a'">
 						即将迎接第360年历史了，始终是九州人气花火期待度排名第一的筑后川花火大会，起源来自水天宫的奉纳祭祀，是一场结合平安祈福的烟火节庆。
 					</div>
-					<div class="getsakura-text" v-if="lsakuraDetailKey == 'sakura_b'">
+					<div class="getsakura-text" v-if="sakuraDetailKey == 'sakura_b'">
 						土浦全国烟火大会是可自由入场的竞赛大会，是日本三大烟花大会之一，也是日本全国人气数一数二的烟花比赛。
 					</div>
 					<div class="getsakura-text" v-if="sakuraDetailKey == 'sakura_c'">
@@ -484,7 +484,7 @@ import card from '@/components/card';
 			<!-- showHaveDone -->
 			<div class="get-alert-box suc-alert-box" v-if="showAlert == 'showHaveDone'">
 				<div class="colse" @click="closeAlert()"></div>
-				<div class="mysakura-text">
+				<div class="mysakura-text mysakura-text-done">
 					<div class="name">手慢了，花火已被别人领取了～</div>
 				</div>
 				<form :report-submit="form_id" @submit="gather" >
