@@ -51,6 +51,7 @@
 		<div id="mask" v-if="maskShow">
 			<div class="to-alert-box" v-show="showAlert == 'changescore'">
 				<div class="colse" @click="closeAlert()"></div>
+				<div class="changecash-title">积分兑换提醒</div>
 				<div class="mysakura-tips">
 					<p>即将为您兑换豌豆公主<span>{{toScoreNum}}</span>积分，</p>
 					<p>可抵现<span>{{scoreToCash}}</span>元，下单时可抵现。</p>
@@ -324,7 +325,7 @@ body {
 	bottom: 10px;
 	width: 100px;
 	height: 35px;
-	line-height: 38px;
+	line-height: 35px;
 	font-size: 14px;
 	color: #fff;
 	background: url('https://s5.wandougongzhu.cn/s/2a/btn_e2760e.jpg') no-repeat;
