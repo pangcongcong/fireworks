@@ -1382,7 +1382,7 @@ export default {
 			WMP.checkAuthPromise(this.$root.$mp.page).then(()=>{
 				Net.newLog(
 					{
-						mt: 'huahuodahui_task_' + parseInt(paramTask),
+						mt: 'huahuodahui_task_' + parseInt(task_id),
 					},
 					this.logCommonParam,
 				);
