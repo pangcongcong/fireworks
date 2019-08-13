@@ -12,7 +12,7 @@ import card from '@/components/card';
 				<div class="fire-item item5"></div>
 			</div>
 			<div class="text-box"></div>
-			<div v-if="act_status == '1'" class="timer-count">已点亮<span class="num">{{totalSakuraNum}}</span>场花火，距分钱还剩<span class="num">{{act_remain_day}}</span>天</div>
+			<div v-if="act_status == '1'" class="timer-count">共点亮<span class="num">{{totalSakuraNum}}</span>场花火，距分钱还剩<span class="num">{{act_remain_day}}</span>天</div>
 			<div v-else class="timer-count">{{act_text}}</div>
 		</div>
 		
@@ -1249,7 +1249,9 @@ export default {
 		closeAlert (param) {
 			param = false;
 			this.maskShow = false;
-			this.getUserActInfo();
+			if (param != 'sakuraDetail') {
+				this.getUserActInfo();
+			}
 		},
 		shareSakura() {
 
@@ -1298,7 +1300,7 @@ export default {
 						console.log('lotterySakura');
 						self.bindInviteUser();
 						// self._getUserActInfo();
-						self._lotterySakura();
+						// self._lotterySakura();
 					});
 				// })
 			}
@@ -1849,7 +1851,7 @@ button::after{ border: none; }
 	width: 330px;
 	height: 80px;
 	margin: 30px auto 0 auto;
-	background: url(https://s1.wandougongzhu.cn/s/46/16_1d7c08.png) no-repeat;
+	background: url(https://s4.wandougongzhu.cn/s/68/title_da8dd3.png) no-repeat;
 	background-size: 100% auto;
 } 
 .tips {

@@ -49,7 +49,7 @@
 			</div>
 		</div>
 		<div id="mask" v-if="maskShow">
-			<div class="to-alert-box" v-if="showAlert == 'changescore'">
+			<div class="to-alert-box" v-show="showAlert == 'changescore'">
 				<div class="colse" @click="closeAlert()"></div>
 				<div class="mysakura-tips">
 					<p>即将为您兑换豌豆公主<span>{{toScoreNum}}</span>积分，</p>
@@ -113,7 +113,7 @@ export default {
 			sucResShow: false,
 			scoreToCash: 0,
 			toCashTip: '',
-			type: '0',
+			type: null,
 			phone: '',
 			realMoney: '',
 			sakura_H_num: '0',
@@ -129,6 +129,7 @@ export default {
 				devtype: 'mp',
 				ch: ch,
 			},
+			showAlert: ''//兑换现金 changescash or 积分 changescore
 		};
 	},
 	onLoad(option) {
@@ -172,7 +173,8 @@ export default {
 		},
 		toScore() {
 			if (this.toScoreNum > 0) {
-				this.maskShow =true;
+				this.showAlert = 'changescore';
+				this.maskShow = true;
 			} else {
 				wx.showToast({
 					title: '无可兑换积分',
@@ -329,6 +331,9 @@ body {
 	background-size: 100% 100%;
 	margin: 0 auto;
 }
+.suc-btn {
+	margin-top: 10px;
+}
 .dis-btn {
 	background: url('https://s3.wandougongzhu.cn/s/28/_67a6fa.png') no-repeat;
 	background-size: 100% 100%;
@@ -365,13 +370,15 @@ body {
 }
 #suc .suc-title {
 	font-size: 22px;
-	margin-top: 80px;
+	margin-top: 90px;
   color: rgb(216, 35, 35);
 	/* -webkit-text-stroke:1rpx #ffffff; */
 	text-align:center;
 	font-weight:bold;
 }
 #suc .suc-tips {
+	width: 300px;
+	margin: 5px auto;
 	font-size: 14px;
 	color: #191919;
   color: rgb(22, 40, 84);
@@ -411,7 +418,8 @@ body {
 .mysakura-tips {
 	width: 230px;
 	height: 60px;
-	margin: 40px auto 10px auto;
+	font-weight: normal;
+	margin: 10px auto;
 }
 .mysakura {
 	width: 15px;
@@ -477,7 +485,6 @@ body {
 	justify-content: center;
 }
 .score-box {
-	top: 300px;
 	background: url('https://s4.wandougongzhu.cn/s/a4/_39ec92.png') no-repeat;
 	background-size: 100% 100%;
 }
