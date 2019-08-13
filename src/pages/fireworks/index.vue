@@ -347,7 +347,7 @@ import card from '@/components/card';
 					<div class="invite-title">邀请好友注册得万能花火</div>
 					<div>万能花火可兑换任意地区花火</div>
 				</div>
-				<img class="getsakura invite-sakura" src="https://s3.wandougongzhu.cn/s/8b/_830d8b.jpg">
+				<img class="getsakura" src="https://s3.wandougongzhu.cn/s/8b/_830d8b.jpg">
 				<form :report-submit="form_id" @submit="gather" >
 					<button class="invite-btn" form-type="submit" open-type="share" :data-type="2">
 						去邀请

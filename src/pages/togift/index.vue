@@ -286,7 +286,7 @@ button::after{
 }
 .suc-alert-box {
 	height: 190px;
-	background: url('https://s.wandougongzhu.cn/s/e8/alert_230438.png') no-repeat;
+	background: url('https://s4.wandougongzhu.cn/s/a2/alert_s_f4973c.png') no-repeat;
 	background-size: 100% 100%;
 }
 .suc-alert-box  .mysakura-text .name {
