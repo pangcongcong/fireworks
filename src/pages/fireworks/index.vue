@@ -42,8 +42,8 @@ import card from '@/components/card';
 							</div>
 							<div class="fire-ani-box" v-if="sakura_C_num != '0'">
 								<div class="firecracker" style="left:55%;top: 40%">
-									<div class="ani" :class="{'ani-delay': sakura_C_num > 0 }"></div>
-									<div class="boom" :class="{'ani-delay': sakura_C_num > 0 }"></div>
+									<div class="ani" :style="{'animation-delay': sakura_C_num > 0 ? '2.3s' : '2.5s'}"></div>
+									<div class="boom" :style="{'animation-delay': sakura_C_num > 0 ? '2.3s' : '2.5s'}"></div>
 								</div>
 							</div>
 						</button>
@@ -58,8 +58,8 @@ import card from '@/components/card';
 							</div>
 							<div class="fire-ani-box" v-if="sakura_D_num != '0'">
 								<div class="firecracker" style="left:55%;top: 40%">
-									<div class="ani"></div>
-									<div class="boom"></div>
+									<div class="ani" :style="{'animation-delay': sakura_D_num > 0 ? '2.1s' : '2.5s'}"></div>
+									<div class="boom" :style="{'animation-delay': sakura_D_num > 0 ? '2.1s' : '2.5s'}"></div>
 								</div>
 							</div>
 						</button>
@@ -68,12 +68,12 @@ import card from '@/components/card';
 						<button class="flower-item flower-item-db" :class="{'gray': sakura_E_num == '0'}" @click="showSakuraDetail('sakura_e','大阪天神祭','全国花火競技大会「大阪の花火」',sakura_E_num)">
 							<div class="tag" :class="{'gray': sakura_E_num == '0'}" style="left:60%;top: -100%">
 								大阪天神祭
-								<div v-if="sakura_E_num > 0" class="num-box" style="right: auto;left:0">{{sakura_E_num}}</div>
+								<div v-if="sakura_E_num > 0" class="num-box" style="right: -10px;bottom:auto;top:-10px;">{{sakura_E_num}}</div>
 							</div>
 							<div class="fire-ani-box" v-if="sakura_E_num != '0'">
 								<div class="firecracker" style="left:70%;top: 20%">
-									<div class="ani"></div>
-									<div class="boom"></div>
+									<div class="ani" :style="{'animation-delay': sakura_E_num > 0 ? '1.7s' : '2.5s'}"></div>
+									<div class="boom" :style="{'animation-delay': sakura_E_num > 0 ? '1.7s' : '2.5s'}"></div>
 								</div>
 							</div>
 						</button>
@@ -86,8 +86,8 @@ import card from '@/components/card';
 							</div>
 							<div class="fire-ani-box" v-if="sakura_B_num != '0'">
 								<div class="firecracker" style="left:25%;top: 40%">
-									<div class="ani" :class="{'ani-delay': sakura_B_num > 0 }"></div>
-									<div class="boom" :class="{'ani-delay': sakura_B_num > 0 }"></div>
+									<div class="ani" :style="{'animation-delay': sakura_B_num > 0 ? '1.3s' : '2.5s'}"></div>
+									<div class="boom" :style="{'animation-delay': sakura_B_num > 0 ? '1.3s' : '2.5s'}"></div>
 								</div>
 							</div>
 						</button>
@@ -102,8 +102,8 @@ import card from '@/components/card';
 							</div>
 							<div class="fire-ani-box" v-if="sakura_A_num != '0'">
 								<div class="firecracker" style="left:15%;top: 20%">
-									<div class="ani" :class="{'ani-delay': sakura_A_num > 0 }"></div>
-									<div class="boom" :class="{'ani-delay': sakura_A_num > 0 }"></div>
+									<div class="ani" :style="{'animation-delay': sakura_A_num > 0 ? '0.5s' : '2.5s'}"></div>
+									<div class="boom" :style="{'animation-delay': sakura_A_num > 0 ? '0.5s' : '2.5s'}"></div>
 								</div>
 							</div>
 						</button>
@@ -190,7 +190,7 @@ import card from '@/components/card';
 				</form>
 			</div>
 		</div>
-		<div class="brand-box" v-if="topRankList && topRankList.length > 0 ">
+		<div class="brand-box" v-if="topRankList && topRankList.length > 0">
 			<div class="task-title">
 				点亮成就榜
 			</div>
@@ -230,7 +230,7 @@ import card from '@/components/card';
 				</swiper>
 			</div>
 		</div>
-		<div v-if="buoy_ad_info.ad_img != ''"  class="ad-img-fixed" :class="{'scrolling': isScrolling}" @click="toFixedCard()">
+		<div v-if="buoy_ad_info.ad_img != ''"  class="ad-img-fixed" @click="toFixedCard()">
 			<img :src="buoy_ad_info.ad_img" alt="">
 		</div>
 		<div id="mask" v-if="maskShow">
@@ -536,22 +536,19 @@ export default {
 			maskShow: false, //蒙层
 			taskList: [],
 			totalSakuraNum: 0,
-			lastSakuraNum: 500000,
-			progressSakura: 0, //集花火进度0-5代表0w-50w
-			restDay: 10,
 			restText: '',
 			lock: false,
 			sakuraDetailKey: 'sakura_a',
 			sakuraDetailName: '筑后川花火大会',
 			sakuraDetailPoetry: '築後川花火大會',
 			sakuraDetailNum: 0,
-			shareImg: 'https://s1.wandougongzhu.cn/s/81/_9163d6.jpg', //分享图
+			shareImg: 'https://s3.wandougongzhu.cn/s/0c/_3937c1.jpg', //分享图
 			shareImgBtn: {
-				'sakura_a': 'https://s.wandougongzhu.cn/s/16/-_b46163.jpg',
-				'sakura_b': 'https://s3.wandougongzhu.cn/s/58/-_452eb2.jpg',
-				'sakura_c': 'https://s1.wandougongzhu.cn/s/c4/-_2b2c54.jpg',
-				'sakura_d': 'https://s5.wandougongzhu.cn/s/e6/-_405b31.jpg',
-				'sakura_e': 'https://s4.wandougongzhu.cn/s/a5/-_0732fe.jpg'
+				'sakura_a': 'https://s5.wandougongzhu.cn/s/b8/-_3a2d0e.jpg', //zhc
+				'sakura_b': 'https://s2.wandougongzhu.cn/s/dc/-_f2e633.jpg', //tf
+				'sakura_c': 'https://s.wandougongzhu.cn/s/8e/-_5b6c16.jpg', //dyh
+				'sakura_d': 'https://s5.wandougongzhu.cn/s/e4/-_c2b724.jpg', //dq
+				'sakura_e': 'https://s.wandougongzhu.cn/s/72/-_5e68d2.jpg' //db
 			},//分享花火给好友图了list
 			shareSakura: 'sakura_a',
 			sakura_All_num: 0, //万能花火数量
@@ -583,7 +580,6 @@ export default {
 			userRankList: {}, //当前用户的排行数据
 			showFaceTime: '0', //是否显示山下久智FaceTime
 			pageId: 19767, //活动规则卡片页id
-			isScrolling: false,
 			logCommonParam: {
 				ns: '828_huahuodahui_mp',
 				w: '',
@@ -649,19 +645,6 @@ export default {
 			}
 		}
 	},
-	onUnload() {
-	},
-	onPageScroll(e) {
-		let scrollTopNow =  e.scrollTop;
-		this.isScrolling = true;
-		let timer = setTimeout(()=> {
-			if(scrollTopNow === e.scrollTop) {
-				this.isScrolling = false;
-				console.log('滚动结束');
-				clearTimeout(timer);
-			}
-		},300);
-	},
 	onShow() {
 		this._getUserActInfo();
 	},
@@ -678,7 +661,7 @@ export default {
 				);
 				console.log('data-sakuraid='+ res.target.dataset.sakuraid);
 				return {
-					title: '送你一朵'+res.target.dataset.sakuraname + this.cloundShareSakuraInfo.title,
+					title: this.cloundShareSakuraInfo.title,
 					path: '/pages/fireworks/main?sakura_key=' + res.target.dataset.sakurakey +'&user_id=' + this.user_id +"&sakura_id=" + res.target.dataset.sakuraid + '&ch=' + ch,
 					imageUrl: this.shareImgBtn[res.target.dataset.sakurakey],
 					success: function () {
@@ -701,7 +684,7 @@ export default {
 					this.logCommonParam,
 				);
 				return {
-					title: '送你一朵'+this.sakuraDetailName + this.cloundShareSakuraInfo.title,
+					title: this.cloundShareSakuraInfo.title,
 					path: '/pages/fireworks/main?sakura_key=' + this.sakuraDetailKey +'&user_id=' + this.user_id +"&sakura_id=" + this.sakura_id + '&ch=' + ch,
 					imageUrl: this.shareImgBtn[this.sakuraDetailKey],
 					success: function () {
@@ -806,10 +789,6 @@ export default {
 		}
 	},
 	methods: {
-		
-		getRandom(min, max) {
-			return Math.floor((max - min) * Math.random()) + min;
-		},
 		goCash() {
 			WMP.checkAuthPromise(this.$root.$mp.page).then(() => {
 				wx.navigateTo({ 
@@ -937,8 +916,6 @@ export default {
 					this.buoy_ad_info = res.data.buoy_ad_info;
 					this.cloundShareActInfo = res.data.share_activity;
 					this.cloundShareSakuraInfo = res.data.share_sakura;
-					this.lastSakuraNum = parseInt(500000 - parseInt(res.data.h_sakura_count));
-					this.progressSakura = parseFloat(parseInt(res.data.h_sakura_count)/100000);
 					this.showFaceTime = res.data.show_facetime;
 				} else {
 					wx.showToast({
@@ -969,45 +946,54 @@ export default {
 						this.getUserActInfo();
 					}
 				} else {
-					if (this.recv_id == "" || this.recv_id == '0') {
-						Net.get('Sakura.userRecvGiftSakura', {
-							data: {
-								user_id: this.user_id,
-								from_user_id: this.option.user_id,
-								sakura_id: this.option.sakura_id
-							}
-						}).then(res=>{
-							if(res.errno=='0') {
-								Net.newLog(
-									{
-										mt: 'huahuodahui_get_flower_success',
-									},
-									this.logCommonParam,
-								);
-								wx.showToast({
-									title: '领取成功',
-									icon: 'success',
-									duration: 2000
-								});
-								this.closeAlert();
-								this.getUserActInfo();
-							} else {
-								wx.showToast({
-									title: res.errmsg,
-									icon: 'error',
-									duration: 2000
-								});
-							}
+					// 0未开始 1进行中 2 兑换 3结束
+					if(this.act_status == '2' || this.act_status == '3') {
+						wx.showToast({
+							title: this.act_status == '2' ? '收集期已过，下次早点来哦~' : ' 活动结束了，下次再来吧~',
+							icon: 'none',
+							duration: 2000
 						});
 					} else {
-						this.showAlert = 'showHaveDone';
-						this.maskShow = true;
-						Net.newLog(
-							{
-								mt: 'huahuodahui_get_flower_fail',
-							},
-							this.logCommonParam,
-						);
+						if (this.recv_id == "" || this.recv_id == '0') {
+							Net.get('Sakura.userRecvGiftSakura', {
+								data: {
+									user_id: this.user_id,
+									from_user_id: this.option.user_id,
+									sakura_id: this.option.sakura_id
+								}
+							}).then(res=>{
+								if(res.errno=='0') {
+									Net.newLog(
+										{
+											mt: 'huahuodahui_get_flower_success',
+										},
+										this.logCommonParam,
+									);
+									wx.showToast({
+										title: '领取成功',
+										icon: 'success',
+										duration: 2000
+									});
+									this.closeAlert();
+									this.getUserActInfo();
+								} else {
+									wx.showToast({
+										title: res.errmsg,
+										icon: 'error',
+										duration: 2000
+									});
+								}
+							});
+						} else {
+							this.showAlert = 'showHaveDone';
+							this.maskShow = true;
+							Net.newLog(
+								{
+									mt: 'huahuodahui_get_flower_fail',
+								},
+								this.logCommonParam,
+							);
+						}
 					}
 				}
 			} else {
@@ -1094,8 +1080,6 @@ export default {
 						this.buoy_ad_info = res.data.buoy_ad_info;
 						this.cloundShareActInfo = res.data.share_activity;
 						this.cloundShareSakuraInfo = res.data.share_sakura;
-						this.lastSakuraNum = parseInt(500000 - parseInt(res.data.h_sakura_count));
-						this.progressSakura = parseFloat(parseInt(res.data.h_sakura_count)/100000);
 						this.showFaceTime = res.data.show_facetime;
 					} else if (res.errno == '2008') {
 						WMP.checkAuthPromise(this.$root.$mp.page);
@@ -1138,6 +1122,7 @@ export default {
 			);
 		},
 		showSakuraDetail(key, name, poetry,num) {
+			// 0未开始 1进行中 2 兑换 3结束
 			if (this.act_status == '1') {
 				this.sakuraDetailKey = key;
 				this.sakuraDetailName = name;
@@ -1146,9 +1131,21 @@ export default {
 				
 				this.maskShow = true;
 				this.showAlert = 'sakuraDetail';
+			} else if(this.act_status == '2'){
+				wx.showToast({
+					title: '花火火热兑换中',
+					icon: 'error',
+					duration: 2000
+				});
+			} else if(this.act_status == '0'){
+				wx.showToast({
+					title: '花火大会未开始',
+					icon: 'error',
+					duration: 2000
+				});
 			} else {
 				wx.showToast({
-					title: '抽花火已结束',
+					title: '花火大会已结束',
 					icon: 'error',
 					duration: 2000
 				});
@@ -1412,8 +1409,6 @@ export default {
 
 };
 </script>
-
-
 <style scoped>
 button::after{ border: none; }
 .ad-img-fixed {
@@ -1428,9 +1423,6 @@ button::after{ border: none; }
 .ad-img-fixed img {
 	width: 100%;
 	height: 100%;
-}
-.ad-img-fixed.scrolling {
-	opacity: 0.5;
 }
 .invite-text {
 	font-size: 12px;
@@ -1656,6 +1648,9 @@ button::after{ border: none; }
 .mysakura-text-done {
 	margin-top: 60px;
 	font-weight: bold;
+}
+.mysakura-text-done .name {
+	color: #000;
 }
 .sakura-text .poetry {
 	font-weight: bold;
@@ -2542,12 +2537,10 @@ button::after{ border: none; }
 }
 @keyframes fire_rise{
 	0%{  
+		opacity: 1;
 		bottom: 25px;
 	}
-	50%{
-		opacity: 1;
-	}
-	90% {
+	60% {
 		opacity: 0;
 		bottom: 80px;
 	}
@@ -2558,19 +2551,17 @@ button::after{ border: none; }
 } 
 @-webkit-keyframes fire_rise{
 	0%{  
+		opacity: 1;
 		bottom: 25px;
 	}
-	50%{
-		opacity: 1;
-	}
-	90% {
+	60% {
 		opacity: 0;
 		bottom: 80px;
 	}
 	100%{
 		bottom: 80px;
 		opacity: 0;
-	}  
+	} 
 }
 
 @keyframes fire_boom_s {

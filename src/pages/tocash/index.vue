@@ -6,44 +6,46 @@
 				<div class="my-sakura">X{{sakura_H_num || 0}}</div>
 			</div>
 			<div class="none-tips" v-if="sakura_H_num == '0'">无可兑换的花火</div>
+			<div class="min-tips" v-if="user_price == '0' && toCashNum < min_exchange_price">微信限制提现金额不得小于0.3元，建议兑换豌豆积分</div>
 		</div>
-		<div class="min-tips" v-if="user_price == '0' && toCashNum < min_exchange_price">微信限制提现金额不得小于0.3元，建议兑换豌豆积分</div>
-		<div class="cash-box">
-			<img class="icon" src="https://s5.wandougongzhu.cn/s/ca/xianjin_82b0bb.png" alt="">
-			<div class="cash-content">
-				<div class="tips2">
-					<span>{{toCashNum || 0}}</span>元
-					<div class="mini-tip">24小时内存入微信零钱</div>
+		<div class="duihuan-box">
+			<div class="cash-box">
+				<img class="icon" src="https://s5.wandougongzhu.cn/s/ca/xianjin_82b0bb.png" alt="">
+				<div class="cash-content">
+					<div class="tips2">
+						<span>{{toCashNum || 0}}</span>元
+						<div class="mini-tip">24小时内存入微信零钱</div>
+					</div>
+					
+					<div v-if="user_price != '' && user_price != '0'" class="to-cash-btn to-cash-btn-disable">
+						<text v-if="pay_status == '2'">已兑换</text>
+						<text v-else>已失效</text>
+					</div>
+					<form v-if="user_price == '0' || user_price == ''" :report-submit="form_id" @submit="gather" >
+						<button class="to-cash-btn" form-type="submit" @click="showChangeCash()">
+							兑换现金
+						</button>
+					</form>
 				</div>
-				
-				<div v-if="user_price != '' && user_price != '0'" class="to-cash-btn to-cash-btn-disable">
-					<text v-if="pay_status == '2'">已兑换</text>
-					<text v-else>已失效</text>
-				</div>
-				<form v-if="user_price == '0' || user_price == ''" :report-submit="form_id" @submit="gather" >
-					<button class="to-cash-btn" form-type="submit" @click="showChangeCash()">
-						兑换现金
-					</button>
-				</form>
 			</div>
-		</div>
-		<div class="score-box">
-			<img class="icon" src="https://s3.wandougongzhu.cn/s/ad/jifen_964890.png" alt="">
-			<div class="cash-rate">{{score_rate}}倍</div>
-			<div class="score-content">
-				<div class="tips2">
-					<div>价值<span>{{scoreToCash}}</span>元({{toScoreNum}})积分</div>
-					<div class="mini-tip">下单可直接抵现</div>
+			<div class="score-box">
+				<img class="icon" src="https://s3.wandougongzhu.cn/s/ad/jifen_964890.png" alt="">
+				<div class="cash-rate">{{score_rate}}倍</div>
+				<div class="score-content">
+					<div class="tips2">
+						<div>价值<span>{{scoreToCash}}</span>元({{toScoreNum}})积分</div>
+						<div class="mini-tip">下单可直接抵现</div>
+					</div>
+					<div v-if="user_price != '' && user_price != '0'" class="to-cash-btn to-cash-btn-disable">
+						<text v-if="pay_status == '3'">已兑换</text>
+						<text v-else>已失效</text>
+					</div>
+					<form v-if="user_price == '0' || user_price == ''" :report-submit="form_id" @submit="gather" >
+						<button class="to-score-btn" form-type="submit" @click="toScore()">
+							兑换积分
+						</button>
+					</form>
 				</div>
-				<div v-if="user_price != '' && user_price != '0'" class="to-cash-btn to-cash-btn-disable">
-					<text v-if="pay_status == '3'">已兑换</text>
-					<text v-else>已失效</text>
-				</div>
-				<form v-if="user_price == '0' || user_price == ''" :report-submit="form_id" @submit="gather" >
-					<button class="to-score-btn" form-type="submit" @click="toScore()">
-						兑换积分
-					</button>
-				</form>
 			</div>
 		</div>
 		<div id="mask" v-if="maskShow">
@@ -295,6 +297,7 @@ body {
 	height: 25px;
 	margin: 3px;
 	padding-left: 30px;
+  color: rgb(214, 35, 35);
 	background: url('https://s.wandougongzhu.cn/s/7a/513_d24f95.png') no-repeat;
 	background-size: 25px;
 	background-position: left center;
@@ -426,15 +429,24 @@ body {
 	color: rgb(111,111,111);
 	margin-top: 10px;
 }
+.duihuan-box {
+	width: 100%;
+	height: 300px;
+	display: flex;
+	flex-direction: column;
+	justify-items: center;
+	align-items: center;
+	justify-content: center;
+}
 .cash-box,.score-box {
-	position: absolute;
-	top: 180px;
 	width: 275px;
 	height: 80px;
+	border-radius: 4px;
 	overflow: hidden;
 	background: url('https://s5.wandougongzhu.cn/s/52/xianjinbtn_254e29.png') no-repeat;
 	background-size: 100% 100%;
 	color: #ffffff;
+	position: relative;
 }
 .cash-box .icon ,.score-box .icon{
 	width: 35px;
@@ -442,6 +454,9 @@ body {
 	position: absolute;
 	left: -5px;
 	top: -2px;
+}
+.score-box {
+	margin-top: 20px;
 }
 .cash-rate {
 	width: 60px;
@@ -485,6 +500,7 @@ body {
 	font-weight: bold;
   color: rgb(22, 40, 84);
 	text-align: center;
+	margin-top: 100px;
 }
 .to-cash-btn,.to-score-btn,.to-cash-btn-disable {
 	width: 80px;
