@@ -210,7 +210,7 @@ import card from '@/components/card';
 						</div>
 					</div>
 				</div>
-				<swiper class="brand-box-top" :style="{'height': user_id > 0 ? '220px' : '200px'}" vertical autoplay circular>
+				<swiper class="brand-box-top" vertical autoplay circular>
 					<swiper-item style="height: 34px;" v-for="(swiperitem, swiperindex) in topRankList" :key="swiperindex">
 						<div class="brand-box-top-item" v-for="(item, index) in swiperitem" :key="index">
 							<div class="rank">
@@ -1897,8 +1897,8 @@ button::after{ border: none; }
 	justify-items: center;
 }
 .flower-item .tag .tag-text {
-	width: 23px;
-	margin: 10px 2px;
+	width: 17px;
+	margin: 10px 4px;
 }
 .flower-item .tag.gray {
 	background: url(https://s4.wandougongzhu.cn/s/20/_gray_cd255c.png) no-repeat;
