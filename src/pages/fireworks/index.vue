@@ -112,10 +112,8 @@ import card from '@/components/card';
 				<form :report-submit="form_id" @submit="gather" >
 					<button class="mix-btn" form-type="submit" @click="showComposeAni()">
 						<div class="wave">
-						</div>
-						<div class="wave-pos" :style="{'transform': 'translateY(' + (15*(-is_compose)) + 'px)'}">
-							<div class="wave-pos-before"></div>
-							<div class="wave-pos-after"></div>
+							<div class="wave-pos" :style="{'transform': 'translateY(' + (15*(-is_compose)) + 'px)'}">
+							</div>
 						</div>
 						<div class="mix-btn-text">点亮花火</div>
 					</button>
@@ -1298,6 +1296,8 @@ export default {
 					WMP.checkAuthPromise(this.$root.$mp.page).then((res)=>{
 						console.log('lotterySakura');
 						self.bindInviteUser();
+						self.userInfo = WMP.globalData.userInfo;
+						self.user_id = self.userInfo.user_id;
 						// self._getUserActInfo();
 						// self._lotterySakura();
 					});
@@ -2123,37 +2123,48 @@ button::after{ border: none; }
 .wave-pos {
 	width: 60px;
 	height: 60px;
-	background: transparent;
+	border-radius: 34%;
+	background: rgba(0,0,0,0.5);
+	/* animation: rotate 3s linear infinite;  */
+	/* linear-gradient(rgba(0,0,0,0.5) 50%,transparent 50%) */
 	position: absolute;
-	border-radius: 50%;
-	overflow: hidden;
 }
-.wave-pos-before,  
 .wave-pos-after {
+	position: absolute;
+	width: 60px;
+	height: 60px;
+	border-radius: 34%;
+	background: rgba(0,0,0,0.2);  
+	animation: rotate 7s linear infinite; 
+}
+/* .wave-pos::before,  
+.wave-pos::after {
+	content: '';
 	display: block; 
 	position: relative;
 	width: 80px;  
 	height: 80px;  
 	top: 0;  
 	left: 50%;  
-	background-color: rgba(0, 0, 0, .2);
+	background: rgba(0, 0, 0, .2);
 	border-radius: 34%;  
 	transform: translate(-50%, -18px) rotate(0);  
 	animation: rotate 7s linear infinite;  
 	z-index: 1;  
 }  
-.wave-pos-after {  
+.wave-pos::after {  
 	top: -80px;
 	border-radius: 67%;  
-	background-color: rgba(0, 0, 0, .5);  
+	background: rgba(0, 0, 0, .5);  
 	transform: translate(-50%, -18px) rotate(0);  
 	animation: rotate 11s linear -5s infinite;
-}
+} */
+/* translate(-50%, -18px) */
 @keyframes rotate {  
 	50% {  
-		transform: translate(-50%, -18px) rotate(180deg);  
+		transform: translateY(-18px) rotate(180deg);  
 	} 100% {  
-		transform: translate(-50%, -18px) rotate(360deg);  
+		transform: translateY(-18px) rotate(360deg);  
 	}  
 } 
 .mix-btn-text {
