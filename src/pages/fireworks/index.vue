@@ -559,7 +559,7 @@ export default {
 			giftRecList: [], //赠领记录
 			invite_sakura: '', //通过邀请来领取的花火key
 			invite_user_id: '', //邀请人id
-			option: '',
+			option: {},
 			inviteUser: '', //好友昵称
 			inviteShareSakuraName: '', //好友送的**盈
 			inviteShareSakuraKey: '', //好友送的**盈
@@ -593,7 +593,7 @@ export default {
 		wx.setStorage({ key: 'ch', data: ch });
 		WMP.globalData.ch = ch;
 		this.logCommonParam.open_id = WMP.getOpenid() || null;
-		this.logCommonParam.w = WMP.globalData.userInfo.user_id || 0;
+		this.logCommonParam.w = WMP.globalData.userInfo ? WMP.globalData.userInfo.user_id : 0;
 		//浏览打点
 		Net.newLog(
 			{
@@ -652,6 +652,7 @@ export default {
 	onShareAppMessage (res) {
 		let self = this;
 		this.closeAlert();
+		this.showAlert = '';
 		if (res.from == 'button' && res.target.dataset.type == '0') {
 			if (res.target.dataset.sakuraid) {
 				Net.newLog(
