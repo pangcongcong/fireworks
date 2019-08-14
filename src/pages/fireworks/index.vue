@@ -210,7 +210,7 @@ import card from '@/components/card';
 						</div>
 					</div>
 				</div>
-				<swiper class="brand-box-top" :style="{'height': user_id > 0 ? '220px' : '180px'}" vertical autoplay circular>
+				<swiper class="brand-box-top" :style="{'height': user_id > 0 ? '220px' : '190px'}" vertical autoplay circular>
 					<swiper-item style="height: 34px;" v-for="(swiperitem, swiperindex) in topRankList" :key="swiperindex">
 						<div class="brand-box-top-item" v-for="(item, index) in swiperitem" :key="index">
 							<div class="rank">
@@ -367,7 +367,7 @@ import card from '@/components/card';
 						<form :report-submit="form_id" @submit="gather" >
 							<button class="flower-item flower-item-dyh" :class="{'gray': sakura_whitch_choosed != 'sakura_c'}" @click="chooseChangeSakura('sakura_c')">
 								<div class="tag" :class="{'gray': sakura_whitch_choosed != 'sakura_c'}" style="left:50%;top: 80%">
-									洞爷湖花火大会
+									<div class="tag-text">洞爷湖花火大会</div>
 									<div v-if="sakura_C_num > 0" class="num-box">{{sakura_C_num}}</div>
 								</div>
 							</button>
@@ -377,7 +377,7 @@ import card from '@/components/card';
 						<form :report-submit="form_id" @submit="gather" >
 							<button class="flower-item flower-item-dq" :class="{'gray': sakura_whitch_choosed != 'sakura_d'}" @click="chooseChangeSakura('sakura_d')">
 									<div class="tag" :class="{'gray': sakura_whitch_choosed != 'sakura_d'}" style="left:80%;top: 50%">
-									大曲花火大会
+									<div class="tag-text">大曲花火大会</div>
 									<div v-if="sakura_D_num > 0" class="num-box">{{sakura_D_num}}</div>
 								</div>
 							</button>
@@ -385,7 +385,7 @@ import card from '@/components/card';
 						<form :report-submit="form_id" @submit="gather" >
 							<button class="flower-item flower-item-db" :class="{'gray': sakura_whitch_choosed != 'sakura_e'}" @click="chooseChangeSakura('sakura_e')">
 								<div class="tag" :class="{'gray': sakura_whitch_choosed != 'sakura_e'}" style="left:60%;top: -100%">
-									大阪天神祭
+									<div class="tag-text">大阪天神祭</div>
 									<div v-if="sakura_E_num > 0" class="num-box">{{sakura_E_num}}</div>
 								</div>
 							</button>
@@ -393,7 +393,7 @@ import card from '@/components/card';
 						<form :report-submit="form_id" @submit="gather" >
 							<button class="flower-item flower-item-tf" :class="{'gray': sakura_whitch_choosed != 'sakura_b'}" @click="chooseChangeSakura('sakura_b')">
 								<div class="tag" :class="{'gray': sakura_whitch_choosed != 'sakura_b'}" style="left:30%;top: 80%">
-									土浦花火大会
+									<div class="tag-text">土浦花火大会</div>
 									<div v-if="sakura_B_num > 0" class="num-box">{{sakura_B_num}}</div>
 								</div>
 							</button>
@@ -403,7 +403,7 @@ import card from '@/components/card';
 						<form :report-submit="form_id" @submit="gather" >
 							<button class="flower-item flower-item-zhc" :class="{'gray': sakura_whitch_choosed != 'sakura_a'}" @click="chooseChangeSakura('sakura_a')">
 								<div class="tag" :class="{'gray': sakura_whitch_choosed != 'sakura_a'}" style="left:20%;top: 50%">
-									筑后川花火大会
+									<div class="tag-text">筑后川花火大会</div>
 									<div v-if="sakura_A_num > 0" class="num-box">{{sakura_A_num}}</div>
 								</div>
 							</button>
