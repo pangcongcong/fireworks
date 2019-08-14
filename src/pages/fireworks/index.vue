@@ -110,7 +110,7 @@ import card from '@/components/card';
 					</form>
 				</div>
 				<form :report-submit="form_id" @submit="gather" >
-					<button class="mix-btn" :style="{'animation': is_compose == '5' ? 'breath 2s ease infinte' : 'none'}" form-type="submit" @click="showComposeAni()">
+					<button class="mix-btn" :class="{'breath-none': is_compose != '5'}" form-type="submit" @click="showComposeAni()">
 						<div class="wave">
 							<div class="wave-pos" :style="{'transform': 'translateY(' + (14*(-is_compose)) + 'px)'}">
         				<div class="wave-pos-decorate"></div>
@@ -124,7 +124,7 @@ import card from '@/components/card';
 				今日剩余收集次数<span>{{rest_count || 0}}</span>/{{total_count || 9}}
 			</div>
 			<form :report-submit="form_id" @submit="gather" >
-				<button class="lottery-btn" :style="{'animation': is_compose == '5' ? 'breath 2s ease infinte' : 'none'}" form-type="submit" v-if="act_status == '1'" @click="lotterySakura()">
+				<button class="lottery-btn" :class="{'lottery-active': is_compose != '0' && is_compose != '5'}" form-type="submit" v-if="act_status == '1'" @click="lotterySakura()">
 					收集花火
 				</button>
 			</form>
@@ -2116,6 +2116,10 @@ button::after{ border: none; }
 	background-size: cover;
 	overflow: hidden;
 	border-radius: 50%;
+	animation: breath 2s ease infinite;
+}
+.breath-none {
+	animation: none;
 }
 .wave {  
 	position: absolute;
@@ -2199,6 +2203,9 @@ button::after{ border: none; }
 	background: url('https://s2.wandougongzhu.cn/s/09/-_f9c638.png') no-repeat;
 	background-size: 100% 100%;
 	margin: 5px auto;
+}
+.lottery-active {
+	animation: breath 2s ease infinite;
 }
 .lottery-btn.wait-res {
 	background: url('https://s3.wandougongzhu.cn/s/3b/-_gray_673f6c.png') no-repeat;
