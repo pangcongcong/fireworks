@@ -194,7 +194,7 @@ import card from '@/components/card';
 			<div class="task-title">
 				点亮成就榜
 			</div>
-			<div class="brand-box-content">
+			<div class="brand-box-content" :style="{'height': user_id > 0 ? '250px' : '200px'}">
 				<div class="brand-box-my" v-if="user_id && user_id>0">
 					<div class="brand-box-top-item">
 						<div class="rank">
@@ -248,7 +248,7 @@ import card from '@/components/card';
 			</div>
 			<!-- 点击**樱花瓣弹框 -->
 			<div class="to-alert-box" v-if="showAlert == 'sakuraDetail'">
-				<div class="colse" @click="closeAlert()"></div>
+				<div class="colse" @click="closeAlert('sakuraDetail')"></div>
 				<div class="sakura-text">
 					<div class="name">{{sakuraDetailName}}</div>
 					<div class="poetry">{{sakuraDetailPoetry}}</div>
@@ -285,7 +285,7 @@ import card from '@/components/card';
 						送给好友
 					</button>
 				</form>
-				<div v-if="sakuraDetailNum == 0" class="mysakura-btn" @click="closeAlert()">
+				<div v-if="sakuraDetailNum == 0" class="mysakura-btn" @click="closeAlert('sakuraDetail')">
 					确定
 				</div>
 			</div>
@@ -358,7 +358,7 @@ import card from '@/components/card';
 			<!-- 万能樱兑换 -->
 			<!-- sakuraAllChange -->
 			<div class="get-alert-box" v-if="showAlert == 'sakuraAllChange'">
-				<div class="colse" @click="closeAlert()"></div>
+				<div class="colse" @click="closeAlert('sakuraAllChange')"></div>
 				<div class="mysakura-text">
 					<div class="universal-compose">请选择要兑换的花火</div>
 					<div class="universal-tips">使用1个万能花火可以兑换任意地区花火</div>
@@ -1250,8 +1250,12 @@ export default {
 		closeAlert (param) {
 			param = false;
 			this.maskShow = false;
-			if (param != 'sakuraDetail') {
+			if (WMP.globalData.userInfo && WMP.globalData.userInfo.user_id) {
 				this.getUserActInfo();
+			} else {
+				if (param != 'sakuraDetail' && param != 'sakuraAllChange') {
+					this.getUserActInfo();
+				}
 			}
 		},
 		shareSakura() {
