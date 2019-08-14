@@ -138,6 +138,7 @@ export default {
 		wx.hideShareMenu();
 		wx.setStorage({ key: 'ch', data: ch });
 		WMP.globalData.ch = ch;
+		this.logCommonParam.open_id = WMP.getOpenid() || null;
 		// getInfo().then(()=> {
 			WMP.checkAuthPromise(this.$root.$mp.page).then(res=> {
 				this.userInfo = WMP.globalData.userInfo;
@@ -211,6 +212,7 @@ export default {
 					this.toCashTip = res.data.to_cash_tips;
 					if (this.pay_status != 0) {
 						this.sucResShow = true;
+						this.type = this.pay_status == '2' ? '1':'0';
 					}
 				} else {
 					wx.showToast({

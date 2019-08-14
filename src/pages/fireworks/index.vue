@@ -195,7 +195,7 @@ import card from '@/components/card';
 				点亮成就榜
 			</div>
 			<div class="brand-box-content">
-				<div class="brand-box-my">
+				<div class="brand-box-my" v-if="user_id && user_id>0">
 					<div class="brand-box-top-item">
 						<div class="rank">
 							<div class="desc">我的排名</div>
@@ -593,6 +593,7 @@ export default {
 		wx.hideShareMenu();
 		wx.setStorage({ key: 'ch', data: ch });
 		WMP.globalData.ch = ch;
+		this.logCommonParam.open_id = WMP.getOpenid() || null;
 		//浏览打点
 		Net.newLog(
 			{
@@ -1463,7 +1464,7 @@ button::after{ border: none; }
 	position: absolute;
 	right: 10px;
 	top: 12px;
-	width: 31px;
+	width: 28px;
 	height: 92px;
 	font-weight: bold;
 	background: url('https://s3.wandougongzhu.cn/s/f0/2x_3ae473.png') no-repeat;

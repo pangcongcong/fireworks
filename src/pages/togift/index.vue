@@ -75,6 +75,7 @@ export default {
 		wx.hideShareMenu();
 		wx.setStorage({ key: 'ch', data: ch });
 		WMP.globalData.ch = ch;
+		this.logCommonParam.open_id = WMP.getOpenid() || null;
 
 		wx.hideShareMenu();
 		this.userInfo = WMP.globalData.userInfo;
