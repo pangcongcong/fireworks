@@ -193,7 +193,7 @@ import card from '@/components/card';
 			<div class="task-title">
 				点亮成就榜
 			</div>
-			<div class="brand-box-content" :style="{'height': user_id > 0 ? '250px' : '200px'}">
+			<div class="brand-box-content" :style="{'height': user_id > 0 ? '250px' : '210px'}">
 				<div class="brand-box-my" v-if="user_id && user_id>0">
 					<div class="brand-box-top-item">
 						<div class="rank">
@@ -210,7 +210,7 @@ import card from '@/components/card';
 						</div>
 					</div>
 				</div>
-				<swiper class="brand-box-top" :style="{'height': user_id > 0 ? '220px' : '190px'}" vertical autoplay circular>
+				<swiper class="brand-box-top" :style="{'height': user_id > 0 ? '220px' : '200px'}" vertical autoplay circular>
 					<swiper-item style="height: 34px;" v-for="(swiperitem, swiperindex) in topRankList" :key="swiperindex">
 						<div class="brand-box-top-item" v-for="(item, index) in swiperitem" :key="index">
 							<div class="rank">
