@@ -291,19 +291,18 @@ button::after{
 	background-size: 100% 100%;
 }
 .suc-alert-box  .mysakura-text .name {
-	font-size: 12px;
+	font-size: 14px;
 	margin-top: 20px;
 }
 .colse {
 	position: absolute;
-	top: -45px;
-	right: 0px;
-	width: 30px;
-	height: 50px;
-	background: url('https://s2.wandougongzhu.cn/s/5f/_977ab3.png') no-repeat;
+	top: 15px;
+	right: 15px;
+	width: 20px;
+	height: 20px;
+	background: url('https://s.wandougongzhu.cn/s/eb/close_a4ff2d.png') no-repeat;
 	z-index: 2;
 	background-size: contain;
-	cursor: pointer;
 }
 .container {
 	position: absolute;
@@ -335,7 +334,7 @@ button::after{
 	overflow: hidden;
 }
 .mysakura-text {
-	margin-top: 28px;
+	margin-top: 38px;
 }
 .sakura-text .name {
 	margin-top: 20px;

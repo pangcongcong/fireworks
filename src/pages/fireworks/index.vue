@@ -581,6 +581,7 @@ export default {
 			logCommonParam: {
 				ns: '828_huahuodahui_mp',
 				w: '',
+				user_id: '',
 				open_id: '',
 				devtype: 'mp',
 				ch: ch,
@@ -592,6 +593,7 @@ export default {
 		wx.setStorage({ key: 'ch', data: ch });
 		WMP.globalData.ch = ch;
 		this.logCommonParam.open_id = WMP.getOpenid() || null;
+		this.logCommonParam.user_id = WMP.globalData.userInfo.user_id || 0;
 		//浏览打点
 		Net.newLog(
 			{
@@ -796,12 +798,12 @@ export default {
 			})
 		},
 		doTask2() {
-			Net.newLog(
-				{
-					mt: 'huahuodahui_task_2',
-				},
-				this.logCommonParam,
-			);
+			// Net.newLog(
+			// 	{
+			// 		mt: 'huahuodahui_task_2',
+			// 	},
+			// 	this.logCommonParam,
+			// );
 			this.shareActivity();
 			this.getUserActInfo();
 		},
@@ -1005,6 +1007,7 @@ export default {
 					WMP.checkAuthPromise(this.$root.$mp.page).then((res)=>{
 						this.userInfo = WMP.globalData.userInfo;
 						this.user_id = this.userInfo.user_id;
+						this.logCommonParam.user_id = this.user_id;
 						this.bindInviteUser();
 						this.closeAlert();
 						this.checkAuth();
@@ -1881,6 +1884,7 @@ button::after{ border: none; }
 	width: 23px;
 	padding: 10px 2px;
 	font-size: 10px;
+	word-wrap: break-all; 
 	font-weight: bold;
 	line-height: 11px;
 	color: #000;

@@ -358,6 +358,9 @@ body {
 	height: 60px;
 	margin: 0 auto;
 }
+.changecash-title {
+	margin-top: 10px;
+}
 #mask,#suc {
 	position: fixed;
 	top: 0;
