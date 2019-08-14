@@ -359,7 +359,7 @@ body {
 	margin: 0 auto;
 }
 .changecash-title {
-	margin-top: 10px;
+	margin-top: 20px;
 }
 #mask,#suc {
 	position: fixed;

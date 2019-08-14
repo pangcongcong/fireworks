@@ -37,7 +37,7 @@ import card from '@/components/card';
 					<form :report-submit="form_id" @submit="gather" >
 						<button class="flower-item flower-item-dyh" :class="{'gray': sakura_C_num == '0'}" @click="showSakuraDetail('sakura_c','洞爷湖花火大会','全国花火競技大会「洞爷湖の花火」',sakura_C_num)">
 							<div class="tag" :class="{'gray': sakura_C_num == '0'}" style="left:50%;top: 80%">
-								洞爷湖花火大会
+								<div class="tag-text">洞爷湖花火大会</div>
 								<div v-if="sakura_C_num > 0" class="num-box">{{sakura_C_num}}</div>
 							</div>
 							<div class="fire-ani-box" v-if="sakura_C_num != '0'">
@@ -53,7 +53,7 @@ import card from '@/components/card';
 					<form :report-submit="form_id" @submit="gather" @click="showSakuraDetail('sakura_d','大曲花火大会','全国花火競技大会「大曲の花火」',sakura_D_num)">
 						<button class="flower-item flower-item-dq" :class="{'gray': sakura_D_num == '0'}">
 							<div class="tag" :class="{'gray': sakura_D_num == '0'}" style="left:80%;top: 50%">
-								大曲花火大会
+								<div class="tag-text">大曲花火大会</div>
 								<div v-if="sakura_D_num > 0" class="num-box">{{sakura_D_num}}</div>
 							</div>
 							<div class="fire-ani-box" v-if="sakura_D_num != '0'">
@@ -67,7 +67,7 @@ import card from '@/components/card';
 					<form :report-submit="form_id" @submit="gather" >
 						<button class="flower-item flower-item-db" :class="{'gray': sakura_E_num == '0'}" @click="showSakuraDetail('sakura_e','大阪天神祭','全国花火競技大会「大阪の花火」',sakura_E_num)">
 							<div class="tag" :class="{'gray': sakura_E_num == '0'}" style="left:60%;top: -100%">
-								大阪天神祭
+								<div class="tag-text">大阪天神祭</div>
 								<div v-if="sakura_E_num > 0" class="num-box" style="right: -10px;bottom:auto;top:-10px;">{{sakura_E_num}}</div>
 							</div>
 							<div class="fire-ani-box" v-if="sakura_E_num != '0'">
@@ -81,7 +81,7 @@ import card from '@/components/card';
 					<form :report-submit="form_id" @submit="gather" >
 						<button class="flower-item flower-item-tf" :class="{'gray': sakura_B_num == '0'}" @click="showSakuraDetail('sakura_b','土浦花火大会','全国花火競技大会「土浦の花火」',sakura_B_num)">
 							<div class="tag" :class="{'gray': sakura_B_num == '0'}" style="left:30%;top: 80%">
-								土浦花火大会
+								<div class="tag-text">土浦花火大会</div>
 								<div v-if="sakura_B_num > 0" class="num-box">{{sakura_B_num}}</div>
 							</div>
 							<div class="fire-ani-box" v-if="sakura_B_num != '0'">
@@ -97,7 +97,7 @@ import card from '@/components/card';
 					<form :report-submit="form_id" @submit="gather" >
 						<button class="flower-item flower-item-zhc" :class="{'gray': sakura_A_num == '0'}" @click="showSakuraDetail('sakura_a','筑后川花火大会','全国花火競技大会「筑后川の花火」',sakura_A_num)">
 							<div class="tag" :class="{'gray': sakura_A_num == '0'}" style="left:10%;top: 80%">
-								筑后川花火大会
+								<div class="tag-text">筑后川花火大会</div>
 								<div v-if="sakura_A_num > 0" class="num-box">{{sakura_A_num}}</div>
 							</div>
 							<div class="fire-ani-box" v-if="sakura_A_num != '0'">
@@ -112,7 +112,7 @@ import card from '@/components/card';
 				<form :report-submit="form_id" @submit="gather" >
 					<button class="mix-btn" :style="{'animation': is_compose == '5' ? 'breath 2s ease infinte' : 'none'}" form-type="submit" @click="showComposeAni()">
 						<div class="wave">
-							<div class="wave-pos" :style="{'transform': 'translateY(' + (13*(-is_compose)) + 'px)'}">
+							<div class="wave-pos" :style="{'transform': 'translateY(' + (14*(-is_compose)) + 'px)'}">
         				<div class="wave-pos-decorate"></div>
 							</div>
 						</div>
@@ -210,7 +210,7 @@ import card from '@/components/card';
 						</div>
 					</div>
 				</div>
-				<swiper class="brand-box-top" vertical autoplay circular>
+				<swiper class="brand-box-top" :style="{'height': user_id > 0 ? '220px' : '180px'}" vertical autoplay circular>
 					<swiper-item style="height: 34px;" v-for="(swiperitem, swiperindex) in topRankList" :key="swiperindex">
 						<div class="brand-box-top-item" v-for="(item, index) in swiperitem" :key="index">
 							<div class="rank">
@@ -1030,8 +1030,9 @@ export default {
 					this._getUserActInfo();
 				} else {
 					WMP.checkAuthPromise(this.$root.$mp.page).then(()=>{
+						this._getUserActInfo();
+					}).then(()=>{
 						this.bindInviteUser();
-						// this._getUserActInfo();
 					}).catch((error) => {
 						console.error(error);
 					})
@@ -1302,7 +1303,7 @@ export default {
 						self.bindInviteUser();
 						self.userInfo = WMP.globalData.userInfo;
 						self.user_id = self.userInfo.user_id;
-						// self._getUserActInfo();
+						self._getUserActInfo();
 						// self._lotterySakura();
 					});
 				// })
@@ -1396,6 +1397,7 @@ export default {
 							icon: 'none',
 							duration: 1500,
 						});
+						this.getUserActInfo();
 					} else {
 						wx.navigateTo({
 							url: '/pages/togift/main',
@@ -1748,7 +1750,7 @@ button::after{ border: none; }
 	position: relative;
 	border: none;
 	border-radius: 0;
-	background: url('https://s2.wandougongzhu.cn/s/68/toyou_3d05c2.png') no-repeat;
+	background: url('https://s5.wandougongzhu.cn/s/09/_ad9e3d.png') no-repeat;
 	background-size: 100% 100%;
 	margin: 10px auto;
 }
@@ -1880,7 +1882,6 @@ button::after{ border: none; }
 .flower-item .tag{
 	position: relative;
 	width: 23px;
-	padding: 10px 2px;
 	font-size: 10px;
 	word-wrap: break-all; 
 	font-weight: bold;
@@ -1894,6 +1895,10 @@ button::after{ border: none; }
 	display: flex;
 	align-items: center;
 	justify-items: center;
+}
+.flower-item .tag .tag-text {
+	width: 23px;
+	margin: 10px 2px;
 }
 .flower-item .tag.gray {
 	background: url(https://s4.wandougongzhu.cn/s/20/_gray_cd255c.png) no-repeat;
