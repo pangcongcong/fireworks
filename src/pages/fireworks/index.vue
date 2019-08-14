@@ -42,8 +42,8 @@ import card from '@/components/card';
 							</div>
 							<div class="fire-ani-box" v-if="sakura_C_num != '0'">
 								<div class="firecracker" style="left:55%;top: 40%">
-									<div class="ani" :style="{'animation-delay': sakura_C_num > 0 ? '2.3s' : '2.5s'}"></div>
-									<div class="boom" :style="{'animation-delay': sakura_C_num > 0 ? '2.3s' : '2.5s'}"></div>
+									<div class="ani" :style="{'animation-delay': sakura_C_num > 0 ? '-2.3s' : '2.5s'}"></div>
+									<div class="boom" :style="{'animation-delay': sakura_C_num > 0 ? '-2.3s' : '2.5s'}"></div>
 								</div>
 							</div>
 						</button>
@@ -58,8 +58,8 @@ import card from '@/components/card';
 							</div>
 							<div class="fire-ani-box" v-if="sakura_D_num != '0'">
 								<div class="firecracker" style="left:55%;top: 40%">
-									<div class="ani" :style="{'animation-delay': sakura_D_num > 0 ? '2.1s' : '2.5s'}"></div>
-									<div class="boom" :style="{'animation-delay': sakura_D_num > 0 ? '2.1s' : '2.5s'}"></div>
+									<div class="ani" :style="{'animation-delay': sakura_D_num > 0 ? '-2.1s' : '2.5s'}"></div>
+									<div class="boom" :style="{'animation-delay': sakura_D_num > 0 ? '-2.1s' : '2.5s'}"></div>
 								</div>
 							</div>
 						</button>
@@ -72,8 +72,8 @@ import card from '@/components/card';
 							</div>
 							<div class="fire-ani-box" v-if="sakura_E_num != '0'">
 								<div class="firecracker" style="left:70%;top: 20%">
-									<div class="ani" :style="{'animation-delay': sakura_E_num > 0 ? '1.7s' : '2.5s'}"></div>
-									<div class="boom" :style="{'animation-delay': sakura_E_num > 0 ? '1.7s' : '2.5s'}"></div>
+									<div class="ani" :style="{'animation-delay': sakura_E_num > 0 ? '-1.7s' : '2.5s'}"></div>
+									<div class="boom" :style="{'animation-delay': sakura_E_num > 0 ? '-1.7s' : '2.5s'}"></div>
 								</div>
 							</div>
 						</button>
@@ -86,8 +86,8 @@ import card from '@/components/card';
 							</div>
 							<div class="fire-ani-box" v-if="sakura_B_num != '0'">
 								<div class="firecracker" style="left:25%;top: 40%">
-									<div class="ani" :style="{'animation-delay': sakura_B_num > 0 ? '1.3s' : '2.5s'}"></div>
-									<div class="boom" :style="{'animation-delay': sakura_B_num > 0 ? '1.3s' : '2.5s'}"></div>
+									<div class="ani" :style="{'animation-delay': sakura_B_num > 0 ? '-1.3s' : '2.5s'}"></div>
+									<div class="boom" :style="{'animation-delay': sakura_B_num > 0 ? '-1.3s' : '2.5s'}"></div>
 								</div>
 							</div>
 						</button>
@@ -102,17 +102,18 @@ import card from '@/components/card';
 							</div>
 							<div class="fire-ani-box" v-if="sakura_A_num != '0'">
 								<div class="firecracker" style="left:15%;top: 20%">
-									<div class="ani" :style="{'animation-delay': sakura_A_num > 0 ? '0.5s' : '2.5s'}"></div>
-									<div class="boom" :style="{'animation-delay': sakura_A_num > 0 ? '0.5s' : '2.5s'}"></div>
+									<div class="ani" :style="{'animation-delay': sakura_A_num > 0 ? '-0.5s' : '2.5s'}"></div>
+									<div class="boom" :style="{'animation-delay': sakura_A_num > 0 ? '-0.5s' : '2.5s'}"></div>
 								</div>
 							</div>
 						</button>
 					</form>
 				</div>
 				<form :report-submit="form_id" @submit="gather" >
-					<button class="mix-btn" form-type="submit" @click="showComposeAni()">
+					<button class="mix-btn" :style="{'animation': is_compose == '5' ? 'breath 2s ease infinte' : 'none'}" form-type="submit" @click="showComposeAni()">
 						<div class="wave">
-							<div class="wave-pos" :style="{'transform': 'translateY(' + (15*(-is_compose)) + 'px)'}">
+							<div class="wave-pos" :style="{'transform': 'translateY(' + (13*(-is_compose)) + 'px)'}">
+        				<div class="wave-pos-decorate"></div>
 							</div>
 						</div>
 						<div class="mix-btn-text">点亮花火</div>
@@ -123,7 +124,7 @@ import card from '@/components/card';
 				今日剩余收集次数<span>{{rest_count || 0}}</span>/{{total_count || 9}}
 			</div>
 			<form :report-submit="form_id" @submit="gather" >
-				<button class="lottery-btn" form-type="submit" v-if="act_status == '1'" @click="lotterySakura()">
+				<button class="lottery-btn" :style="{'animation': is_compose == '5' ? 'breath 2s ease infinte' : 'none'}" form-type="submit" v-if="act_status == '1'" @click="lotterySakura()">
 					收集花火
 				</button>
 			</form>
@@ -581,7 +582,6 @@ export default {
 			logCommonParam: {
 				ns: '828_huahuodahui_mp',
 				w: '',
-				user_id: '',
 				open_id: '',
 				devtype: 'mp',
 				ch: ch,
@@ -593,7 +593,7 @@ export default {
 		wx.setStorage({ key: 'ch', data: ch });
 		WMP.globalData.ch = ch;
 		this.logCommonParam.open_id = WMP.getOpenid() || null;
-		this.logCommonParam.user_id = WMP.globalData.userInfo.user_id || 0;
+		this.logCommonParam.w = WMP.globalData.userInfo.user_id || 0;
 		//浏览打点
 		Net.newLog(
 			{
@@ -1007,7 +1007,7 @@ export default {
 					WMP.checkAuthPromise(this.$root.$mp.page).then((res)=>{
 						this.userInfo = WMP.globalData.userInfo;
 						this.user_id = this.userInfo.user_id;
-						this.logCommonParam.user_id = this.user_id;
+						this.logCommonParam.w = this.user_id;
 						this.bindInviteUser();
 						this.closeAlert();
 						this.checkAuth();
@@ -1381,6 +1381,7 @@ export default {
 		},
 		toFinishTask(task_id,page_id) {
 			WMP.checkAuthPromise(this.$root.$mp.page).then(()=>{
+				this.bindInviteUser();
 				Net.newLog(
 					{
 						mt: 'huahuodahui_task_' + parseInt(task_id),
@@ -1470,7 +1471,7 @@ button::after{ border: none; }
 	font-weight: bold;
 	background: url('https://s3.wandougongzhu.cn/s/f0/2x_3ae473.png') no-repeat;
 	background-size: 100% 100%;
-	animation: flutter 3s linear 2.8s infinite alternate;
+	/* animation: flutter 3s linear 2.8s infinite alternate; */
 	margin: 0;
 	padding: 0;
 	text-align: center;
@@ -1488,7 +1489,7 @@ button::after{ border: none; }
 	white-space: wrap;
 }
 .w-sakura .w-count {
-	margin: 3px 10px 0 10px;
+	margin: 0px 10px;
 	line-height: 16px;
 	color: #fff;
 	font-size: 16px;
@@ -1815,15 +1816,11 @@ button::after{ border: none; }
 	top: -30px;
 	left: -30px;
 	opacity: 0.6;
-	/* animation: breath 1s ease infinte;
-	-webkit-animation: breath 1s ease infinite; */
 }
 .fire-item.item2 {
 	top: -20px;
 	left: 70px;
 	opacity: 0.3;
-	/* animation: fire_boom_s 2s ease infinte;
-	-webkit-animation: fire_boom_s 2s ease infinite; */
 }
 .fire-item.item3 {
 	top: -20px;
@@ -2131,15 +2128,8 @@ button::after{ border: none; }
 	background: rgba(0,0,0,0.5);
 	/* animation: rotate 3s linear infinite;  */
 	/* linear-gradient(rgba(0,0,0,0.5) 50%,transparent 50%) */
-	position: absolute;
-}
-.wave-pos-after {
-	position: absolute;
-	width: 60px;
-	height: 60px;
-	border-radius: 34%;
-	background: rgba(0,0,0,0.2);  
-	animation: rotate 7s linear infinite; 
+	position: relative;
+	overflow: visible;
 }
 /* .wave-pos::before,  
 .wave-pos::after {
@@ -2203,8 +2193,6 @@ button::after{ border: none; }
 	background: url('https://s2.wandougongzhu.cn/s/09/-_f9c638.png') no-repeat;
 	background-size: 100% 100%;
 	margin: 5px auto;
-	animation: breath 2s ease infinte;
-	-webkit-animation: breath 2s ease infinite;
 }
 .lottery-btn.wait-res {
 	background: url('https://s3.wandougongzhu.cn/s/3b/-_gray_673f6c.png') no-repeat;
@@ -2584,7 +2572,7 @@ button::after{ border: none; }
 
 @keyframes fire_boom_s {
 	0%{
-		transform: scale(0.5); 
+		transform: scale(0.3); 
 		opacity:1;
 	}
 	80%{ 
@@ -2598,7 +2586,7 @@ button::after{ border: none; }
 }
 @-webkit-keyframes fire_boom_s {
 	0%{
-		transform: scale(0.5); 
+		transform: scale(0.3); 
 		opacity:1;
 	}
 	80%{ 
