@@ -112,10 +112,10 @@ import card from '@/components/card';
 				<form :report-submit="form_id" @submit="gather" >
 					<button class="mix-btn" form-type="submit" @click="showComposeAni()">
 						<div class="wave">
-							<div class="wave-pos" :style="{'transform': 'translateY(' + (15*(-is_compose)) + 'px)'}">
-								<div class="wave-pos-before"></div>
-								<div class="wave-pos-after"></div>
-							</div>
+						</div>
+						<div class="wave-pos" :style="{'transform': 'translateY(' + (15*(-is_compose)) + 'px)'}">
+							<div class="wave-pos-before"></div>
+							<div class="wave-pos-after"></div>
 						</div>
 						<div class="mix-btn-text">点亮花火</div>
 					</button>
@@ -248,7 +248,7 @@ import card from '@/components/card';
 			</div>
 			<!-- 点击**樱花瓣弹框 -->
 			<div class="to-alert-box" v-if="showAlert == 'sakuraDetail'">
-				<div class="colse" @click="closeAlert('sakuraDetail')"></div>
+				<div class="colse" @click="closeAlert()"></div>
 				<div class="sakura-text">
 					<div class="name">{{sakuraDetailName}}</div>
 					<div class="poetry">{{sakuraDetailPoetry}}</div>
@@ -285,7 +285,7 @@ import card from '@/components/card';
 						送给好友
 					</button>
 				</form>
-				<div v-if="sakuraDetailNum == 0" class="mysakura-btn" @click="closeAlert('sakuraDetail')">
+				<div v-if="sakuraDetailNum == 0" class="mysakura-btn" @click="closeAlert()">
 					确定
 				</div>
 			</div>
@@ -358,7 +358,7 @@ import card from '@/components/card';
 			<!-- 万能樱兑换 -->
 			<!-- sakuraAllChange -->
 			<div class="get-alert-box" v-if="showAlert == 'sakuraAllChange'">
-				<div class="colse" @click="closeAlert('sakuraAllChange')"></div>
+				<div class="colse" @click="closeAlert()"></div>
 				<div class="mysakura-text">
 					<div class="universal-compose">请选择要兑换的花火</div>
 					<div class="universal-tips">使用1个万能花火可以兑换任意地区花火</div>
@@ -707,7 +707,7 @@ export default {
 
 			if (res.from == 'menu') {
 				return {
-					title: this.cloundShareActInfo.title + this.act_text + '!',
+					title: this.cloundShareActInfo.title,
 					path: '/pages/fireworks/main?user_id=' + this.user_id + '&ch=' + ch,
 					imageUrl: shareImg,
 					success: function (res) {
@@ -737,7 +737,7 @@ export default {
 						self.logCommonParam,
 					);
 					return {
-						title: this.cloundShareActInfo.title + this.act_text + '!',
+						title: this.cloundShareActInfo.title,
 						path: '/pages/fireworks/main?user_id=' + this.user_id + '&ch=' + ch,
 						imageUrl: shareImg,
 						success: function (res) {
@@ -762,7 +762,7 @@ export default {
 						self.logCommonParam,
 					);
 					return {
-						title: this.cloundShareActInfo.title + this.act_text + '!',
+						title: this.cloundShareActInfo.title,
 						path: '/pages/fireworks/main?user_id=' + this.user_id + '&ch=' + ch,
 						imageUrl: shareImg,
 						success: function (res) {
@@ -1250,13 +1250,7 @@ export default {
 		closeAlert (param) {
 			param = false;
 			this.maskShow = false;
-			if (WMP.globalData.userInfo && WMP.globalData.userInfo.user_id) {
-				this.getUserActInfo();
-			} else {
-				if (param != 'sakuraDetail' && param != 'sakuraAllChange') {
-					this.getUserActInfo();
-				}
-			}
+			this.getUserActInfo();
 		},
 		shareSakura() {
 
@@ -2130,7 +2124,9 @@ button::after{ border: none; }
 	width: 60px;
 	height: 60px;
 	background: transparent;
-	position: relative;
+	position: absolute;
+	border-radius: 50%;
+	overflow: hidden;
 }
 .wave-pos-before,  
 .wave-pos-after {
