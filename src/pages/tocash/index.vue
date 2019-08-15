@@ -456,7 +456,7 @@ body {
 	width: 275px;
 	height: 80px;
 	border-radius: 4px;
-	overflow: hidden;
+	/* overflow: hidden; */
 	background: url('https://s5.wandougongzhu.cn/s/52/xianjinbtn_254e29.png') no-repeat;
 	background-size: 100% 100%;
 	color: #ffffff;

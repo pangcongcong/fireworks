@@ -42,8 +42,8 @@ import card from '@/components/card';
 							</div>
 							<div class="fire-ani-box" v-if="sakura_C_num != '0'">
 								<div class="firecracker" style="left:55%;top: 40%">
-									<div class="ani" :style="{'animation-delay': sakura_C_num > 0 ? '-2.3s' : '2.5s'}"></div>
-									<div class="boom" :style="{'animation-delay': sakura_C_num > 0 ? '-2.3s' : '2.5s'}"></div>
+									<div class="ani" :style="{'animation-delay': sakura_C_num > 0 ? '2.3s' : '2.5s'}"></div>
+									<div class="boom" :style="{'animation-delay': sakura_C_num > 0 ? '4.8s' : '2.5s'}"></div>
 								</div>
 							</div>
 						</button>
@@ -58,8 +58,8 @@ import card from '@/components/card';
 							</div>
 							<div class="fire-ani-box" v-if="sakura_D_num != '0'">
 								<div class="firecracker" style="left:55%;top: 40%">
-									<div class="ani" :style="{'animation-delay': sakura_D_num > 0 ? '-2.1s' : '2.5s'}"></div>
-									<div class="boom" :style="{'animation-delay': sakura_D_num > 0 ? '-2.1s' : '2.5s'}"></div>
+									<div class="ani" :style="{'animation-delay': sakura_D_num > 0 ? '2.1s' : '2.5s'}"></div>
+									<div class="boom" :style="{'animation-delay': sakura_D_num > 0 ? '4.6s' : '2.5s'}"></div>
 								</div>
 							</div>
 						</button>
@@ -72,8 +72,8 @@ import card from '@/components/card';
 							</div>
 							<div class="fire-ani-box" v-if="sakura_E_num != '0'">
 								<div class="firecracker" style="left:70%;top: 20%">
-									<div class="ani" :style="{'animation-delay': sakura_E_num > 0 ? '-1.7s' : '2.5s'}"></div>
-									<div class="boom" :style="{'animation-delay': sakura_E_num > 0 ? '-1.7s' : '2.5s'}"></div>
+									<div class="ani" :style="{'animation-delay': sakura_E_num > 0 ? '1.7s' : '2.5s'}"></div>
+									<div class="boom" :style="{'animation-delay': sakura_E_num > 0 ? '4.2s' : '2.5s'}"></div>
 								</div>
 							</div>
 						</button>
@@ -86,8 +86,8 @@ import card from '@/components/card';
 							</div>
 							<div class="fire-ani-box" v-if="sakura_B_num != '0'">
 								<div class="firecracker" style="left:25%;top: 40%">
-									<div class="ani" :style="{'animation-delay': sakura_B_num > 0 ? '-1.3s' : '2.5s'}"></div>
-									<div class="boom" :style="{'animation-delay': sakura_B_num > 0 ? '-1.3s' : '2.5s'}"></div>
+									<div class="ani" :style="{'animation-delay': sakura_B_num > 0 ? '1.3s' : '2.5s'}"></div>
+									<div class="boom" :style="{'animation-delay': sakura_B_num > 0 ? '3.8s' : '2.5s'}"></div>
 								</div>
 							</div>
 						</button>
@@ -102,15 +102,15 @@ import card from '@/components/card';
 							</div>
 							<div class="fire-ani-box" v-if="sakura_A_num != '0'">
 								<div class="firecracker" style="left:15%;top: 20%">
-									<div class="ani" :style="{'animation-delay': sakura_A_num > 0 ? '-0.5s' : '2.5s'}"></div>
-									<div class="boom" :style="{'animation-delay': sakura_A_num > 0 ? '-0.5s' : '2.5s'}"></div>
+									<div class="ani" :style="{'animation-delay': sakura_A_num > 0 ? '0.5s' : '2.5s'}"></div>
+									<div class="boom" :style="{'animation-delay': sakura_A_num > 0 ? '3s' : '2.5s'}"></div>
 								</div>
 							</div>
 						</button>
 					</form>
 				</div>
 				<form :report-submit="form_id" @submit="gather" >
-					<button class="mix-btn" :class="{'breath-none': is_compose != '5'}" form-type="submit" @click="showComposeAni()">
+					<button class="mix-btn" :class="{'lottery-active': is_compose == '5'}" form-type="submit" @click="showComposeAni()">
 						<div class="wave">
 							<div class="wave-pos" :style="{'transform': 'translateY(' + (14*(-is_compose)) + 'px)'}">
         				<div class="wave-pos-decorate"></div>
@@ -124,7 +124,7 @@ import card from '@/components/card';
 				今日剩余收集次数<span>{{rest_count || 0}}</span>/{{total_count || 9}}
 			</div>
 			<form :report-submit="form_id" @submit="gather" >
-				<button class="lottery-btn" :class="{'lottery-active': is_compose != '0' && is_compose != '5'}" form-type="submit" v-if="act_status == '1'" @click="lotterySakura()">
+				<button class="lottery-btn" :class="{'lottery-active': rest_count > 0 && is_compose != '5'}" form-type="submit" v-if="act_status == '1'" @click="lotterySakura()">
 					收集花火
 				</button>
 			</form>
@@ -193,7 +193,7 @@ import card from '@/components/card';
 			<div class="task-title">
 				点亮成就榜
 			</div>
-			<div class="brand-box-content" :style="{'height': user_id > 0 ? '250px' : '210px'}">
+			<div class="brand-box-content" :style="{'height': user_id > 0 ? '500rpx' : '400rpx'}">
 				<div class="brand-box-my" v-if="user_id && user_id>0">
 					<div class="brand-box-top-item">
 						<div class="rank">
@@ -211,7 +211,7 @@ import card from '@/components/card';
 					</div>
 				</div>
 				<swiper class="brand-box-top" vertical autoplay circular>
-					<swiper-item style="height: 34px;" v-for="(swiperitem, swiperindex) in topRankList" :key="swiperindex">
+					<swiper-item class="brand-box-top" v-for="(swiperitem, swiperindex) in topRankList" :key="swiperindex">
 						<div class="brand-box-top-item" v-for="(item, index) in swiperitem" :key="index">
 							<div class="rank">
 								<div class="last">{{5*swiperindex + index+1}}</div>
@@ -316,7 +316,7 @@ import card from '@/components/card';
 				</div>
 				<form :report-submit="form_id" @submit="gather" >
 					<button class="mysakura-btn" form-type="submit" @click="closeAlert()">
-						确定
+						收下点亮
 					</button>
 				</form>
 			</div>
@@ -344,7 +344,7 @@ import card from '@/components/card';
 				<div class="colse" @click="closeAlert()"></div>
 				<div class="invite-text">
 					<div class="invite-title">邀请好友注册得万能花火</div>
-					<div>万能花火可兑换任意地区花火</div>
+					<div class="universal-tips">万能花火可兑换任意地区花火</div>
 				</div>
 				<img class="getsakura" src="https://s3.wandougongzhu.cn/s/8b/_830d8b.jpg">
 				<form :report-submit="form_id" @submit="gather" >
@@ -475,7 +475,7 @@ import card from '@/components/card';
 				</div>
 				<form :report-submit="form_id" @submit="gather" >
 					<button class="mysakura-btn" form-type="submit" @click="checkAuth()">
-						领取
+						收下点亮
 					</button>
 				</form>
 			</div>
@@ -621,9 +621,12 @@ export default {
 				});
 			}
 			this.showGetSakuraAlert();
-			if (this.option.sakura_key) {
+			if (this.option.sakura_key && this.option.sakura_id) {
 				this.maskShow = true;
 				this.showAlert = 'inviteShareSakura';
+			} else {
+				this.maskShow = false;
+				this.showAlert = '';
 			}
 		} else {
 			if (this.option.user_id == WMP.globalData.userInfo.user_id) {
@@ -639,7 +642,7 @@ export default {
 				}
 			} else {
 				this.getUserActInfo();
-				if (this.option.sakura_key) {
+				if (this.option.sakura_key && this.option.sakura_id) {
 					this.maskShow = true;
 					this.showAlert = 'inviteShareSakura';
 				}
@@ -1018,6 +1021,7 @@ export default {
 		},
 		getUserActInfo() {
 			this.maskShow = false;
+			this.showAlert = '';
 
 			// WMP.checkAuthPromise(this.$root.$mp.page).then((res)=> {
 				Net.newLog(
@@ -1435,10 +1439,13 @@ button::after{ border: none; }
 .invite-text {
 	font-size: 12px;
 	color: rgb(67, 67, 67);
-	margin: 30px auto 20px auto;
+	margin: 30px auto 10px auto;
 }
 .invite-text .invite-title {
-	font-size: 15px;
+	font-size: 20px;
+	line-height: 22px;
+	font-weight: bold;
+  color: rgb(213, 34, 35);
 }
 .my-sakura-box {
 	position: absolute;
@@ -1566,9 +1573,10 @@ button::after{ border: none; }
 	background: url('https://s4.wandougongzhu.cn/s/a2/alert_s_f4973c.png') no-repeat;
 	background-size: 100% 100%;
 }
-.suc-alert-box  .mysakura-text .name {
-	font-size: 12px;
+.suc-alert-box .mysakura-text .name {
+	font-size: 14px;
 	margin-top: 20px;
+	font-weight: normal;
 }
 .universal-compose {
 	font-size: 20px;
@@ -1580,7 +1588,7 @@ button::after{ border: none; }
 }
 .universal-tips {
 	font-size: 12px;
-	line-height: 20px;
+	line-height: 24px;
 }
 .congratulation {
 	font-size: 14px;
@@ -1654,8 +1662,8 @@ button::after{ border: none; }
   color: rgb(213, 34, 35);
 }
 .mysakura-text-done {
-	margin-top: 60px;
-	font-weight: bold;
+	margin-top: 50px;
+	font-weight: normal;
 }
 .mysakura-text-done .name {
 	color: #000;
@@ -1752,7 +1760,7 @@ button::after{ border: none; }
 	border-radius: 0;
 	background: url('https://s5.wandougongzhu.cn/s/09/_ad9e3d.png') no-repeat;
 	background-size: 100% 100%;
-	margin: 10px auto;
+	margin: 5px auto;
 }
 
 .rule-box {
@@ -2116,7 +2124,6 @@ button::after{ border: none; }
 	background-size: cover;
 	overflow: hidden;
 	border-radius: 50%;
-	animation: breath 2s ease infinite;
 }
 .breath-none {
 	animation: none;
@@ -2681,7 +2688,7 @@ button::after{ border: none; }
 /* https://s4.wandougongzhu.cn/s/a2/alert_s_f4973c.png */
 .brand-box-top{
 	width: 345px;
-	height: 220px;
+	height: 200px;
 	overflow: hidden;
 	margin: 0 auto;
 	display: flex;
@@ -2692,7 +2699,7 @@ button::after{ border: none; }
 .brand-box-top-item,.brand-box-my{
 	position: relative;
 	width: 310px;
-	height: 40px;
+	height: 36px;
 	margin: 0 auto;
 	display: flex;
 	align-items: center;

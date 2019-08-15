@@ -290,9 +290,8 @@ button::after{
 	background: url('https://s4.wandougongzhu.cn/s/a2/alert_s_f4973c.png') no-repeat;
 	background-size: 100% 100%;
 }
-.suc-alert-box  .mysakura-text .name {
+.suc-alert-box .mysakura-text .name {
 	font-size: 14px;
-	margin-top: 20px;
 }
 .colse {
 	position: absolute;
@@ -334,7 +333,7 @@ button::after{
 	overflow: hidden;
 }
 .mysakura-text {
-	margin-top: 38px;
+	margin-top: 60px;
 }
 .sakura-text .name {
 	margin-top: 20px;
@@ -370,7 +369,7 @@ button::after{
 	position: absolute;
 	left: 50%;
 	transform: translate(-50%,0);
-	bottom: 50px;
+	bottom: 40px;
 	width: 115px;
 	height: 38px;
 	line-height: 38px;
