@@ -34,7 +34,7 @@
 				</div>
 				<form :report-submit="form_id" @submit="gather" >
 					<button open-type="share" class="mysakura-btn" @click="backToIndex()">
-						确定
+						确&nbsp;定
 					</button>
 				</form>
 			</div>
@@ -373,7 +373,7 @@ button::after{
 	width: 115px;
 	height: 38px;
 	line-height: 38px;
-	font-size: 14px;
+	font-size: 12px;
 	color: #fff;
 	border: none;
 	background: url('https://s5.wandougongzhu.cn/s/09/_ad9e3d.png') no-repeat;

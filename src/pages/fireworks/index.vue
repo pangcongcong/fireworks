@@ -13,6 +13,7 @@ import card from '@/components/card';
 			</div>
 			<div class="text-box"></div>
 			<div v-if="act_status == '1'" class="timer-count">共点亮<span class="num">{{totalSakuraNum}}</span>场花火，距分钱还剩<span class="num">{{act_remain_day}}</span>天</div>
+			<div v-else-if="act_status == '2'" class="timer-count">共点亮<span class="num">{{totalSakuraNum}}</span>场花火，{{act_text}}</div>
 			<div v-else class="timer-count">{{act_text}}</div>
 		</div>
 		
@@ -129,7 +130,7 @@ import card from '@/components/card';
 				</button>
 			</form>
 			<form :report-submit="form_id" @submit="gather">
-				<button class="lottery-btn" form-type="submit" v-if="act_status == '2'" @click="goCash()">
+				<button class="lottery-btn lottery-active" form-type="submit" v-if="act_status == '2'" @click="goCash()">
 					兑换现金
 				</button>
 			</form>
@@ -285,7 +286,7 @@ import card from '@/components/card';
 					</button>
 				</form>
 				<div v-if="sakuraDetailNum == 0" class="mysakura-btn" @click="closeAlert()">
-					确定
+					确&nbsp;定
 				</div>
 			</div>
 			<!-- 恭喜你获得了**樱 -->
@@ -334,7 +335,7 @@ import card from '@/components/card';
 				</div>
 				<form :report-submit="form_id" @submit="gather" >
 					<button form-type="submit" class="mysakura-btn">
-						确定
+						确&nbsp;定
 					</button>
 				</form>
 			</div>
@@ -412,7 +413,7 @@ import card from '@/components/card';
 				</div>
 				<form :report-submit="form_id" @submit="gather" >
 					<button class="mysakura-btn" form-type="submit" @click="changeSakura()">
-						兑换
+						兑&nbsp;换
 					</button>
 				</form>
 			</div>
@@ -442,7 +443,7 @@ import card from '@/components/card';
 				</div>
 				<form :report-submit="form_id" @submit="gather" >
 					<button class="mysakura-btn" form-type="submit" @click="closeAlert()">
-						确定
+						确&nbsp;定
 					</button>
 				</form>
 			</div>
@@ -488,7 +489,7 @@ import card from '@/components/card';
 				</div>
 				<form :report-submit="form_id" @submit="gather" >
 					<button class="mysakura-btn" form-type="submit" @click="closeAlert()">
-						确定
+						确&nbsp;定
 					</button>
 				</form>
 			</div>
@@ -500,7 +501,7 @@ import card from '@/components/card';
 				</div>
 				<form :report-submit="form_id" @submit="gather" >
 					<button open-type="share" :data-type="0" class="mysakura-btn">
-						确定
+						确&nbsp;定
 					</button>
 				</form>
 			</div>
@@ -1428,7 +1429,7 @@ button::after{ border: none; }
 	width: 50px;
 	height: 50px;
 	border-radius: 50%;
-	right: 30px;
+	left: 30px;
 	bottom: 50px;
 	z-index: 2;
 }
@@ -1718,6 +1719,7 @@ button::after{ border: none; }
 	font-size: 12px;
 	line-height: 18px;
   color: rgb(18, 20, 59);
+	word-wrap: break-word;
 }
 .mysakura-tips {
 	width: 100%;
@@ -1753,6 +1755,7 @@ button::after{ border: none; }
 .invite-btn {
 	width: 115px;
 	height: 38px;
+	font-size: 12px;
 	line-height: 38px;
 	color: #fff;
 	position: relative;
@@ -2001,9 +2004,9 @@ button::after{ border: none; }
 	background-position: center;
 }
 .flower-item-db {
-	left: 56px;
+	left: 55px;
 	top: 227px;
-	width: 104px;
+	width: 106px;
 	height: 60.5px;
 	background: url(https://s.wandougongzhu.cn/s/e3/db_map_065caa.png) no-repeat;
 	background-size: cover;
@@ -2015,10 +2018,10 @@ button::after{ border: none; }
 	background-position: center;
 }
 .flower-item-zhc {
-	left: 24px;
+	left: 22px;
 	top: 246px;
 	width: 100.5px;
-	height: 61px;
+	height: 62px;
 	background: url(https://s4.wandougongzhu.cn/s/d0/zhc_map_128e65.png) no-repeat;
 	background-size: cover;
 	background-position: center;

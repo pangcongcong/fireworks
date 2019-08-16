@@ -328,7 +328,7 @@ body {
 	width: 100px;
 	height: 35px;
 	line-height: 35px;
-	font-size: 14px;
+	font-size: 12px;
 	color: #fff;
 	background: url('https://s5.wandougongzhu.cn/s/2a/btn_e2760e.jpg') no-repeat;
 	background-size: 100% 100%;
