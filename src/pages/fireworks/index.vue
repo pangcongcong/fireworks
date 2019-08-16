@@ -110,16 +110,14 @@ import card from '@/components/card';
 						</button>
 					</form>
 				</div>
-				<form :report-submit="form_id" @submit="gather" >
-					<button class="mix-btn" :class="{'lottery-active': is_compose == '5'}" form-type="submit" @click="showComposeAni()">
-						<div class="wave">
-							<div class="wave-pos" :style="{'transform': 'translateY(' + (14*(-is_compose)) + 'px)'}">
-        				<div class="wave-pos-decorate"></div>
-							</div>
+				<div class="mix-btn" :class="{'lottery-active': is_compose == '5'}" @click="showComposeAni()">
+					<div class="wave">
+						<div class="wave-pos" :style="{'transform': 'translateY(' + (14*(-is_compose)) + 'px)'}">
+							<div class="wave-pos-decorate"></div>
 						</div>
-						<div class="mix-btn-text">点亮花火</div>
-					</button>
-				</form>
+					</div>
+					<div class="mix-btn-text">点亮花火</div>
+				</div>
 			</div>
 			<div class="rest-count">
 				今日剩余收集次数<span>{{rest_count || 0}}</span>/{{total_count || 9}}
@@ -2230,7 +2228,7 @@ button::after{ border: none; }
 	font-size: 18px;
 	font-weight: bold;
 	color: rgba(255, 235, 206, 1);
-	background: url(https://s1.wandougongzhu.cn/s/65/122x_130aa0.png) no-repeat;
+	background: url(https://s.wandougongzhu.cn/s/e7/_b696af.png) no-repeat;
 	background-size: contain;
 	background-position: center;
 	display: flex;

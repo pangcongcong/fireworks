@@ -147,6 +147,9 @@ export default {
 			})
 		// })
 	},
+	onShow() {
+		this.getUserActInfo();
+	},
 	methods: {
 		toAd(page_id) {
 			Net.newLog(
@@ -193,6 +196,8 @@ export default {
 		getUserActInfo() {
 			this.userInfo = WMP.globalData.userInfo;
 			this.user_id = this.userInfo.user_id;
+			this.maskShow = false;
+			this.showAlert = '';
 			Net.get('Sakura.getUserActivityInfoByUserId', {
 				user_id: this.user_id
 			}).then(res=>{
@@ -207,10 +212,10 @@ export default {
 					this.score_rate = res.data.score_rate;
 					this.user_price = infoList.price;
 					this.min_exchange_price = res.data.min_exchange_price;
-					this.pay_status = infoList.pay_status;
+					this.pay_status = res.data.info.pay_status;
 					this.phone = infoList.phone;
 					this.toCashTip = res.data.to_cash_tips;
-					if (this.pay_status != 0) {
+					if (this.pay_status != '0') {
 						this.sucResShow = true;
 						this.type = this.pay_status == '2' ? '1':'0';
 					}
